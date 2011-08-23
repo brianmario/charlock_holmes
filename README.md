@@ -30,6 +30,7 @@ If you want to use this library to detect and set the encoding flag on strings, 
 
 ``` ruby
 contents = File.read('test.xml')
+
 # this will detect and set the encoding of `contents`
 contents.detect_encoding!
 ```
