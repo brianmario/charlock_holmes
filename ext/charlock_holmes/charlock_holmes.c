@@ -9,7 +9,7 @@
  * Returns: a Hash with :encoding, :language and :confidence
  */
 static VALUE mCharlockHolmes_detect(VALUE self, VALUE str) {
-  char *str;
+  char *buf;
   int32_t len;
   VALUE ret = Qnil;
   UErrorCode status = U_ZERO_ERROR;
@@ -20,12 +20,12 @@ static VALUE mCharlockHolmes_detect(VALUE self, VALUE str) {
   int32_t confidence;
 
   Check_Type(str, T_STRING);
-  str = RSTRING_PTR(str);
+  buf = RSTRING_PTR(str);
   len = (int32_t)RSTRING_LEN(str);
 
   csd = ucsdet_open(&status);
 
-  ucsdet_setText(csd, str, len, &status);
+  ucsdet_setText(csd, buf, len, &status);
 
   match = ucsdet_detect(csd, &status);
 
