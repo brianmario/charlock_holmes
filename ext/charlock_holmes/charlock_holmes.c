@@ -2,13 +2,13 @@
 #include "unicode/ucsdet.h"
 
 /*
- * call-seq: detection_hash = CharDetective.detect "some string"
+ * call-seq: detection_hash = CharlockHolmes.detect "some string"
  *
  * Attempt to detect the encoding of this string
  *
  * Returns: a Hash with :encoding, :language and :confidence
  */
-static VALUE mCharDetective_detect(VALUE self, VALUE str) {
+static VALUE mCharlockHolmes_detect(VALUE self, VALUE str) {
   char *str;
   int32_t len;
   VALUE ret = Qnil;
@@ -49,8 +49,8 @@ static VALUE mCharDetective_detect(VALUE self, VALUE str) {
   return ret;
 }
 
-void Init_char_detective() {
-  VALUE mCharDetective = rb_define_module("CharDetective");
+void Init_charlock_holmes() {
+  VALUE mCharlockHolmes = rb_define_module("CharlockHolmes");
 
-  rb_define_method(mCharDetective, "detect", mCharDetective_detect, 1);
+  rb_define_method(mCharlockHolmes, "detect", mCharlockHolmes_detect, 1);
 }

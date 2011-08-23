@@ -22,6 +22,6 @@ require 'rake' unless defined? Rake
 gem 'rake-compiler', '>= 0.7.5'
 require "rake/extensiontask"
 
-Rake::ExtensionTask.new 'char_detective'
+Rake::ExtensionTask.new 'charlock_holmes'
 
 Rake::Task[:spec].prerequisites << :compile

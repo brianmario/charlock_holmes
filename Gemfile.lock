@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    char_detective (0.1.0)
+    charlock_holmes (0.1.0)
 
 GEM
   remote: http://rubygems.org/
@@ -23,6 +23,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  char_detective!
+  charlock_holmes!
   rake-compiler (>= 0.7.5)
   rspec (>= 2.0.0)

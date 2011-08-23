@@ -7,4 +7,4 @@ dir_config 'icu'
 
 have_library 'icui18n'
 
-create_makefile 'char_detective'
+create_makefile 'charlock_holmes'

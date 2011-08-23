@@ -1,11 +1,11 @@
-require 'char_detective' unless defined? CharDetective
+require 'charlock_holmes' unless defined? CharlockHolmes
 
 class String
   # Attempt to detect the encoding of this string
   #
   # Returns: a Hash with :encoding, :language and :confidence
   def detect_encoding
-    CharDetective.detect(self)
+    CharlockHolmes.detect(self)
   end
 
   if RUBY_VERSION =~ /1.9/
@@ -14,7 +14,7 @@ class String
     #
     # Returns: a Hash with :encoding, :language and :confidence
     def detect_encoding!
-      if detected = CharDetective.detect(self)
+      if detected = CharlockHolmes.detect(self)
         self.force_encoding detected[:encoding]
         detected
       end

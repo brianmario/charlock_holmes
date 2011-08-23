@@ -1,14 +1,14 @@
-require './lib/char_detective/version' unless defined? CharDetective::VERSION
+require './lib/charlock_holmes/version' unless defined? CharlockHolmes::VERSION
 
 Gem::Specification.new do |s|
-  s.name = %q{char_detective}
-  s.version = CharDetective::VERSION
+  s.name = %q{charlock_holmes}
+  s.version = CharlockHolmes::VERSION
   s.authors = ["Brian Lopez"]
   s.date = Time.now.utc.strftime("%Y-%m-%d")
   s.email = %q{seniorlopez@gmail.com}
-  s.extensions = ["ext/char_detective/extconf.rb"]
+  s.extensions = ["ext/charlock_holmes/extconf.rb"]
   s.files = `git ls-files`.split("\n")
-  s.homepage = %q{http://github.com/brianmario/char_detective}
+  s.homepage = %q{http://github.com/brianmario/charlock_holmes}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib", "ext"]
   s.rubygems_version = %q{1.4.2}

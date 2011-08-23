@@ -1,6 +1,6 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 
-require 'char_detective'
+require 'charlock_holmes'
 require 'rspec'
 
 RSpec.configure do |config|
