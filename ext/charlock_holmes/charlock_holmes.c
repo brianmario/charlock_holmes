@@ -1,8 +1,21 @@
-#include "ruby.h"
 #include "unicode/ucsdet.h"
+
+#include <ruby.h>
+#ifdef HAVE_RUBY_ENCODING_H
+#include <ruby/encoding.h>
+#endif
 
 static VALUE rb_mCharlockHolmes;
 static VALUE rb_cEncodingDetector;
+
+static VALUE charlock_new_str2(const char *str)
+{
+#ifdef HAVE_RUBY_ENCODING_H
+	return rb_external_str_new_with_enc(str, strlen(str), rb_utf8_encoding());
+#else
+	return rb_str_new2(str);
+#endif
+}
 
 static VALUE rb_encdec_buildmatch(const UCharsetMatch *match)
 {
@@ -21,11 +34,11 @@ static VALUE rb_encdec_buildmatch(const UCharsetMatch *match)
 
 	rb_match = rb_hash_new();
 
-	rb_hash_aset(rb_match, ID2SYM(rb_intern("encoding")), rb_str_new2(mname));
+	rb_hash_aset(rb_match, ID2SYM(rb_intern("encoding")), charlock_new_str2(mname));
 	rb_hash_aset(rb_match, ID2SYM(rb_intern("confidence")), INT2NUM(mconfidence));
 
 	if (mlang && mlang[0])
-		rb_hash_aset(rb_match, ID2SYM(rb_intern("language")), rb_str_new2(mlang));
+		rb_hash_aset(rb_match, ID2SYM(rb_intern("language")), charlock_new_str2(mlang));
 
 	return rb_match;
 }
