@@ -30,7 +30,8 @@ describe CharlockHolmes::EncodingDetector do
       ['core.rkt',                  'UTF-8'],
       ['cl-messagepack.lisp',       'ISO-8859-1'],
       ['TwigExtensionsDate.es.yml', 'UTF-8'],
-      ['AnsiGraph.psm1',            'UTF-16LE']
+      ['AnsiGraph.psm1',            'UTF-16LE'],
+      ['laholator.py',              'UTF-8']
     ]
 
     MAPPING.each do |mapping|
