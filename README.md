@@ -14,7 +14,7 @@ Now if you want to detect the encoding of a set of bytes:
 
 ``` ruby
 contents = File.read('test.xml')
-detection = CharlockHolmes::EncodingDetector.new.detect(contents)
+detection = CharlockHolmes::EncodingDetector.detect(contents)
 ```
 
 Though it'd probably be more efficient to reuse once detector instance:
