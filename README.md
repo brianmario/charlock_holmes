@@ -58,3 +58,11 @@ contents = File.read('test.xml')
 # this will detect and set the encoding of `contents`
 contents.detect_encoding!
 ```
+
+## Installing
+
+If the traditional `gem install charlock_holmes` doesn't work, you may need to specify the path to your installation of ICU using the `--with-icu-dir` option during the gem install.
+
+At the time of writing, if you installed ICU via homebrew on OSX your gem install may look something like this:
+
+`gem install charlock_holmes --with-icu-dir=/usr/local/Cellar/icu4c/4.4.1`
