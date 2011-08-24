@@ -5,7 +5,7 @@ class String
   #
   # Returns: a Hash with :encoding, :language and :confidence
   def detect_encoding
-    CharlockHolmes::EncodingDetector.new.detect(self)
+    encoding_detector.detect(self)
   end
 
   if RUBY_VERSION =~ /1.9/
@@ -19,5 +19,10 @@ class String
         detected
       end
     end
+  end
+
+  protected
+  def encoding_detector
+    @encoding_detector ||= CharlockHolmes::EncodingDetector.new
   end
 end
