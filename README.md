@@ -17,18 +17,27 @@ contents = File.read('test.xml')
 detection = CharlockHolmes.detect(contents)
 ```
 
+## String monkey patch
+
 Alternatively, you can just use the `detect_encoding` method on the `String` class
 
 ``` ruby
+require 'charlock_holmes/string'
+
 contents = File.read('test.xml')
+
 detection = contents.detect_encoding
 ```
 
 ## Ruby 1.9 specific
 
+NOTE: This method only exists on Ruby 1.9+
+
 If you want to use this library to detect and set the encoding flag on strings, you can use the `detect_encoding!` method on the `String` class
 
 ``` ruby
+require 'charlock_holmes/string'
+
 contents = File.read('test.xml')
 
 # this will detect and set the encoding of `contents`
