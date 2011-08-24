@@ -21,6 +21,8 @@ detection = CharlockHolmes::EncodingDetector.detect(contents)
 # that's mostly only returned for legacy encodings like ISO-8859-1
 ```
 
+NOTE: `CharlockHolmes::EncodingDetector.detect` will return `nil` if it was unable to find an encoding.
+
 Though it's more efficient to reuse once detector instance:
 
 ``` ruby
