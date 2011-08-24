@@ -12,9 +12,20 @@ require 'charlock_holmes'
 
 Now if you want to detect the encoding of a set of bytes:
 
-```
+``` ruby
 contents = File.read('test.xml')
-detection = CharlockHolmes.detect(contents)
+detection = CharlockHolmes::EncodingDetector.new.detect(contents)
+```
+
+Though it'd probably be more efficient to reuse once detector instance:
+
+``` ruby
+detector = CharlockHolmes::EncodingDetector.new
+
+detection1 = detector.detect(File.read('test.xml'))
+detection2 = detector.detect(File.read('test2.json'))
+
+# and so on...
 ```
 
 ## String monkey patch
