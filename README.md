@@ -68,3 +68,7 @@ If the traditional `gem install charlock_holmes` doesn't work, you may need to s
 At the time of writing, if you installed ICU via homebrew on OSX your gem install may look something like this:
 
 `gem install charlock_holmes --with-icu-dir=/usr/local/Cellar/icu4c/4.4.1`
+
+If you're using Bundler and need to specify a custom path, you can do so with the `bundle config` command:
+
+`bundle config build.charlock_holmes --with-icu-dir=/usr/local/Cellar/icu4c/4.4.1`
