@@ -15,6 +15,10 @@ Now if you want to detect the encoding of a set of bytes:
 ``` ruby
 contents = File.read('test.xml')
 detection = CharlockHolmes::EncodingDetector.detect(contents)
+# => {:encoding => 'UTF-8', :confidence => 100}
+#
+# optionally there will be a :language key as well, but
+# that's mostly only returned for legacy encodings like ISO-8859-1
 ```
 
 Though it's more efficient to reuse once detector instance:
