@@ -95,18 +95,12 @@ static VALUE rb_encdec__alloc(VALUE klass)
 	return Data_Wrap_Struct(klass, NULL, rb_encdec__free, (void *)csd);
 }
 
-static VALUE rb_encdec_initialize(VALUE self)
-{
-	return Qnil;
-}
-
 void Init_charlock_holmes()
 {
 	rb_mCharlockHolmes = rb_define_module("CharlockHolmes");
 
 	rb_cEncodingDetector = rb_define_class_under(rb_mCharlockHolmes, "EncodingDetector", rb_cObject);
 	rb_define_alloc_func(rb_cEncodingDetector, rb_encdec__alloc);
-	rb_define_method(rb_cEncodingDetector, "initialize", rb_encdec_initialize, 0);
 	rb_define_method(rb_cEncodingDetector, "detect", rb_encdec_detect, 1);
 	rb_define_method(rb_cEncodingDetector, "detect_all", rb_encdec_detect_all, 1);
 }
