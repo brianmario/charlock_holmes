@@ -1,8 +1,6 @@
 #include "ruby.h"
 #include "unicode/ucsdet.h"
 
-#define CHARLOCK_HOLMES_VERSION "0.2.0"
-
 static VALUE rb_mCharlockHolmes;
 static VALUE rb_cEncodingDetector;
 
@@ -105,7 +103,6 @@ static VALUE rb_encdec_initialize(VALUE self)
 void Init_charlock_holmes()
 {
 	rb_mCharlockHolmes = rb_define_module("CharlockHolmes");
-	rb_define_const(rb_mCharlockHolmes, "VERSION", rb_str_new2(CHARLOCK_HOLMES_VERSION));
 
 	rb_cEncodingDetector = rb_define_class_under(rb_mCharlockHolmes, "EncodingDetector", rb_cObject);
 	rb_define_alloc_func(rb_cEncodingDetector, rb_encdec__alloc);

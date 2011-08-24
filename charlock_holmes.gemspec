@@ -1,6 +1,8 @@
+require './lib/charlock_holmes/version' unless defined? CharlockHolmes::VERSION
+
 Gem::Specification.new do |s|
   s.name = %q{charlock_holmes}
-  s.version = "0.2.0"
+  s.version = CharlockHolmes::VERSION
   s.authors = ["Brian Lopez", "Vicent Martí"]
   s.date = Time.now.utc.strftime("%Y-%m-%d")
   s.email = %q{seniorlopez@gmail.com}
