@@ -24,7 +24,7 @@ describe CharlockHolmes::EncodingDetector do
     assert_equal ['ISO-8859-1', 'ISO-8859-2', 'UTF-8'], encoding_list
   end
 
-  context "is able to detect that" do
+  context 'encoding detection' do
     MAPPING = [
       ['repl2.cljs',                'ISO-8859-1'],
       ['core.rkt',                  'UTF-8'],
@@ -36,7 +36,7 @@ describe CharlockHolmes::EncodingDetector do
     MAPPING.each do |mapping|
       file, encoding = mapping
 
-      test "#{file} is #{encoding}" do
+      test "#{file} should be detected as #{encoding}" do
         path = File.expand_path "../fixtures/#{file}", __FILE__
         content = File.read path
         guessed = @detector.detect content
