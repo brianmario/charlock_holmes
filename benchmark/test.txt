@@ -1,0 +1,693 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" dir="ltr"> 
+<head> 
+<title>XML - 维基百科，自由的百科全书</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<meta http-equiv="Content-Style-Type" content="text/css" /> 
+<meta name="generator" content="MediaWiki 1.16wmf4" /> 
+<link rel="alternate" type="application/x-wiki" title="编辑本页" href="/w/index.php?title=XML&amp;action=edit" /> 
+<link rel="edit" title="编辑本页" href="/w/index.php?title=XML&amp;action=edit" /> 
+<link rel="apple-touch-icon" href="http://zh.wikipedia.org/apple-touch-icon.png" /> 
+<link rel="shortcut icon" href="/favicon.ico" /> 
+<link rel="search" type="application/opensearchdescription+xml" href="/w/opensearch_desc.php" title="Wikipedia (zh)" /> 
+<link rel="copyright" href="http://creativecommons.org/licenses/by-sa/3.0/" /> 
+<link rel="alternate" type="application/atom+xml" title="Wikipedia的Atom订阅" href="/w/index.php?title=Special:%E6%9C%80%E8%BF%91%E6%9B%B4%E6%94%B9&amp;feed=atom" /> 
+<link rel="stylesheet" href="http://bits.wikimedia.org/skins-1.5/vector/main-ltr.css?283-19" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="http://bits.wikimedia.org/skins-1.5/common/shared.css?283-19" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="http://bits.wikimedia.org/skins-1.5/common/commonPrint.css?283-19" type="text/css" media="print" /> 
+<link rel="stylesheet" href="http://bits.wikimedia.org/w/extensions/UsabilityInitiative/css/combined.min.css?117" type="text/css" media="all" /> 
+<link rel="stylesheet" href="http://bits.wikimedia.org/w/extensions/UsabilityInitiative/css/vector/jquery-ui-1.7.2.css?1.7.2y" type="text/css" media="all" /> 
+<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Common.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" media="all" /> 
+<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Print.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" media="print" /> 
+<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Handheld.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" media="handheld" /> 
+<link rel="stylesheet" href="/w/index.php?title=MediaWiki:Vector.css&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=2678400&amp;action=raw&amp;maxage=2678400" type="text/css" media="all" /> 
+<link rel="stylesheet" href="/w/index.php?title=-&amp;action=raw&amp;maxage=2678400&amp;gen=css" type="text/css" media="all" /> 
+<script type="text/javascript"> 
+var skin="vector",
+stylepath="http://bits.wikimedia.org/skins-1.5",
+wgUrlProtocols="http\\:\\/\\/|https\\:\\/\\/|ftp\\:\\/\\/|irc\\:\\/\\/|gopher\\:\\/\\/|telnet\\:\\/\\/|nntp\\:\\/\\/|worldwind\\:\\/\\/|mailto\\:|news\\:|svn\\:\\/\\/",
+wgArticlePath="/wiki/$1",
+wgScriptPath="/w",
+wgScriptExtension=".php",
+wgScript="/w/index.php",
+wgVariantArticlePath="/$2/$1",
+wgActionPaths={},
+wgServer="http://zh.wikipedia.org",
+wgCanonicalNamespace="",
+wgCanonicalSpecialPageName=false,
+wgNamespaceNumber=0,
+wgPageName="XML",
+wgTitle="XML",
+wgAction="view",
+wgArticleId=3632,
+wgIsArticle=true,
+wgUserName=null,
+wgUserGroups=null,
+wgUserLanguage="zh",
+wgContentLanguage="zh",
+wgBreakFrames=false,
+wgCurRevisionId=15329713,
+wgVersion="1.16wmf4",
+wgEnableAPI=true,
+wgEnableWriteAPI=true,
+wgSeparatorTransformTable=["", ""],
+wgDigitTransformTable=["", ""],
+wgMainPageTitle="Wikipedia:首页",
+wgFormattedNamespaces={"-2": "Media", "-1": "Special", "0": "", "1": "Talk", "2": "User", "3": "User talk", "4": "Wikipedia", "5": "Wikipedia talk", "6": "File", "7": "File talk", "8": "MediaWiki", "9": "MediaWiki talk", "10": "Template", "11": "Template talk", "12": "Help", "13": "Help talk", "14": "Category", "15": "Category talk", "100": "Portal", "101": "Portal talk"},
+wgNamespaceIds={"media": -2, "special": -1, "": 0, "talk": 1, "user": 2, "user_talk": 3, "wikipedia": 4, "wikipedia_talk": 5, "file": 6, "file_talk": 7, "mediawiki": 8, "mediawiki_talk": 9, "template": 10, "template_talk": 11, "help": 12, "help_talk": 13, "category": 14, "category_talk": 15, "portal": 100, "portal_talk": 101, "媒体": -2, "媒體": -2, "特殊": -1, "对话": 1, "對話": 1, "讨论": 1, "討論": 1, "用户": 2, "用戶": 2, "用户对话": 3, "用戶對話": 3, "用户讨论": 3, "用戶討論": 3, "图像": 6, "圖像": 6, "档案": 6, "檔案": 6, "文件": 6, "图像对话": 7, "圖像對話": 7, "图像讨论": 7, "圖像討論": 7, "档案对话": 7, "檔案對話": 7, "档案讨论": 7, "檔案討論": 7, "文件对话": 7, "文件對話": 7, "文件讨论": 7, "文件討論": 7, "模板": 10, "样板": 10, "樣板": 10, "模板对话": 11, "模板對話": 11, "模板讨论": 11, "模板討論": 11, "样板对话": 11, "樣板對話": 11, "样板讨论": 11, "樣板討論": 11, "帮助": 12, "幫助": 12, "帮助对话": 13, "幫助對話": 13, "帮助讨论": 13, "幫助討論": 13, "分类": 14, "分類": 14, "分类对话": 15, "分類對話": 15, "分类讨论": 15, "分類討論": 15, "维基百科": 4, "維基百科": 4, "wp": 4, "维基百科讨论": 5, "维基百科对话": 5, "維基百科討論": 5, "維基百科對話": 5, "t": 10, "wt": 5, "cat": 14, "h": 12, "p": 100, "image": 6, "image_talk": 7},
+wgSiteName="Wikipedia",
+wgCategories=["含有英語的條目", "網頁技術", "W3C标准", "文件格式", "置标语言", "XML", "数据序列化格式"],
+wgDBname="zhwiki",
+wgUserVariant="zh",
+wgMWSuggestTemplate="http://zh.wikipedia.org/w/api.php?action=opensearch\x26search={searchTerms}\x26namespace={namespaces}\x26suggest",
+wgSearchNamespaces=[0],
+wgMWSuggestMessages=["有建议", "无建议"],
+wgRestrictionEdit=[],
+wgRestrictionMove=[],
+wgCollapsibleNavBucketTest=false,
+wgCollapsibleNavForceNewVersion=false,
+wgVectorPreferences={"collapsiblenav": {"enable": 1}, "editwarning": {"enable": 1}, "simplesearch": {"enable": 1, "disablesuggest": 0}},
+wgVectorEnabledModules={"collapsiblenav": true, "collapsibletabs": true, "editwarning": true, "expandablesearch": false, "footercleanup": false, "simplesearch": true},
+Geo={"city": "", "country": ""},
+wgNoticeProject="wikipedia";
+</script><script src="http://bits.wikimedia.org/skins-1.5/common/wikibits.js?283-19" type="text/javascript"></script> 
+<script type="text/javascript" src="http://bits.wikimedia.org/skins-1.5/common/jquery.min.js?283-19"></script> 
+<script src="http://bits.wikimedia.org/skins-1.5/common/ajax.js?283-19" type="text/javascript"></script> 
+<script src="http://bits.wikimedia.org/skins-1.5/common/mwsuggest.js?283-19" type="text/javascript"></script> 
+<script src="http://bits.wikimedia.org/w/extensions/UsabilityInitiative/js/plugins.combined.min.js?283-19" type="text/javascript"></script> 
+<script src="http://bits.wikimedia.org/w/extensions/UsabilityInitiative/Vector/Vector.combined.min.js?283-19" type="text/javascript"></script> 
+<script type="text/javascript">mw.usability.addMessages({'vector-collapsiblenav-more':'更多语言','vector-editwarning-warning':'离开这个页面可能会令您失去之前的所有更改。\n若您已经登入，您可在您参数设置的“编辑”节中关闭此警告。','vector-simplesearch-search':'搜索','vector-simplesearch-containing':'含有...'});</script> 
+<script src="/w/index.php?title=Special:BannerController&amp;cache=/cn.js&amp;283-19" type="text/javascript"></script> 
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/w/skins-1.5/vector/csshover.htc")}</style><![endif]--> 
+<script src="/w/index.php?title=-&amp;action=raw&amp;gen=js&amp;useskin=vector&amp;283-19" type="text/javascript"></script> 
+ 
+<style type="text/css">/*<![CDATA[*/
+.source-xml {line-height: normal;}
+.source-xml li, .source-xml pre {
+	line-height: normal; border: 0px none white;
+}
+/**
+ * GeSHi Dynamically Generated Stylesheet
+ * --------------------------------------
+ * Dynamically generated stylesheet for xml
+ * CSS class: source-xml, CSS id: 
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ * --------------------------------------
+ */
+.xml.source-xml .de1, .xml.source-xml .de2 {font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;}
+.xml.source-xml  {font-family:monospace;}
+.xml.source-xml .imp {font-weight: bold; color: red;}
+.xml.source-xml li, .xml.source-xml .li1 {font-weight: normal; vertical-align:top;}
+.xml.source-xml .ln {width:1px;text-align:right;margin:0;padding:0 2px;vertical-align:top;}
+.xml.source-xml .li2 {font-weight: bold; vertical-align:top;}
+.xml.source-xml .es0 {color: #000099; font-weight: bold;}
+.xml.source-xml .br0 {color: #66cc66;}
+.xml.source-xml .sy0 {color: #66cc66;}
+.xml.source-xml .st0 {color: #ff0000;}
+.xml.source-xml .nu0 {color: #cc66cc;}
+.xml.source-xml .sc-1 {color: #808080; font-style: italic;}
+.xml.source-xml .sc0 {color: #00bbdd;}
+.xml.source-xml .sc1 {color: #ddbb00;}
+.xml.source-xml .sc2 {color: #339933;}
+.xml.source-xml .sc3 {color: #009900;}
+.xml.source-xml .re0 {color: #000066;}
+.xml.source-xml .re1 {color: #000000; font-weight: bold;}
+.xml.source-xml .re2 {color: #000000; font-weight: bold;}
+.xml.source-xml .ln-xtra, .xml.source-xml li.ln-xtra, .xml.source-xml div.ln-xtra {background-color: #ffc;}
+.xml.source-xml span.xtra { display:block; }
+ 
+/*]]>*/
+</style> 
+<style type="text/css">/*<![CDATA[*/
+@import "/w/index.php?title=MediaWiki:Geshi.css&usemsgcache=yes&action=raw&ctype=text/css&smaxage=2678400";
+/*]]>*/
+</style></head> 
+<body class="mediawiki ltr ns-0 ns-subject page-XML skin-vector"> 
+		<div id="mw-page-base" class="noprint"></div> 
+		<div id="mw-head-base" class="noprint"></div> 
+		<!-- content --> 
+		<div id="content"> 
+			<a id="top"></a> 
+			<div id="mw-js-message" style="display:none;"></div> 
+						<!-- sitenotice --> 
+			<div id="siteNotice"><!-- centralNotice loads here --><script type="text/javascript" language="JavaScript"> 
+/* <![CDATA[ */
+document.writeln("\x3cdiv id=\"localNotice\"\x3e\x3c/div\x3e");
+/* ]]> */
+</script></div> 
+			<!-- /sitenotice --> 
+						<!-- firstHeading --> 
+			<h1 id="firstHeading" class="firstHeading">XML</h1> 
+			<!-- /firstHeading --> 
+			<!-- bodyContent --> 
+			<div id="bodyContent"> 
+				<!-- tagline --> 
+				<div id="siteSub">维基百科，自由的百科全书</div> 
+				<!-- /tagline --> 
+				<!-- subtitle --> 
+				<div id="contentSub"></div> 
+				<!-- /subtitle --> 
+																<!-- jumpto --> 
+				<div id="jump-to-nav"> 
+					跳转到： <a href="#mw-head">导航</a>,
+					<a href="#p-search">搜索</a> 
+				</div> 
+				<!-- /jumpto --> 
+								<!-- bodytext --> 
+				<p><span style="display: none;"><a href="#_skip_noteTA">跳过字词转换说明</a></span></p> 
+<div class="NavFrame collapsed noprint nohandheld metadata" style="z-index: 1; margin: 0 0.5em 0.5em auto; top: -1.2em; position: relative; background-color: transparent; border: none;"> 
+<div class="uncollapse toggleHotspot" style="position: absolute; right:0; background-color: transparent; padding: 0; width: 4em;" title="本頁使用了標題或全文手工轉換，單擊檢視"><span style="font-family:微软雅黑,Arial Unicode MS,黑体;"><span style="padding:1px 3px; background: slategray; color:white;">汉</span><span style="padding:1px 3px; background: sienna; color:white;">漢</span></span><span class="toggleShow" style="color:black;">▼</span><span class="toggleHide" style="color:black;">▲</span></div> 
+<div class="NavContent" style="position: absolute; display: none; right: 0; top: 1.5em; border: 1px gray solid; background-color: lightyellow; padding: 0.3em; z-index: 100; width: 650px; font-size: 90%; background-color: #f0f2f0; color: black;"> 
+<div style="background: #FFEA88; background-color: #4d4d4d; color: #ffffff;">为了阅读方便，本文使用<a href="/wiki/Help:%E4%B8%AD%E6%96%87%E7%BB%B4%E5%9F%BA%E7%99%BE%E7%A7%91%E7%9A%84%E7%B9%81%E7%AE%80%E5%A4%84%E7%90%86#.E6.8E.A7.E5.88.B6.E8.87.AA.E5.8A.A8.E8.BD.AC.E6.8D.A2.E7.9A.84.E4.BB.A3.E7.A2.BC" title="Help:中文维基百科的繁简处理" class="mw-redirect"><span style="color:#ffffff; font-weight:bold;">全文手工轉換</span></a>。转换内容：</div> 
+<div style="padding: 3px"> 
+<p>本文采用<a href="/wiki/Portal:%E7%94%B5%E8%84%91%E5%92%8C%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF" title="Portal:电脑和信息技术" class="mw-redirect"><span style="color: #333333; font-weight: bold;">电脑和信息技术</span></a>组全文转换 <span class="editlink noprint plainlinksneverexpand">[<a href="/wiki/Template:CGroup/IT/temp" title="Template:CGroup/IT/temp">查看</a>] • [<a href="http://zh.wikipedia.org/w/index.php?title=Template:CGroup/IT/temp&amp;action=edit" class="external text" rel="nofollow">编辑</a>] • [<a href="http://philip-bot.appspot.com/autoconvert?group=IT" class="external text" rel="nofollow">强制刷新</a>]</span></p> 
+<p><br /></p> 
+</div> 
+<div class="NavFrame collapsed" style="background-color: transparent; border: none; margin:0; padding:0;"> 
+<div class="NavHead" style="background-color: #FFEA88; font-weight: normal; height: 1.5em; text-align: left; background-color: #4d4d4d; color: #ffffff;"><a href="/wiki/Help:%E4%B8%AD%E6%96%87%E7%BB%B4%E5%9F%BA%E7%99%BE%E7%A7%91%E7%9A%84%E7%B9%81%E7%AE%80%E3%80%81%E5%9C%B0%E5%8C%BA%E8%AF%8D%E5%A4%84%E7%90%86" title="Help:中文维基百科的繁简、地区词处理"><span style="color: #333333; font-weight: bold;">字詞轉換</span></a>说明<span class="NavToggle"><span class="toggleShow">顯示↓</span><span class="toggleHide">關閉↑</span></span></div> 
+<div class="NavContent"> 
+<p>字詞轉換是中文维基的一項自動轉換，目的是通過计算机程序自動消除繁简、地区词等不同<b>用字模式</b>的差異，以達到閱讀方便。字詞轉換包括全局轉換和手動轉換，本說明所使用的标题转换和全文转换技術，都屬於手動轉換。</p> 
+<p>如果您想对我们的字词转换系统提出一些改进建议，或者提交应用面更广的转换（<a href="/wiki/%E4%B8%AD%E6%96%87%E7%BB%B4%E5%9F%BA%E7%99%BE%E7%A7%91" title="中文维基百科">中文维基百科</a>全站乃至<a href="/wiki/MediaWiki" title="MediaWiki">MediaWiki</a>软件），或者报告转换系统的错误，请前往<a href="/wiki/Wikipedia:%E5%AD%97%E8%AF%8D%E8%BD%AC%E6%8D%A2%E8%AF%B7%E6%B1%82%E6%88%96%E5%80%99%E9%80%89" title="Wikipedia:字词转换请求或候选">Wikipedia:字词转换请求或候选</a>发表您的意见。</p> 
+</div> 
+</div> 
+</div> 
+</div> 
+<p><span id="_skip_noteTA"></span></p> 
+<div class="thumb tright"> 
+<div class="thumbinner" style="width:427px;"><a href="/wiki/File:RecipeBook_XML_Example.svg" class="image"><img alt="" src="http://upload.wikimedia.org/wikipedia/commons/thumb/7/73/RecipeBook_XML_Example.svg/425px-RecipeBook_XML_Example.svg.png" width="425" height="234" class="thumbimage" /></a> 
+<div class="thumbcaption">RecipeBook的例子，一種基於XML語法上的烹飪技術書刊。此標籤可轉換為：<a href="/wiki/HTML" title="HTML">HTML</a>, <a href="/wiki/Portable_Document_Format" title="Portable Document Format" class="mw-redirect">PDF</a>以及<a href="/wiki/Rich_Text_Format" title="Rich Text Format" class="mw-redirect">Rich Text Format</a>並使用<a href="/wiki/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80" title="程式語言" class="mw-redirect">程式語言</a>或<a href="/w/index.php?title=%E5%8F%AF%E6%93%B4%E5%85%85%E5%A5%97%E4%BB%B6%E6%A8%A3%E5%BC%8F%E8%AA%9E%E8%A8%80&amp;action=edit&amp;redlink=1" class="new" title="可擴充套件樣式語言">XSL</a>。</div> 
+</div> 
+</div> 
+<p><b>可扩展置标语言</b>（<a href="/wiki/%E8%8B%B1%E8%AF%AD" title="英语">英语</a>：<span lang="en" xml:lang="en">e<b>X</b>tensible <b>M</b>arkup <b>L</b>anguage</span>，简称:<span lang="en" xml:lang="en"><b>XML</b></span>），又称<b>可扩展标记语言</b>，是一种<a href="/wiki/%E7%BD%AE%E6%A0%87%E8%AF%AD%E8%A8%80" title="置标语言">置标语言</a>。置标指<a href="/wiki/%E8%AE%A1%E7%AE%97%E6%9C%BA" title="计算机" class="mw-redirect">计算机</a>所能理解的信息符号，通过此种标记，计算机之间可以处理包含各种信息的文章等。如何定义这些标记，既可以选择国际通用的标记语言，比如<a href="/wiki/HTML" title="HTML">HTML</a>，也可以使用像XML这样由相关人士自由决定的标记语言，这就是语言的可扩展性。XML是从<a href="/wiki/%E6%A0%87%E5%87%86%E9%80%9A%E7%94%A8%E7%BD%AE%E6%A0%87%E8%AF%AD%E8%A8%80" title="标准通用置标语言" class="mw-redirect">标准通用置标语言</a>（SGML）中简化修改出来的。它主要用到的有可扩展置标语言、<a href="/wiki/%E5%8F%AF%E6%89%A9%E5%B1%95%E6%A0%B7%E5%BC%8F%E8%AF%AD%E8%A8%80" title="可扩展样式语言">可扩展样式语言</a>（XSL）、<a href="/wiki/XBRL" title="XBRL">XBRL</a>和<a href="/wiki/XPath" title="XPath">XPath</a>等。</p> 
+<table id="toc" class="toc"> 
+<tr> 
+<td> 
+<div id="toctitle"> 
+<h2>目录</h2> 
+</div> 
+<ul> 
+<li class="toclevel-1 tocsection-1"><a href="#.E6.AD.B7.E5.8F.B2"><span class="tocnumber">1</span> <span class="toctext">歷史</span></a></li> 
+<li class="toclevel-1 tocsection-2"><a href="#.E7.94.A8.E9.80.94"><span class="tocnumber">2</span> <span class="toctext">用途</span></a></li> 
+<li class="toclevel-1 tocsection-3"><a href="#.E4.BE.8B"><span class="tocnumber">3</span> <span class="toctext">例</span></a></li> 
+<li class="toclevel-1 tocsection-4"><a href="#.E7.BB.93.E6.9E.84"><span class="tocnumber">4</span> <span class="toctext">结构</span></a></li> 
+<li class="toclevel-1 tocsection-5"><a href="#.E5.8F.82.E8.A7.81"><span class="tocnumber">5</span> <span class="toctext">参见</span></a></li> 
+<li class="toclevel-1 tocsection-6"><a href="#.E5.A4.96.E9.83.A8.E9.93.BE.E6.8E.A5"><span class="tocnumber">6</span> <span class="toctext">外部链接</span></a></li> 
+</ul> 
+</td> 
+</tr> 
+</table> 
+<script type="text/javascript"> 
+//<![CDATA[
+if (window.showTocToggle) { var tocShowText = "显示"; var tocHideText = "隐藏"; showTocToggle(); } 
+//]]>
+</script> 
+<h2><span class="editsection">[<a href="/w/index.php?title=XML&amp;action=edit&amp;section=1" title="编辑段落：歷史">编辑</a>]</span> <span class="mw-headline" id=".E6.AD.B7.E5.8F.B2">歷史</span></h2> 
+<p>XML是從1995年開始有其雛形，並向<a href="/wiki/W3C" title="W3C" class="mw-redirect">W3C</a>（<a href="/wiki/%E4%B8%87%E7%BB%B4%E7%BD%91%E8%81%94%E7%9B%9F" title="万维网联盟">全球資訊網聯盟</a>）提案，而在1998二月發佈為W3C的標準（XML1.0）。XML的前身是<b>SGML</b>（<span lang="en" xml:lang="en">The <b>S</b>tandard <b>G</b>eneralized <b>M</b>arkup <b>L</b>anguage</span>），是自IBM從1960年代就開始發展的<b><a href="/w/index.php?title=%E9%80%9A%E7%94%A8%E7%BD%AE%E6%A0%87%E8%AF%AD%E8%A8%80&amp;action=edit&amp;redlink=1" class="new" title="通用置标语言">GML</a></b>（<span lang="en" xml:lang="en"><b>G</b>eneralized <b>M</b>arkup <b>L</b>anguage</span>）標準化後的名稱。</p> 
+<p>GML的重要概念：</p> 
+<ul> 
+<li>文件中能夠明確的將標示與內容分開</li> 
+<li>所有文件的標示使用方法均一致</li> 
+</ul> 
+<p>1978年，<a href="/wiki/ANSI" title="ANSI" class="mw-redirect">ANSI</a>將GML加以整理規範，發佈成為SGML，1986年起為<a href="/wiki/ISO" title="ISO" class="mw-redirect">ISO</a>所採用（ISO 8879），並且被廣泛地運用在各種大型的文件計劃中，但是SGML是一種非常嚴謹的文件描述法，導致過於龐大複雜（標準手冊就有500多頁），難以理解和學習，進而影響其推廣與應用。</p> 
+<p>同時W3C也發現到HTML的問題：</p> 
+<ul> 
+<li>不能解決所有解釋資料的問題 - 像是影音檔或化學公式、音樂符號等其他形態的內容。</li> 
+<li>效能問題 - 需要下載整份文件，才能開始對文件做搜尋。</li> 
+<li>擴充性、彈性、易讀性均不佳。</li> 
+</ul> 
+<p>為了解決以上問題，專家們使用SGML精簡製作，並依照HTML的發展經驗，產生出一套使用上規則嚴謹，但是簡單的描述資料語言：XML。 XML是在一個這樣的背景下誕生的——为了有一個更中立的方式，讓消費端自行決定要如何消化、呈現從服務端所提供的資訊。</p> 
+<p>XML被廣泛用來作為跨平台之間交互數據的形式，主要針對數據的內容，通過不同的格式化描述手段（XSLT，CSS等）可以完成最終的形式表達（生成對應的HTML，PDF或者其他的文件格式）。</p> 
+<h2><span class="editsection">[<a href="/w/index.php?title=XML&amp;action=edit&amp;section=2" title="编辑段落：用途">编辑</a>]</span> <span class="mw-headline" id=".E7.94.A8.E9.80.94">用途</span></h2> 
+<p>XML设计用来传送及携带数据信息，不用来表现或展示数据，<a href="/wiki/HTML" title="HTML">HTML</a>语言則用来表现数据，所以XML用途的焦点是它说明数据是什么，以及携带数据信息。</p> 
+<ul> 
+<li>丰富文件（Rich Documents）- 自定文件描述并使其更丰富
+<ul> 
+<li>属于文件为主的XML技术应用</li> 
+<li>标记是用来定义一份资料应该如何呈现</li> 
+</ul> 
+</li> 
+<li>元数据（Metadata）- 描述其它文件或网络资讯
+<ul> 
+<li>属于资料为主的XML技术应用</li> 
+<li>标记是用来说明一份资料的意义</li> 
+</ul> 
+</li> 
+<li>設定档案（Configuration Files）- 描述软件設定的参数</li> 
+</ul> 
+<h2><span class="editsection">[<a href="/w/index.php?title=XML&amp;action=edit&amp;section=3" title="编辑段落：例">编辑</a>]</span> <span class="mw-headline" id=".E4.BE.8B">例</span></h2> 
+<p>XML定义结构、存储信息、传送信息。下例為<u>張旭</u>发送给<u>陳貞伶</u>的便条，存储为XML。</p> 
+<div dir="ltr" class="mw-geshi" style="text-align: left;"> 
+<div class="xml source-xml" style="font-family:monospace;"> 
+<pre class="de1"> 
+<span class="sc3">&lt;小纸条<span class="re2">&gt;</span></span> 
+    <span class="sc3">&lt;收件人<span class="re2">&gt;</span></span>陳貞伶<span class="sc3">&lt;/收件人<span class="re2">&gt;</span></span> 
+    <span class="sc3">&lt;发件人<span class="re2">&gt;</span></span>張旭<span class="sc3">&lt;/发件人<span class="re2">&gt;</span></span> 
+    <span class="sc3">&lt;主题<span class="re2">&gt;</span></span>問候<span class="sc3">&lt;/主题<span class="re2">&gt;</span></span> 
+    <span class="sc3">&lt;具体内容<span class="re2">&gt;</span></span>最近可好？<span class="sc3">&lt;/具体内容<span class="re2">&gt;</span></span> 
+<span class="sc3">&lt;/小纸条<span class="re2">&gt;</span></span> 
+</pre></div> 
+</div> 
+<p>这XML文档仅是纯粹的信息标签，这些标签意义的展开依赖于应用它的程序。</p> 
+<h2><span class="editsection">[<a href="/w/index.php?title=XML&amp;action=edit&amp;section=4" title="编辑段落：结构">编辑</a>]</span> <span class="mw-headline" id=".E7.BB.93.E6.9E.84">结构</span></h2> 
+<p>每个XML文档都由XML序言开始，在前面的代码中的第一行便是XML序言，&lt;?xml version="1.0"?&gt;。这一行代码会告诉解析器和浏览器，这个文件应该按照前面讨论过的XML规则进行解析。第二行代码，&lt;books&gt;，则是文档元素（document element），它是文件中最外面的标签（我们认为元素（element）是起始标签和结束标签之间的内容）。所有其他的标签必须包含在这个标签之内来组成一个有效的XML文件。XML文件的第二行并不一定要包含文档元素；如果有注释或者其他内容，文档元素可以迟些出现。</p> 
+<p>范例文件中的第三行代码是注释，你会发现它与HTML中使用的注释风格是一样的。这是XML从SGML中继承的语法元素之一。</p> 
+<p>页面再往下的一些地方，可以发现&lt;desc&gt;标签裡有一些特殊的语法。&lt;![CDATA[ ]]&gt;代码用于表示无需进行解析的文本，允许诸如大于号和小于号之类的特殊字符包含在文本中，而无需担心破坏XML的语法。文本必须出现在&lt;![CDATA[和]]&gt;之间才能合适地避免被解析。这样的文本称为Character Data Section，简称CData Section。</p> 
+<p>下面的一行就是在第二本书的定义之前的：</p> 
+<p>&lt;?page render multiple authors&#160;?&gt;</p> 
+<p>虽然它看上去很像XML序言，但实际上是一种称为处理指令（processing instruction）的不同类型的语法。处理指令（以下简称PI）的目的是为了给处理页面的程序（例如XML解析器）提供额外的信息。PI通常情况下是没有固定格式的，唯一的要求是紧随第一个问号必须至少有一个字母。在此之后，PI可以包含除了小于号和大于号之外的任何字符串序列。</p> 
+<p>最常见的PI是用来指定XML文件的样式表：</p> 
+<p>这个PI一般会直接放在XML序言之后，通常由Web浏览器使用，来将XML数据以特殊的样式显示出来。</p> 
+<p>XML的结构有一个缺陷，那就是不支持分帧（framing）。当多条XML消息在TCP上传输的时候，无法基于XML协议来确定一条XML消息是否已经结束。</p> 
+<h2><span class="editsection">[<a href="/w/index.php?title=XML&amp;action=edit&amp;section=5" title="编辑段落：参见">编辑</a>]</span> <span class="mw-headline" id=".E5.8F.82.E8.A7.81">参见</span></h2> 
+<ul> 
+<li><a href="/wiki/XHTML" title="XHTML">XHTML</a></li> 
+<li><a href="/wiki/DTD" title="DTD" class="mw-redirect">DTD</a>（<a href="/wiki/%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B%E6%8F%8F%E8%BF%B0" title="文件类型描述">文件类型描述</a>）</li> 
+<li><a href="/wiki/XML_Schema" title="XML Schema">XML Schema</a></li> 
+<li><a href="/w/index.php?title=XLink&amp;action=edit&amp;redlink=1" class="new" title="XLink">XLink</a></li> 
+<li><a href="/wiki/SVG" title="SVG">SVG</a></li> 
+<li><a href="/wiki/XSLT" title="XSLT">XSLT</a></li> 
+<li><a href="/wiki/X3D" title="X3D">X3D</a></li> 
+<li><a href="/wiki/HTML" title="HTML">HTML</a></li> 
+<li><a href="/wiki/CSS" title="CSS">CSS</a></li> 
+<li><a href="/wiki/RDF" title="RDF" class="mw-redirect">RDF</a></li> 
+<li><a href="/wiki/RSS" title="RSS">RSS</a> 
+<ul> 
+<li><a href="/wiki/Unicode" title="Unicode">Unicode</a></li> 
+</ul> 
+</li> 
+</ul> 
+<h2><span class="editsection">[<a href="/w/index.php?title=XML&amp;action=edit&amp;section=6" title="编辑段落：外部链接">编辑</a>]</span> <span class="mw-headline" id=".E5.A4.96.E9.83.A8.E9.93.BE.E6.8E.A5">外部链接</span></h2> 
+<ul> 
+<li><a href="http://xml.ascc.net/zh/utf-8/gloss.html" class="external text" rel="nofollow">XML及SGML名词英汉翻译表 (台湾)</a></li> 
+</ul> 
+<p><br /></p> 
+<table class="navbox" cellspacing="0" style=";"> 
+<tr> 
+<td style="padding:2px;"> 
+<table cellspacing="0" class="nowraplinks collapsible autocollapse" style="width:100%;background:transparent;color:inherit;;"> 
+<tr> 
+<th style=";" colspan="2" class="navbox-title"> 
+<div style="float:left; width:6em;text-align:left;"> 
+<div class="noprint plainlinksneverexpand" style="background-color:transparent; padding:0; font-weight:normal; font-size:80%; color:#000000; white-space:nowrap;"><a href="/wiki/Template:W3C%E8%A7%84%E8%8C%83%E5%92%8C%E6%A0%87%E5%87%86" title="Template:W3C规范和标准"><span style=";;border:none;" title="查看这个模板">查</span></a>&#160;<span style="font-size:80%;">•</span>&#160;<a href="/w/index.php?title=Template_talk:W3C%E8%A7%84%E8%8C%83%E5%92%8C%E6%A0%87%E5%87%86&amp;action=edit&amp;redlink=1" class="new" title="Template talk:W3C规范和标准"><span style=";;border:none;" title="关于这个模板的讨论页面">論</span></a>&#160;<span style="font-size:80%;">•</span>&#160;<a href="http://zh.wikipedia.org/w/index.php?title=Template:W3C%E8%A7%84%E8%8C%83%E5%92%8C%E6%A0%87%E5%87%86&amp;action=edit" class="external text" rel="nofollow"><span style=";;border:none;" title="您可以编辑这个模板。请在储存变更之前先预览">編</span></a></div> 
+</div> 
+<span style="font-size:110%;"><a href="/wiki/%E4%B8%87%E7%BB%B4%E7%BD%91%E8%81%94%E7%9B%9F" title="万维网联盟">W3C</a>规范和标准</span></th> 
+</tr> 
+<tr style="height:2px;"> 
+<td></td> 
+</tr> 
+<tr> 
+<td class="navbox-group" style=";background-color:#e6e6ff;;"><a href="/wiki/W3C%E6%8E%A8%E8%8D%90%E6%A0%87%E5%87%86" title="W3C推荐标准">推薦標準</a></td> 
+<td style="text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;line-height:1.4em;;;" class="navbox-list navbox-odd"> 
+<div style="padding:0em 0.25em"><span style="white-space:nowrap"><a href="/wiki/Canonical_XML" title="Canonical XML">Canonical XML</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/w/index.php?title=Compound_Document_Format&amp;action=edit&amp;redlink=1" class="new" title="Compound Document Format">CDF</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/wiki/CSS" title="CSS">CSS</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/wiki/%E6%96%87%E6%A1%A3%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B" title="文档对象模型">DOM</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/wiki/HTML" title="HTML">HTML</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/wiki/%E6%95%B0%E5%AD%A6%E7%BD%AE%E6%A0%87%E8%AF%AD%E8%A8%80" title="数学置标语言">MathML</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/wiki/%E7%BD%91%E7%BB%9C%E6%9C%AC%E4%BD%93%E8%AF%AD%E8%A8%80" title="网络本体语言">OWL</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/w/index.php?title=P3P&amp;action=edit&amp;redlink=1" class="new" title="P3P">P3P</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/w/index.php?title=Pronunciation_Lexicon_Specification&amp;action=edit&amp;redlink=1" class="new" title="Pronunciation Lexicon Specification">PLS</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/wiki/RDF" title="RDF" class="mw-redirect">RDF</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/w/index.php?title=RDF_Schema&amp;action=edit&amp;redlink=1" class="new" title="RDF Schema">RDF Schema</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/w/index.php?title=Semantic_Interpretation_for_Speech_Recognition&amp;action=edit&amp;redlink=1" class="new" title="Semantic Interpretation for Speech Recognition">SISR</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/wiki/%E5%90%8C%E6%AD%A5%E5%A4%9A%E5%AA%92%E4%BD%93%E9%9B%86%E6%88%90%E8%AF%AD%E8%A8%80" title="同步多媒体集成语言">SMIL</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/wiki/%E7%B0%A1%E5%96%AE%E7%89%A9%E4%BB%B6%E5%AD%98%E5%8F%96%E5%8D%94%E5%AE%9A" title="簡單物件存取協定" class="mw-redirect">SOAP</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/w/index.php?title=Speech_Recognition_Grammar_Specification&amp;action=edit&amp;redlink=1" class="new" title="Speech Recognition Grammar Specification">SRGS</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/w/index.php?title=Speech_Synthesis_Markup_Language&amp;action=edit&amp;redlink=1" class="new" title="Speech Synthesis Markup Language">SSML</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/wiki/%E5%8F%AF%E7%BC%A9%E6%94%BE%E7%9F%A2%E9%87%8F%E5%9B%BE%E5%BD%A2" title="可缩放矢量图形" class="mw-redirect">SVG</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/wiki/SPARQL" title="SPARQL">SPARQL</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/w/index.php?title=Timed_Text&amp;action=edit&amp;redlink=1" class="new" title="Timed Text">Timed Text</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/w/index.php?title=VoiceXML&amp;action=edit&amp;redlink=1" class="new" title="VoiceXML">VoiceXML</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/wiki/WSDL" title="WSDL">WSDL</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/wiki/XForms" title="XForms">XForms</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/wiki/XHTML" title="XHTML">XHTML</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/w/index.php?title=XLink&amp;action=edit&amp;redlink=1" class="new" title="XLink">XLink</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><strong class="selflink">XML</strong>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/w/index.php?title=XML_Base&amp;action=edit&amp;redlink=1" class="new" title="XML Base">XML Base</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/wiki/XML_Encryption" title="XML Encryption">XML Encryption</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/w/index.php?title=XML_Events&amp;action=edit&amp;redlink=1" class="new" title="XML Events">XML Events</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/wiki/XML%E4%BF%A1%E6%81%AF%E9%9B%86" title="XML信息集">XML信息集</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/wiki/XML%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4" title="XML命名空间">XML命名空间</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/wiki/XML_Schema" title="XML Schema">XML Schema</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/wiki/XML_Signature" title="XML Signature">XML Signature</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/wiki/XPath" title="XPath">XPath</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/w/index.php?title=XPointer&amp;action=edit&amp;redlink=1" class="new" title="XPointer">XPointer</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/w/index.php?title=XQuery&amp;action=edit&amp;redlink=1" class="new" title="XQuery">XQuery</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/wiki/%E5%8F%AF%E6%89%A9%E5%B1%95%E6%A0%B7%E5%BC%8F%E8%AF%AD%E8%A8%80" title="可扩展样式语言">XSL</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/wiki/XSL-FO" title="XSL-FO">XSL-FO</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/wiki/XSL_Transformations" title="XSL Transformations" class="mw-redirect">XSLT</a></span></div> 
+</td> 
+</tr> 
+<tr style="height:2px"> 
+<td></td> 
+</tr> 
+<tr> 
+<td class="navbox-group" style=";background-color:#e6e6ff;;">Notes</td> 
+<td style="text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;line-height:1.4em;;;" class="navbox-list navbox-even"> 
+<div style="padding:0em 0.25em"><span style="white-space:nowrap"><a href="/w/index.php?title=XAdES&amp;action=edit&amp;redlink=1" class="new" title="XAdES">XAdES</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/w/index.php?title=XHTML%2BSMIL&amp;action=edit&amp;redlink=1" class="new" title="XHTML+SMIL">XHTML+SMIL</a></span></div> 
+</td> 
+</tr> 
+<tr style="height:2px"> 
+<td></td> 
+</tr> 
+<tr> 
+<td class="navbox-group" style=";background-color:#e6e6ff;;">工作草案</td> 
+<td style="text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;line-height:1.4em;;;" class="navbox-list navbox-odd"> 
+<div style="padding:0em 0.25em"><span style="white-space:nowrap"><a href="/w/index.php?title=Call_Control_eXtensible_Markup_Language&amp;action=edit&amp;redlink=1" class="new" title="Call Control eXtensible Markup Language">CCXML</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/w/index.php?title=CURIE&amp;action=edit&amp;redlink=1" class="new" title="CURIE">CURIE</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/wiki/HTML_5" title="HTML 5">HTML 5</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/w/index.php?title=InkML&amp;action=edit&amp;redlink=1" class="new" title="InkML">InkML</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/w/index.php?title=Web_Integration_Compound_Document&amp;action=edit&amp;redlink=1" class="new" title="Web Integration Compound Document">WICD</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/w/index.php?title=Extensible_Forms_Description_Language&amp;action=edit&amp;redlink=1" class="new" title="Extensible Forms Description Language">XFDL</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/w/index.php?title=XFrames&amp;action=edit&amp;redlink=1" class="new" title="XFrames">XFrames</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/wiki/XBL" title="XBL">XBL</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/w/index.php?title=XHTML%2BMathML%2BSVG&amp;action=edit&amp;redlink=1" class="new" title="XHTML+MathML+SVG">XHTML+MathML+SVG</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/wiki/XMLHttpRequest" title="XMLHttpRequest" class="mw-redirect">XMLHttpRequest</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/w/index.php?title=XProc&amp;action=edit&amp;redlink=1" class="new" title="XProc">XProc</a></span></div> 
+</td> 
+</tr> 
+<tr style="height:2px"> 
+<td></td> 
+</tr> 
+<tr> 
+<td class="navbox-group" style=";background-color:#e6e6ff;;">檢測</td> 
+<td style="text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;line-height:1.4em;;;" class="navbox-list navbox-even"> 
+<div style="padding:0em 0.25em"><a href="/w/index.php?title=%E7%84%A1%E9%9A%9C%E7%A4%99%E7%B6%B2%E9%A0%81%E6%AA%A2%E6%B8%AC&amp;action=edit&amp;redlink=1" class="new" title="無障礙網頁檢測">無障礙網頁檢測</a></div> 
+</td> 
+</tr> 
+<tr style="height:2px"> 
+<td></td> 
+</tr> 
+<tr> 
+<td class="navbox-group" style=";background-color:#e6e6ff;;">前标准</td> 
+<td style="text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;line-height:1.4em;;;" class="navbox-list navbox-odd"> 
+<div style="padding:0em 0.25em"><span style="white-space:nowrap"><a href="/wiki/C-HTML" title="C-HTML">C-HTML</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/w/index.php?title=Handheld_Device_Markup_Language&amp;action=edit&amp;redlink=1" class="new" title="Handheld Device Markup Language">HDML</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/w/index.php?title=JavaScript_Style_Sheets&amp;action=edit&amp;redlink=1" class="new" title="JavaScript Style Sheets">JSSS</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/w/index.php?title=Precision_Graphics_Markup_Language&amp;action=edit&amp;redlink=1" class="new" title="Precision Graphics Markup Language">PGML</a>&#160;<b>·</b></span> <span style="white-space:nowrap"><a href="/wiki/Vector_Markup_Language" title="Vector Markup Language" class="mw-redirect">VML</a></span></div> 
+</td> 
+</tr> 
+</table> 
+</td> 
+</tr> 
+</table> 
+<table class="navbox" cellspacing="0" style=";"> 
+<tr> 
+<td style="padding:2px;"> 
+<table cellspacing="0" class="nowraplinks collapsible autocollapse" style="width:100%;background:transparent;color:inherit;;"> 
+<tr> 
+<th style=";" colspan="2" class="navbox-title"> 
+<div style="float:left; width:6em;text-align:left;"> 
+<div class="noprint plainlinksneverexpand" style="background-color:transparent; padding:0; font-weight:normal; font-size:80%; color:#000000; white-space:nowrap;"><a href="/wiki/Template:%E7%B6%B2%E9%A0%81%E6%8A%80%E8%A1%93%E8%88%87%E6%A8%99%E6%BA%96" title="Template:網頁技術與標準"><span style=";;border:none;" title="查看这个模板">查</span></a>&#160;<span style="font-size:80%;">•</span>&#160;<a href="/wiki/Template_talk:%E7%B6%B2%E9%A0%81%E6%8A%80%E8%A1%93%E8%88%87%E6%A8%99%E6%BA%96" title="Template talk:網頁技術與標準"><span style=";;border:none;" title="关于这个模板的讨论页面">論</span></a>&#160;<span style="font-size:80%;">•</span>&#160;<a href="http://zh.wikipedia.org/w/index.php?title=Template:%E7%B6%B2%E9%A0%81%E6%8A%80%E8%A1%93%E8%88%87%E6%A8%99%E6%BA%96&amp;action=edit" class="external text" rel="nofollow"><span style=";;border:none;" title="您可以编辑这个模板。请在储存变更之前先预览">編</span></a></div> 
+</div> 
+<span style="font-size:110%;">網頁技術與標準</span></th> 
+</tr> 
+<tr style="height:2px;"> 
+<td></td> 
+</tr> 
+<tr> 
+<td class="navbox-group" style=";;">文档呈现语言</td> 
+<td style="text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;" class="navbox-list navbox-odd"> 
+<div style="padding:0em 0.25em"><a href="/wiki/HTML" title="HTML">HTML</a>*（<a href="/wiki/HTML5" title="HTML5" class="mw-redirect">HTML5</a>*）<span style="white-space:nowrap; font-weight:bold;">&#160;·</span> <a href="/wiki/XHTML" title="XHTML">XHTML</a>*<span style="white-space:nowrap; font-weight:bold;">&#160;·</span> <strong class="selflink">XML</strong>*<span style="white-space:nowrap; font-weight:bold;">&#160;·</span> <a href="/wiki/XForms" title="XForms">XForms</a>*<span style="white-space:nowrap; font-weight:bold;">&#160;·</span> <a href="/wiki/DHTML" title="DHTML">DHTML</a>*</div> 
+</td> 
+</tr> 
+<tr style="height:2px"> 
+<td></td> 
+</tr> 
+<tr> 
+<td class="navbox-group" style=";;">样式格式描述语言</td> 
+<td style="text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;" class="navbox-list navbox-even"> 
+<div style="padding:0em 0.25em"><a href="/wiki/CSS" title="CSS">CSS</a>*<span style="white-space:nowrap; font-weight:bold;">&#160;·</span> <a href="/wiki/XSL" title="XSL" class="mw-redirect">XSL</a>*</div> 
+</td> 
+</tr> 
+<tr style="height:2px"> 
+<td></td> 
+</tr> 
+<tr> 
+<td class="navbox-group" style=";;">动态网页技术</td> 
+<td style="text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;" class="navbox-list navbox-odd"> 
+<div style="padding:0em 0.25em"><a href="/wiki/%E9%80%9A%E7%94%A8%E7%BD%91%E5%85%B3%E6%8E%A5%E5%8F%A3" title="通用网关接口">CGI</a><span style="white-space:nowrap; font-weight:bold;">&#160;·</span> <a href="/wiki/Active_Server_Pages" title="Active Server Pages">ASP</a><span style="white-space:nowrap; font-weight:bold;">&#160;·</span> <a href="/wiki/ASP.NET" title="ASP.NET">ASP.NET</a><span style="white-space:nowrap; font-weight:bold;">&#160;·</span> <a href="/wiki/ColdFusion" title="ColdFusion" class="mw-redirect">ColdFusion</a><span style="white-space:nowrap; font-weight:bold;">&#160;·</span> <a href="/wiki/JSP" title="JSP">JSP</a><span style="white-space:nowrap; font-weight:bold;">&#160;·</span> <a href="/wiki/PHP" title="PHP">PHP</a><span style="white-space:nowrap; font-weight:bold;">&#160;·</span> <a href="/wiki/Ruby_on_Rails" title="Ruby on Rails">Ruby on Rails</a></div> 
+</td> 
+</tr> 
+<tr style="height:2px"> 
+<td></td> 
+</tr> 
+<tr> 
+<td class="navbox-group" style=";;">客户端交互技术</td> 
+<td style="text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;" class="navbox-list navbox-even"> 
+<div style="padding:0em 0.25em"><a href="/wiki/ActiveX" title="ActiveX">ActiveX</a><span style="white-space:nowrap; font-weight:bold;">&#160;·</span> <a href="/wiki/Java_Applet" title="Java Applet" class="mw-redirect">Java Applet</a><span style="white-space:nowrap; font-weight:bold;">&#160;·</span> <a href="/wiki/JavaFX" title="JavaFX">JavaFX</a><span style="white-space:nowrap; font-weight:bold;">&#160;·</span> <a href="/wiki/AJAX" title="AJAX">AJAX</a>（<a href="/wiki/XMLHTTP" title="XMLHTTP">XMLHTTP</a>*）<span style="white-space:nowrap; font-weight:bold;">&#160;·</span> <a href="/wiki/Microsoft_Silverlight" title="Microsoft Silverlight">Silverlight</a><span style="white-space:nowrap; font-weight:bold;">&#160;·</span> <a href="/wiki/ActionScript" title="ActionScript">ActionScript</a>（<a href="/wiki/Adobe_Flash" title="Adobe Flash">Flash</a><span style="white-space:nowrap; font-weight:bold;">&#160;·</span> <a href="/wiki/Adobe_Flex" title="Adobe Flex">Flex</a><span style="white-space:nowrap; font-weight:bold;">&#160;·</span> <a href="/wiki/Adobe_Integrated_Runtime" title="Adobe Integrated Runtime" class="mw-redirect">AIR</a>）</div> 
+</td> 
+</tr> 
+<tr style="height:2px"> 
+<td></td> 
+</tr> 
+<tr> 
+<td class="navbox-group" style=";;">客户端脚本语言</td> 
+<td style="text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;" class="navbox-list navbox-odd"> 
+<div style="padding:0em 0.25em"><a href="/wiki/JavaScript" title="JavaScript">JavaScript</a><span style="white-space:nowrap; font-weight:bold;">&#160;·</span> <a href="/wiki/JScript" title="JScript">JScript</a><span style="white-space:nowrap; font-weight:bold;">&#160;·</span> <a href="/wiki/VBScript" title="VBScript">VBScript</a><span style="white-space:nowrap; font-weight:bold;">&#160;·</span> <a href="/wiki/ECMAScript" title="ECMAScript">ECMAScript</a></div> 
+</td> 
+</tr> 
+<tr style="height:2px"> 
+<td></td> 
+</tr> 
+<tr> 
+<td class="navbox-group" style=";;">标识定位语言</td> 
+<td style="text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;" class="navbox-list navbox-even"> 
+<div style="padding:0em 0.25em"><a href="/wiki/%E7%BB%9F%E4%B8%80%E8%B5%84%E6%BA%90%E5%AE%9A%E4%BD%8D%E7%AC%A6" title="统一资源定位符">URL</a><span style="white-space:nowrap; font-weight:bold;">&#160;·</span> <a href="/wiki/%E7%BB%9F%E4%B8%80%E8%B5%84%E6%BA%90%E6%A0%87%E5%BF%97%E7%AC%A6" title="统一资源标志符">URI</a><span style="white-space:nowrap; font-weight:bold;">&#160;·</span> <a href="/wiki/XPath" title="XPath">XPath</a><span style="white-space:nowrap; font-weight:bold;">&#160;·</span> <a href="/wiki/URL%E9%87%8D%E5%AF%AB" title="URL重寫">URL重寫</a></div> 
+</td> 
+</tr> 
+<tr style="height:2px"> 
+<td></td> 
+</tr> 
+<tr> 
+<td class="navbox-group" style=";;">文档纲要语言</td> 
+<td style="text-align:left;border-left:2px solid #fdfdfd;width:100%;padding:0px;;;" class="navbox-list navbox-odd"> 
+<div style="padding:0em 0.25em"><a href="/wiki/%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B%E6%8F%8F%E8%BF%B0" title="文件类型描述">DTD</a>*<span style="white-space:nowrap; font-weight:bold;">&#160;·</span> <a href="/wiki/XML_Schema" title="XML Schema">XML Schema</a>*</div> 
+</td> 
+</tr> 
+</table> 
+</td> 
+</tr> 
+</table> 
+ 
+ 
+<!-- 
+NewPP limit report
+Preprocessor node count: 2032/1000000
+Post-expand include size: 837777/2048000 bytes
+Template argument size: 22446/2048000 bytes
+Expensive parser function count: 11/500
+--> 
+ 
+<!-- Saved in parser cache with key zhwiki:pcache:idhash:3632-0!1!0!!zh!4!zh and timestamp 20110110032035 --> 
+<div class="printfooter"> 
+来自“<a href="http://zh.wikipedia.org/wiki/XML">http://zh.wikipedia.org/wiki/XML</a>”</div> 
+				<!-- /bodytext --> 
+								<!-- catlinks --> 
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="/wiki/Special:%E9%A1%B5%E9%9D%A2%E5%88%86%E7%B1%BB" title="Special:页面分类">6个分类</a>: <span dir='ltr'><a href="/wiki/Category:%E7%B6%B2%E9%A0%81%E6%8A%80%E8%A1%93" title="Category:網頁技術">網頁技術</a></span> | <span dir='ltr'><a href="/wiki/Category:W3C%E6%A0%87%E5%87%86" title="Category:W3C标准">W3C标准</a></span> | <span dir='ltr'><a href="/wiki/Category:%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F" title="Category:文件格式">文件格式</a></span> | <span dir='ltr'><a href="/wiki/Category:%E7%BD%AE%E6%A0%87%E8%AF%AD%E8%A8%80" title="Category:置标语言">置标语言</a></span> | <span dir='ltr'><a href="/wiki/Category:XML" title="Category:XML">XML</a></span> | <span dir='ltr'><a href="/wiki/Category:%E6%95%B0%E6%8D%AE%E5%BA%8F%E5%88%97%E5%8C%96%E6%A0%BC%E5%BC%8F" title="Category:数据序列化格式">数据序列化格式</a></span></div><div id="mw-hidden-catlinks" class="mw-hidden-cats-hidden">1个隐藏分类: <span dir='ltr'><a href="/wiki/Category:%E5%90%AB%E6%9C%89%E8%8B%B1%E8%AA%9E%E7%9A%84%E6%A2%9D%E7%9B%AE" title="Category:含有英語的條目">含有英語的條目</a></span></div></div>				<!-- /catlinks --> 
+												<div class="visualClear"></div> 
+			</div> 
+			<!-- /bodyContent --> 
+		</div> 
+		<!-- /content --> 
+		<!-- header --> 
+		<div id="mw-head" class="noprint"> 
+			
+<!-- 0 --> 
+<div id="p-personal" class=""> 
+	<h5>个人工具</h5> 
+	<ul> 
+					<li  id="pt-login"><a href="/w/index.php?title=Special:%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95&amp;returnto=XML&amp;returntoquery=variant%3Dzh" title="建议你登录，尽管并非必须。 [o]" accesskey="o">登录／创建账户</a></li> 
+			</ul> 
+</div> 
+ 
+<!-- /0 --> 
+			<div id="left-navigation"> 
+				
+<!-- 0 --> 
+<div id="p-namespaces" class="vectorTabs"> 
+	<h5>名字空间</h5> 
+	<ul> 
+					<li  id="ca-nstab-main" class="selected"><a href="/wiki/XML"  title="查看页面内容 [c]" accesskey="c"><span>条目</span></a></li> 
+					<li  id="ca-talk"><a href="/wiki/Talk:XML"  title="关于条目正文的讨论 [t]" accesskey="t"><span>讨论</span></a></li> 
+			</ul> 
+</div> 
+ 
+<!-- /0 --> 
+ 
+<!-- 1 --> 
+<div id="p-variants" class="vectorMenu"> 
+			<h4> 
+									不转换																																					</h4> 
+		<h5><span>变换</span><a href="#"></a></h5> 
+	<div class="menu"> 
+		<ul> 
+							<li id="ca-0" class="selected"><a href="/zh/XML" >不转换</a></li> 
+							<li id="ca-1"><a href="/zh-hans/XML" >简体</a></li> 
+							<li id="ca-2"><a href="/zh-hant/XML" >繁體</a></li> 
+							<li id="ca-3"><a href="/zh-cn/XML" >大陆简体</a></li> 
+							<li id="ca-4"><a href="/zh-hk/XML" >港澳繁體</a></li> 
+							<li id="ca-5"><a href="/zh-sg/XML" >马新简体</a></li> 
+							<li id="ca-6"><a href="/zh-tw/XML" >台灣正體</a></li> 
+					</ul> 
+	</div> 
+</div> 
+ 
+<!-- /1 --> 
+			</div> 
+			<div id="right-navigation"> 
+				
+<!-- 0 --> 
+<div id="p-views" class="vectorTabs"> 
+	<h5>查看</h5> 
+	<ul> 
+					<li id="ca-view" class="selected"><a href="/wiki/XML" ><span>阅读</span></a></li> 
+					<li id="ca-edit"><a href="/w/index.php?title=XML&amp;action=edit"  title="你可编辑此页，请在保存前先预览一下。 [e]" accesskey="e"><span>编辑</span></a></li> 
+					<li id="ca-history" class="collapsible "><a href="/w/index.php?title=XML&amp;action=history"  title="本页面的早前版本。 [h]" accesskey="h"><span>查看历史</span></a></li> 
+			</ul> 
+</div> 
+ 
+<!-- /0 --> 
+ 
+<!-- 1 --> 
+<div id="p-cactions" class="vectorMenu emptyPortlet"> 
+	<h5><span>动作</span><a href="#"></a></h5> 
+	<div class="menu"> 
+		<ul> 
+					</ul> 
+	</div> 
+</div> 
+ 
+<!-- /1 --> 
+ 
+<!-- 2 --> 
+<div id="p-search"> 
+	<h5><label for="searchInput">搜索</label></h5> 
+	<form action="/w/index.php" id="searchform"> 
+		<input type='hidden' name="title" value="Special:搜索"/> 
+				<div id="simpleSearch"> 
+			<input id="searchInput" name="search" type="text"  title="搜索维基百科 [f]" accesskey="f"  value="" /> 
+			<button id="searchButton" type='submit' name='button'  title="搜索该文字的页面"><img src="http://bits.wikimedia.org/skins-1.5/vector/images/search-ltr.png?283-19" alt="搜索" /></button> 
+		</div> 
+			</form> 
+</div> 
+ 
+<!-- /2 --> 
+			</div> 
+		</div> 
+		<!-- /header --> 
+		<!-- panel --> 
+			<div id="mw-panel" class="noprint"> 
+				<!-- logo --> 
+					<div id="p-logo"><a style="background-image: url(http://upload.wikimedia.org/wikipedia/commons/0/0a/Wikipedia-logo-v2-zh.png);" href="/wiki/Wikipedia:%E9%A6%96%E9%A1%B5"  title="首页"></a></div> 
+				<!-- /logo --> 
+				
+<!-- SEARCH --> 
+ 
+<!-- /SEARCH --> 
+ 
+<!-- navigation --> 
+<div class="portal" id='p-navigation'> 
+	<h5>导航</h5> 
+	<div class="body"> 
+				<ul> 
+					<li id="n-mainpage-description"><a href="/wiki/Wikipedia:%E9%A6%96%E9%A1%B5" title="访问首页 [z]" accesskey="z">首页</a></li> 
+					<li id="n-indexpage"><a href="/wiki/Wikipedia:%E5%88%86%E9%A1%9E%E7%B4%A2%E5%BC%95">分類索引</a></li> 
+					<li id="n-Featured_content"><a href="/wiki/Portal:%E7%89%B9%E8%89%B2%E5%85%A7%E5%AE%B9">特色内容</a></li> 
+					<li id="n-currentevents"><a href="/wiki/Portal:%E6%96%B0%E8%81%9E%E5%8B%95%E6%85%8B" title="提供当前新闻事件的背景资料">新闻动态</a></li> 
+					<li id="n-recentchanges"><a href="/wiki/Special:%E6%9C%80%E8%BF%91%E6%9B%B4%E6%94%B9" title="列出维基百科中的最近修改 [r]" accesskey="r">最近更改</a></li> 
+					<li id="n-randompage"><a href="/wiki/Special:%E9%9A%8F%E6%9C%BA%E9%A1%B5%E9%9D%A2" title="随机载入一个页面 [x]" accesskey="x">随机条目</a></li> 
+				</ul> 
+			</div> 
+</div> 
+ 
+<!-- /navigation --> 
+ 
+<!-- help --> 
+<div class="portal" id='p-help'> 
+	<h5>帮助</h5> 
+	<div class="body"> 
+				<ul> 
+					<li id="n-help"><a href="/wiki/Help:%E7%9B%AE%E5%BD%95" title="寻求帮助">帮助</a></li> 
+					<li id="n-portal"><a href="/wiki/Wikipedia:%E7%A4%BE%E5%8C%BA%E4%B8%BB%E9%A1%B5" title="关于本计划、你可以做什么、应该如何做">社区入口</a></li> 
+					<li id="n-policy"><a href="/wiki/Wikipedia:%E6%96%B9%E9%87%9D%E8%88%87%E6%8C%87%E5%BC%95">方针与指引</a></li> 
+					<li id="n-villagepump"><a href="/wiki/Wikipedia:%E4%BA%92%E5%8A%A9%E5%AE%A2%E6%A0%88">互助客栈</a></li> 
+					<li id="n-Information_desk"><a href="/wiki/Wikipedia:%E8%A9%A2%E5%95%8F%E8%99%95">询问处</a></li> 
+					<li id="n-conversion"><a href="/wiki/Wikipedia:%E5%AD%97%E8%AF%8D%E8%BD%AC%E6%8D%A2%E8%AF%B7%E6%B1%82%E6%88%96%E5%80%99%E9%80%89">字词转换</a></li> 
+					<li id="n-IRC"><a href="/wiki/Wikipedia:IRC%E8%81%8A%E5%A4%A9%E9%A2%91%E9%81%93">IRC即时聊天</a></li> 
+					<li id="n-contact"><a href="/wiki/Wikipedia:%E8%81%94%E7%B3%BB%E6%88%91%E4%BB%AC">联系我们</a></li> 
+					<li id="n-about"><a href="/wiki/Wikipedia:%E5%85%B3%E4%BA%8E">关于维基百科</a></li> 
+					<li id="n-sitesupport"><a href="http://wikimediafoundation.org/wiki/Special:Landingcheck?landing_page=WMFJA1&amp;language=zh&amp;utm_source=donate&amp;utm_medium=sidebar&amp;utm_campaign=20101204SB001" title="如果您在維基百科受益良多，您可以考慮資助我們">资助维基百科</a></li> 
+				</ul> 
+			</div> 
+</div> 
+ 
+<!-- /help --> 
+ 
+<!-- TOOLBOX --> 
+<div class="portal" id="p-tb"> 
+	<h5>工具</h5> 
+	<div class="body"> 
+		<ul> 
+					<li id="t-whatlinkshere"><a href="/wiki/Special:%E9%93%BE%E5%85%A5%E9%A1%B5%E9%9D%A2/XML" title="列出所有与本页相链的页面 [j]" accesskey="j">链入页面</a></li> 
+						<li id="t-recentchangeslinked"><a href="/wiki/Special:%E9%93%BE%E5%87%BA%E6%9B%B4%E6%94%B9/XML" title="页面链出所有页面的更改 [k]" accesskey="k">链出更改</a></li> 
+																																					<li id="t-upload"><a href="/wiki/Project:%E4%B8%8A%E4%BC%A0" title="上传图像或多媒体文件 [u]" accesskey="u">上传文件</a></li> 
+											<li id="t-specialpages"><a href="/wiki/Special:%E7%89%B9%E6%AE%8A%E9%A1%B5%E9%9D%A2" title="全部特殊页面的列表 [q]" accesskey="q">特殊页面</a></li> 
+									<li id="t-print"><a href="/w/index.php?title=XML&amp;variant=zh&amp;printable=yes" rel="alternate" title="这个页面的可打印版本 [p]" accesskey="p">打印页面</a></li> 
+						<li id="t-permalink"><a href="/w/index.php?title=XML&amp;oldid=15329713" title="这个页面修订版本的永久链接">永久链接</a></li> 
+				<li id="t-cite"><a href="/w/index.php?title=Special:%E5%BC%95%E7%94%A8&amp;page=XML&amp;id=15329713" title="Information on how to cite this page">引用此文</a></li>		</ul> 
+	</div> 
+</div> 
+ 
+<!-- /TOOLBOX --> 
+ 
+<!-- LANGUAGES --> 
+<div class="portal" id="p-lang"> 
+	<h5>其他语言</h5> 
+	<div class="body"> 
+		<ul> 
+					<li class="interwiki-af"><a href="http://af.wikipedia.org/wiki/XML" title="XML">Afrikaans</a></li> 
+					<li class="interwiki-ar"><a href="http://ar.wikipedia.org/wiki/%D9%84%D8%BA%D8%A9_%D8%A7%D9%84%D8%B1%D9%82%D9%85_%D8%A7%D9%84%D9%82%D8%A7%D8%A8%D9%84%D8%A9_%D9%84%D9%84%D8%A7%D9%85%D8%AA%D8%AF%D8%A7%D8%AF" title="لغة الرقم القابلة للامتداد">العربية</a></li> 
+					<li class="interwiki-bat-smg"><a href="http://bat-smg.wikipedia.org/wiki/XML" title="XML">Žemaitėška</a></li> 
+					<li class="interwiki-bg"><a href="http://bg.wikipedia.org/wiki/XML" title="XML">Български</a></li> 
+					<li class="interwiki-bn"><a href="http://bn.wikipedia.org/wiki/%E0%A6%8F%E0%A6%95%E0%A7%8D%E0%A6%B8%E0%A6%9F%E0%A7%87%E0%A6%A8%E0%A6%B8%E0%A6%BF%E0%A6%AD_%E0%A6%AE%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%95%E0%A6%86%E0%A6%AA_%E0%A6%B2%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%82%E0%A6%97%E0%A7%81%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%9C" title="এক্সটেনসিভ মার্কআপ ল্যাংগুয়েজ">বাংলা</a></li> 
+					<li class="interwiki-bs"><a href="http://bs.wikipedia.org/wiki/XML" title="XML">Bosanski</a></li> 
+					<li class="interwiki-ca"><a href="http://ca.wikipedia.org/wiki/Extensible_Markup_Language" title="Extensible Markup Language">Català</a></li> 
+					<li class="interwiki-ckb"><a href="http://ckb.wikipedia.org/wiki/%D8%A6%DB%8E%DA%A9%D8%B3_%D8%A6%DB%8E%D9%85_%D8%A6%DB%8E%DA%B5" title="ئێکس ئێم ئێڵ">Soranî / کوردی</a></li> 
+					<li class="interwiki-cs"><a href="http://cs.wikipedia.org/wiki/Extensible_Markup_Language" title="Extensible Markup Language">Česky</a></li> 
+					<li class="interwiki-da"><a href="http://da.wikipedia.org/wiki/XML" title="XML">Dansk</a></li> 
+					<li class="interwiki-de"><a href="http://de.wikipedia.org/wiki/Extensible_Markup_Language" title="Extensible Markup Language">Deutsch</a></li> 
+					<li class="interwiki-el"><a href="http://el.wikipedia.org/wiki/XML" title="XML">Ελληνικά</a></li> 
+					<li class="interwiki-en"><a href="http://en.wikipedia.org/wiki/XML" title="XML">English</a></li> 
+					<li class="interwiki-eo"><a href="http://eo.wikipedia.org/wiki/XML" title="XML">Esperanto</a></li> 
+					<li class="interwiki-es"><a href="http://es.wikipedia.org/wiki/Extensible_Markup_Language" title="Extensible Markup Language">Español</a></li> 
+					<li class="interwiki-et"><a href="http://et.wikipedia.org/wiki/XML" title="XML">Eesti</a></li> 
+					<li class="interwiki-eu"><a href="http://eu.wikipedia.org/wiki/XML" title="XML">Euskara</a></li> 
+					<li class="interwiki-fa"><a href="http://fa.wikipedia.org/wiki/%D8%A7%DB%8C%DA%A9%D8%B3%E2%80%8C%D8%A7%D9%85%E2%80%8C%D8%A7%D9%84" title="ایکس‌ام‌ال">فارسی</a></li> 
+					<li class="interwiki-fi"><a href="http://fi.wikipedia.org/wiki/XML" title="XML">Suomi</a></li> 
+					<li class="interwiki-fr"><a href="http://fr.wikipedia.org/wiki/Extensible_Markup_Language" title="Extensible Markup Language">Français</a></li> 
+					<li class="interwiki-ga"><a href="http://ga.wikipedia.org/wiki/XML" title="XML">Gaeilge</a></li> 
+					<li class="interwiki-gl"><a href="http://gl.wikipedia.org/wiki/XML" title="XML">Galego</a></li> 
+					<li class="interwiki-he"><a href="http://he.wikipedia.org/wiki/XML" title="XML">עברית</a></li> 
+					<li class="interwiki-hi"><a href="http://hi.wikipedia.org/wiki/%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%AE%E0%A4%B2" title="क्षमल">हिन्दी</a></li> 
+					<li class="interwiki-hr"><a href="http://hr.wikipedia.org/wiki/XML" title="XML">Hrvatski</a></li> 
+					<li class="interwiki-hu"><a href="http://hu.wikipedia.org/wiki/XML" title="XML">Magyar</a></li> 
+					<li class="interwiki-ia"><a href="http://ia.wikipedia.org/wiki/XML" title="XML">Interlingua</a></li> 
+					<li class="interwiki-id"><a href="http://id.wikipedia.org/wiki/Extensible_markup_language" title="Extensible markup language">Bahasa Indonesia</a></li> 
+					<li class="interwiki-is"><a href="http://is.wikipedia.org/wiki/XML" title="XML">Íslenska</a></li> 
+					<li class="interwiki-it"><a href="http://it.wikipedia.org/wiki/XML" title="XML">Italiano</a></li> 
+					<li class="interwiki-ja"><a href="http://ja.wikipedia.org/wiki/Extensible_Markup_Language" title="Extensible Markup Language">日本語</a></li> 
+					<li class="interwiki-ko"><a href="http://ko.wikipedia.org/wiki/XML" title="XML">한국어</a></li> 
+					<li class="interwiki-lo"><a href="http://lo.wikipedia.org/wiki/XML" title="XML">ລາວ</a></li> 
+					<li class="interwiki-lt"><a href="http://lt.wikipedia.org/wiki/XML" title="XML">Lietuvių</a></li> 
+					<li class="interwiki-lv"><a href="http://lv.wikipedia.org/wiki/Valoda_XML" title="Valoda XML">Latviešu</a></li> 
+					<li class="interwiki-ml"><a href="http://ml.wikipedia.org/wiki/%E0%B4%8E%E0%B4%95%E0%B5%8D%E0%B4%B8%E0%B5%8D.%E0%B4%8E%E0%B4%82.%E0%B4%8E%E0%B5%BD." title="എക്സ്.എം.എൽ.">മലയാളം</a></li> 
+					<li class="interwiki-mn"><a href="http://mn.wikipedia.org/wiki/XML" title="XML">Монгол</a></li> 
+					<li class="interwiki-ms"><a href="http://ms.wikipedia.org/wiki/XML" title="XML">Bahasa Melayu</a></li> 
+					<li class="interwiki-nl"><a href="http://nl.wikipedia.org/wiki/Extensible_Markup_Language" title="Extensible Markup Language">Nederlands</a></li> 
+					<li class="interwiki-nn"><a href="http://nn.wikipedia.org/wiki/XML" title="XML">‪Norsk (nynorsk)‬</a></li> 
+					<li class="interwiki-no"><a href="http://no.wikipedia.org/wiki/XML" title="XML">‪Norsk (bokmål)‬</a></li> 
+					<li class="interwiki-pl"><a href="http://pl.wikipedia.org/wiki/XML" title="XML">Polski</a></li> 
+					<li class="interwiki-pt"><a href="http://pt.wikipedia.org/wiki/XML" title="XML">Português</a></li> 
+					<li class="interwiki-ro"><a href="http://ro.wikipedia.org/wiki/XML" title="XML">Română</a></li> 
+					<li class="interwiki-ru"><a href="http://ru.wikipedia.org/wiki/XML" title="XML">Русский</a></li> 
+					<li class="interwiki-simple"><a href="http://simple.wikipedia.org/wiki/XML" title="XML">Simple English</a></li> 
+					<li class="interwiki-sk"><a href="http://sk.wikipedia.org/wiki/XML" title="XML">Slovenčina</a></li> 
+					<li class="interwiki-sl"><a href="http://sl.wikipedia.org/wiki/XML" title="XML">Slovenščina</a></li> 
+					<li class="interwiki-sq"><a href="http://sq.wikipedia.org/wiki/XML" title="XML">Shqip</a></li> 
+					<li class="interwiki-sr"><a href="http://sr.wikipedia.org/wiki/XML" title="XML">Српски / Srpski</a></li> 
+					<li class="interwiki-sv"><a href="http://sv.wikipedia.org/wiki/XML" title="XML">Svenska</a></li> 
+					<li class="interwiki-ta"><a href="http://ta.wikipedia.org/wiki/%E0%AE%8E%E0%AE%95%E0%AF%8D%E0%AE%B8%E0%AF%8D%E0%AE%8E%E0%AE%AE%E0%AF%8D%E0%AE%8E%E0%AE%B2%E0%AF%8D" title="எக்ஸ்எம்எல்">தமிழ்</a></li> 
+					<li class="interwiki-te"><a href="http://te.wikipedia.org/wiki/XML" title="XML">తెలుగు</a></li> 
+					<li class="interwiki-tg"><a href="http://tg.wikipedia.org/wiki/XML" title="XML">Тоҷикӣ</a></li> 
+					<li class="interwiki-th"><a href="http://th.wikipedia.org/wiki/%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%8B%E0%B9%8C%E0%B9%80%E0%B8%AD%E0%B9%87%E0%B8%A1%E0%B9%81%E0%B8%AD%E0%B8%A5" title="เอกซ์เอ็มแอล">ไทย</a></li> 
+					<li class="interwiki-tk"><a href="http://tk.wikipedia.org/wiki/XML" title="XML">Türkmençe</a></li> 
+					<li class="interwiki-tr"><a href="http://tr.wikipedia.org/wiki/Geni%C5%9Fletilebilir_i%C5%9Faretleme_dili" title="Genişletilebilir işaretleme dili">Türkçe</a></li> 
+					<li class="interwiki-uk"><a href="http://uk.wikipedia.org/wiki/XML" title="XML">Українська</a></li> 
+					<li class="interwiki-ur"><a href="http://ur.wikipedia.org/wiki/%D8%AA%D9%88%D8%B3%DB%8C%D8%B9%DB%8C_%D8%B2%D8%A8%D8%A7%D9%86_%D8%AA%D8%AF%D9%88%DB%8C%D9%86" title="توسیعی زبان تدوین">اردو</a></li> 
+					<li class="interwiki-vi"><a href="http://vi.wikipedia.org/wiki/XML" title="XML">Tiếng Việt</a></li> 
+				</ul> 
+	</div> 
+</div> 
+ 
+<!-- /LANGUAGES --> 
+			</div> 
+		<!-- /panel --> 
+		<!-- footer --> 
+		<div id="footer"> 
+											<ul id="footer-info"> 
+																	<li id="footer-info-lastmod"> 本页面最后修订于2011年1月1日 (星期六) 15:20。</li> 
+																							<li id="footer-info-copyright">本站的全部文字在<a class="internal" href="/wiki/Wikipedia:CC-by-sa-3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" title="Wikipedia:CC-by-sa-3.0协议文本">知识共享 署名-相同方式共享 3.0协议</a>之条款下提供，附加条款亦可能应用。（请参阅<a href="http://wikimediafoundation.org/wiki/Terms_of_Use">使用条款</a>）<br /> 
+Wikipedia&reg;和维基百科标志是<a href="http://wikimediafoundation.org">维基媒体基金会</a>的注册商标；维基&trade;是维基媒体基金会的商标。<br />维基媒体基金会是在美国佛罗里达州登记的501(c)(3)<a href="http://wikimediafoundation.org/wiki/%E8%B5%84%E5%8A%A9%E7%9A%84%E5%85%8D%E7%A8%8E%E6%94%BF%E7%AD%96">免税</a>、非营利、慈善机构。<br /></li> 
+															</ul> 
+															<ul id="footer-places"> 
+																	<li id="footer-places-privacy"><a href="http://wikimediafoundation.org/wiki/%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96" title="wikimedia:隐私政策">隐私政策</a></li> 
+																							<li id="footer-places-about"><a href="/wiki/Wikipedia:%E5%85%B3%E4%BA%8E" title="Wikipedia:关于">关于维基百科</a></li> 
+																							<li id="footer-places-disclaimer"><a href="/wiki/Wikipedia:%E5%85%8D%E8%B4%A3%E5%A3%B0%E6%98%8E" title="Wikipedia:免责声明">免责声明</a></li> 
+															</ul> 
+										<ul id="footer-icons" class="noprint"> 
+								<li id="footer-icon-poweredby"><a href="http://www.mediawiki.org/"><img src="http://bits.wikimedia.org/skins-1.5/common/images/poweredby_mediawiki_88x31.png" height="31" width="88" alt="Powered by MediaWiki" /></a></li> 
+												<li id="footer-icon-copyright"><a href="http://wikimediafoundation.org/"><img src="/images/wikimedia-button.png" width="88" height="31" alt="Wikimedia Foundation"/></a></li> 
+							</ul> 
+			<div style="clear:both"></div> 
+		</div> 
+		<!-- /footer --> 
+		<!-- fixalpha --> 
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script> 
+		<!-- /fixalpha --> 
+		
+<script type="text/javascript">if (window.runOnloadHook) runOnloadHook();</script> 
+<script type="text/javascript" src="http://geoiplookup.wikimedia.org/"></script>		<!-- Served by srv197 in 0.306 secs. -->			</body> 
+</html>
