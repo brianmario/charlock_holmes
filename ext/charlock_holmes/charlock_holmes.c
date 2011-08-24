@@ -53,7 +53,7 @@ static VALUE rb_encdec_detect(VALUE self, VALUE rb_str)
 
 
 /*
- * call-seq: detection_hash = EncodingDetector.detect_all "some string"
+ * call-seq: detection_hash_array = EncodingDetector.detect_all "some string"
  *
  * Attempt to detect the encoding of this string, and return
  * a list with all the possible encodings that match it.
