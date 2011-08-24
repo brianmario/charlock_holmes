@@ -17,7 +17,7 @@ contents = File.read('test.xml')
 detection = CharlockHolmes::EncodingDetector.detect(contents)
 ```
 
-Though it'd probably be more efficient to reuse once detector instance:
+Though it's more efficient to reuse once detector instance:
 
 ``` ruby
 detector = CharlockHolmes::EncodingDetector.new
