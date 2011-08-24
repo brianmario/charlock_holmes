@@ -18,4 +18,6 @@ Gem::Specification.new do |s|
   # tests
   s.add_development_dependency 'rake-compiler', ">= 0.7.5"
   s.add_development_dependency 'rspec', ">= 2.0.0"
+  # benchmarks
+  s.add_development_dependency 'chardet'
 end
