@@ -5,23 +5,23 @@ describe CharlockHolmes::EncodingDetector do
     @detector = CharlockHolmes::EncodingDetector.new
   end
 
-  test "has a detect class-level method" do
+  test 'has a detect class-level method' do
     CharlockHolmes::EncodingDetector.respond_to? :detect
-    detected = CharlockHolmes::EncodingDetector.detect "test"
+    detected = CharlockHolmes::EncodingDetector.detect 'test'
     assert_equal 'ISO-8859-1', detected[:encoding]
   end
 
-  test "has a detect method" do
+  test 'has a detect method' do
     @detector.respond_to? :detect
-    detected = @detector.detect "test"
+    detected = @detector.detect 'test'
     assert_equal 'ISO-8859-1', detected[:encoding]
   end
 
-  test "has a detect_all method" do
+  test 'has a detect_all method' do
     @detector.respond_to? :detect_all
-    detected_list = @detector.detect_all "test"
+    detected_list = @detector.detect_all 'test'
     encoding_list = detected_list.map {|d| d[:encoding]}.sort
-    assert_equal ["ISO-8859-1", "ISO-8859-2", "UTF-8"], encoding_list
+    assert_equal ['ISO-8859-1', 'ISO-8859-2', 'UTF-8'], encoding_list
   end
 
   context "is able to detect that" do
