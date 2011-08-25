@@ -195,12 +195,12 @@ static VALUE rb_get_supported_encodings(VALUE klass)
 	const char *enc_name;
 	int32_t enc_name_len;
 
-	csd = ucsdet_open(&status);
-
 	rb_encoding_list = rb_iv_get(klass, "encoding_list");
 
 	// lazily populate the list
 	if (NIL_P(rb_encoding_list)) {
+		csd = ucsdet_open(&status);
+
 		encoding_list = ucsdet_getAllDetectableCharsets(csd, &status);
 		rb_encoding_list = rb_ary_new();
 		enc_count = uenum_count(encoding_list, &status);
@@ -211,9 +211,8 @@ static VALUE rb_get_supported_encodings(VALUE klass)
 		}
 
 		rb_iv_set(klass, "encoding_list", rb_encoding_list);
+		ucsdet_close(csd);
 	}
-
-	ucsdet_close(csd);
 
 	return rb_encoding_list;
 }
