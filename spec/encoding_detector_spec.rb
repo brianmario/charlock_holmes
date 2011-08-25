@@ -11,9 +11,24 @@ describe CharlockHolmes::EncodingDetector do
     assert_equal 'ISO-8859-1', detected[:encoding]
   end
 
+  test 'has a class-level detect method that accepts an encoding hint' do
+    CharlockHolmes::EncodingDetector.respond_to? :detect
+    detected = CharlockHolmes::EncodingDetector.detect 'test', 'UTF-8'
+    assert_equal 'ISO-8859-1', detected[:encoding]
+  end
+
   test 'has a class-level detect_all method' do
     CharlockHolmes::EncodingDetector.respond_to? :detect_all
     detected_list = CharlockHolmes::EncodingDetector.detect_all 'test'
+    assert detected_list.is_a? Array
+
+    encoding_list = detected_list.map {|d| d[:encoding]}.sort
+    assert_equal ['ISO-8859-1', 'ISO-8859-2', 'UTF-8'], encoding_list
+  end
+
+  test 'has a class-level detect_all method that accepts an encoding hint' do
+    CharlockHolmes::EncodingDetector.respond_to? :detect_all
+    detected_list = CharlockHolmes::EncodingDetector.detect_all 'test', 'UTF-8'
     assert detected_list.is_a? Array
 
     encoding_list = detected_list.map {|d| d[:encoding]}.sort
@@ -26,9 +41,24 @@ describe CharlockHolmes::EncodingDetector do
     assert_equal 'ISO-8859-1', detected[:encoding]
   end
 
+  test 'has a detect method that accepts an encoding hint' do
+    @detector.respond_to? :detect
+    detected = @detector.detect 'test', 'UTF-8'
+    assert_equal 'ISO-8859-1', detected[:encoding]
+  end
+
   test 'has a detect_all method' do
     @detector.respond_to? :detect_all
     detected_list = @detector.detect_all 'test'
+    assert detected_list.is_a? Array
+
+    encoding_list = detected_list.map {|d| d[:encoding]}.sort
+    assert_equal ['ISO-8859-1', 'ISO-8859-2', 'UTF-8'], encoding_list
+  end
+
+  test 'has a detect_all method that accepts an encoding hint' do
+    @detector.respond_to? :detect_all
+    detected_list = @detector.detect_all 'test', 'UTF-8'
     assert detected_list.is_a? Array
 
     encoding_list = detected_list.map {|d| d[:encoding]}.sort

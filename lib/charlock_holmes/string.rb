@@ -4,8 +4,8 @@ class String
   # Attempt to detect the encoding of this string
   #
   # Returns: a Hash with :encoding, :language and :confidence
-  def detect_encoding
-    encoding_detector.detect(self)
+  def detect_encoding(hint_enc=nil)
+    encoding_detector.detect(self, hint_enc)
   end
 
   # Attempt to detect the encoding of this string, and return
@@ -13,8 +13,8 @@ class String
   #
   # Returns: an Array with zero or more Hashes,
   #          each one of them with with :encoding, :language and :confidence
-  def detect_encodings
-    encoding_detector.detect_all(self)
+  def detect_encodings(hint_enc=nil)
+    encoding_detector.detect_all(self, hint_enc)
   end
 
   if RUBY_VERSION =~ /1.9/
@@ -22,8 +22,8 @@ class String
     # then set the encoding to what was detected ala `force_encoding`
     #
     # Returns: a Hash with :encoding, :language and :confidence
-    def detect_encoding!
-      if detected = self.detect_encoding
+    def detect_encoding!(hint_enc=nil)
+      if detected = self.detect_encoding(hint_enc)
         self.force_encoding detected[:encoding]
         detected
       end
