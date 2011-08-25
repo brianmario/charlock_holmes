@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'spec_helper'
 
 describe CharlockHolmes::EncodingDetector do
@@ -63,6 +65,21 @@ describe CharlockHolmes::EncodingDetector do
 
     encoding_list = detected_list.map {|d| d[:encoding]}.sort
     assert_equal ['ISO-8859-1', 'ISO-8859-2', 'UTF-8'], encoding_list
+  end
+
+  test 'has a strip_tags flag' do
+    detector = CharlockHolmes::EncodingDetector.new
+    detector.strip_tags = true
+    assert detector.strip_tags
+
+    detection = detector.detect "<div ascii_attribute='some more ascii'>λ, λ, λ</div>"
+    assert_equal 'UTF-8', detection[:encoding]
+
+    detector.strip_tags = false
+    assert !detector.strip_tags
+
+    detection = detector.detect "<div ascii_attribute='some more ascii'>λ, λ, λ</div>"
+    assert_equal 'UTF-8', detection[:encoding]
   end
 
   context 'encoding detection' do

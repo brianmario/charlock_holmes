@@ -124,6 +124,34 @@ static VALUE rb_encdec_detect_all(int argc, VALUE *argv, VALUE self)
 	return rb_ret;
 }
 
+static VALUE rb_get_strip_tags(VALUE self)
+{
+	UCharsetDetector *csd;
+	UBool val;
+	VALUE rb_val;
+
+	Data_Get_Struct(self, UCharsetDetector, csd);
+
+	val = ucsdet_isInputFilterEnabled(csd);
+
+	rb_val = val == 1 ? Qtrue : Qfalse;
+
+	return rb_val;
+}
+
+static VALUE rb_set_strip_tags(VALUE self, VALUE rb_val)
+{
+	UCharsetDetector *csd;
+	UBool val;
+
+	Data_Get_Struct(self, UCharsetDetector, csd);
+
+	val = rb_val == Qtrue ? 1 : 0;
+
+	ucsdet_enableInputFilter(csd, val);
+
+	return rb_val;
+}
 
 static void rb_encdec__free(void *csd)
 {
@@ -145,4 +173,6 @@ void Init_charlock_holmes()
 	rb_define_alloc_func(rb_cEncodingDetector, rb_encdec__alloc);
 	rb_define_method(rb_cEncodingDetector, "detect", rb_encdec_detect, -1);
 	rb_define_method(rb_cEncodingDetector, "detect_all", rb_encdec_detect_all, -1);
+	rb_define_method(rb_cEncodingDetector, "strip_tags", rb_get_strip_tags, 0);
+	rb_define_method(rb_cEncodingDetector, "strip_tags=", rb_set_strip_tags, 1);
 }
