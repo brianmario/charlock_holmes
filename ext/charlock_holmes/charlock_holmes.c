@@ -184,7 +184,7 @@ static VALUE rb_set_strip_tags(VALUE self, VALUE rb_val)
  *
  * Returns: an Array of Strings
  */
-static VALUE rb_get_supported_encodings(VALUE klass, VALUE rb_val)
+static VALUE rb_get_supported_encodings(VALUE klass)
 {
 	UCharsetDetector *csd;
 	UErrorCode status = U_ZERO_ERROR;
