@@ -1,30 +1,8 @@
 #include "unicode/ucsdet.h"
+#include "common.h"
 
-#include <ruby.h>
-#ifdef HAVE_RUBY_ENCODING_H
-#include <ruby/encoding.h>
-#endif
-
-static VALUE rb_mCharlockHolmes;
+extern VALUE rb_mCharlockHolmes;
 static VALUE rb_cEncodingDetector;
-
-static VALUE charlock_new_str(const char *str, size_t len)
-{
-#ifdef HAVE_RUBY_ENCODING_H
-	return rb_external_str_new_with_enc(str, len, rb_utf8_encoding());
-#else
-	return rb_str_new(str, len);
-#endif
-}
-
-static VALUE charlock_new_str2(const char *str)
-{
-#ifdef HAVE_RUBY_ENCODING_H
-	return rb_external_str_new_with_enc(str, strlen(str), rb_utf8_encoding());
-#else
-	return rb_str_new2(str);
-#endif
-}
 
 static VALUE rb_encdec_buildmatch(const UCharsetMatch *match)
 {
@@ -229,10 +207,8 @@ static VALUE rb_encdec__alloc(VALUE klass)
 	return Data_Wrap_Struct(klass, NULL, rb_encdec__free, (void *)csd);
 }
 
-void Init_charlock_holmes()
+void _init_charlock_encoding_detector()
 {
-	rb_mCharlockHolmes = rb_define_module("CharlockHolmes");
-
 	rb_cEncodingDetector = rb_define_class_under(rb_mCharlockHolmes, "EncodingDetector", rb_cObject);
 	rb_define_alloc_func(rb_cEncodingDetector, rb_encdec__alloc);
 	rb_define_method(rb_cEncodingDetector, "detect", rb_encdec_detect, -1);
