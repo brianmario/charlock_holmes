@@ -124,6 +124,13 @@ static VALUE rb_encdec_detect_all(int argc, VALUE *argv, VALUE self)
 	return rb_ret;
 }
 
+/*
+ * call-seq: EncodingDetector.strip_tags?
+ *
+ * Returns whether or not the strip_tags flag is set on this detector
+ *
+ * Returns: Boolean
+ */
 static VALUE rb_get_strip_tags(VALUE self)
 {
 	UCharsetDetector *csd;
@@ -139,6 +146,14 @@ static VALUE rb_get_strip_tags(VALUE self)
 	return rb_val;
 }
 
+/*
+ * call-seq: EncodingDetector.strip_tags = true
+ *
+ * Enable or disable the stripping of HTML/XML tags from the input before
+ * attempting any detection
+ *
+ * Returns: Boolean, the value passed
+ */
 static VALUE rb_set_strip_tags(VALUE self, VALUE rb_val)
 {
 	UCharsetDetector *csd;

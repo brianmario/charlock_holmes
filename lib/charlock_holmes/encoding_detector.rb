@@ -1,5 +1,7 @@
 module CharlockHolmes
   class EncodingDetector
+    alias :strip_tags? :strip_tags
+
     # Attempt to detect the encoding of this string
     #
     # NOTE: This will create a new CharlockHolmes::EncodingDetector instance on every call
