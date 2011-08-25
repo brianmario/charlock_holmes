@@ -82,6 +82,14 @@ describe CharlockHolmes::EncodingDetector do
     assert_equal 'UTF-8', detection[:encoding]
   end
 
+  test 'has a list of supported encodings' do
+    CharlockHolmes::EncodingDetector.respond_to? :supported_encodings
+    supported_encodings = CharlockHolmes::EncodingDetector.supported_encodings
+
+    assert supported_encodings.is_a?(Array)
+    assert supported_encodings.include? 'UTF-8'
+  end
+
   context 'encoding detection' do
     MAPPING = [
       ['repl2.cljs',                'ISO-8859-1'],

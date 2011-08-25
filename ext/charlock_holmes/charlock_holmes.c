@@ -8,6 +8,15 @@
 static VALUE rb_mCharlockHolmes;
 static VALUE rb_cEncodingDetector;
 
+static VALUE charlock_new_str(const char *str, size_t len)
+{
+#ifdef HAVE_RUBY_ENCODING_H
+	return rb_external_str_new_with_enc(str, len, rb_utf8_encoding());
+#else
+	return rb_str_new(str, len);
+#endif
+}
+
 static VALUE charlock_new_str2(const char *str)
 {
 #ifdef HAVE_RUBY_ENCODING_H
@@ -168,6 +177,47 @@ static VALUE rb_set_strip_tags(VALUE self, VALUE rb_val)
 	return rb_val;
 }
 
+/*
+ * call-seq: detectable_encodings = EncodingDetector.supported_encodings
+ *
+ * The list of detectable encodings supported by this library
+ *
+ * Returns: an Array of Strings
+ */
+static VALUE rb_get_supported_encodings(VALUE klass, VALUE rb_val)
+{
+	UCharsetDetector *csd;
+	UErrorCode status = U_ZERO_ERROR;
+	UEnumeration *encoding_list;
+	VALUE rb_encoding_list;
+	int32_t enc_count;
+	int32_t i;
+	const char *enc_name;
+	int32_t enc_name_len;
+
+	csd = ucsdet_open(&status);
+
+	rb_encoding_list = rb_iv_get(klass, "encoding_list");
+
+	// lazily populate the list
+	if (NIL_P(rb_encoding_list)) {
+		encoding_list = ucsdet_getAllDetectableCharsets(csd, &status);
+		rb_encoding_list = rb_ary_new();
+		enc_count = uenum_count(encoding_list, &status);
+
+		for(i=0; i < enc_count; i++) {
+			enc_name = uenum_next(encoding_list, &enc_name_len, &status);
+			rb_ary_push(rb_encoding_list, charlock_new_str(enc_name, enc_name_len));
+		}
+
+		rb_iv_set(klass, "encoding_list", rb_encoding_list);
+	}
+
+	ucsdet_close(csd);
+
+	return rb_encoding_list;
+}
+
 static void rb_encdec__free(void *csd)
 {
 	ucsdet_close((UCharsetDetector *)csd);
@@ -190,4 +240,6 @@ void Init_charlock_holmes()
 	rb_define_method(rb_cEncodingDetector, "detect_all", rb_encdec_detect_all, -1);
 	rb_define_method(rb_cEncodingDetector, "strip_tags", rb_get_strip_tags, 0);
 	rb_define_method(rb_cEncodingDetector, "strip_tags=", rb_set_strip_tags, 1);
+
+	rb_define_singleton_method(rb_cEncodingDetector, "supported_encodings", rb_get_supported_encodings, 0);
 }
