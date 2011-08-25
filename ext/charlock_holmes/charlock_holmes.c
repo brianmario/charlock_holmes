@@ -59,6 +59,9 @@ static VALUE rb_encdec_detect(VALUE self, VALUE rb_str)
 	Data_Get_Struct(self, UCharsetDetector, csd);
 
 	ucsdet_setText(csd, RSTRING_PTR(rb_str), (int32_t)RSTRING_LEN(rb_str), &status);
+
+	ucsdet_setDeclaredEncoding(csd, "UTF-8", 5, &status);
+
 	return rb_encdec_buildmatch(ucsdet_detect(csd, &status));
 }
 
@@ -86,7 +89,10 @@ static VALUE rb_encdec_detect_all(VALUE self, VALUE rb_str)
 	rb_ret = rb_ary_new();
 
 	ucsdet_setText(csd, RSTRING_PTR(rb_str), (int32_t)RSTRING_LEN(rb_str), &status);
-    csm = ucsdet_detectAll(csd, &match_count, &status);
+
+	ucsdet_setDeclaredEncoding(csd, "UTF-8", 5, &status);
+
+	csm = ucsdet_detectAll(csd, &match_count, &status);
 
 	for (i = 0; i < match_count; ++i) {
 		rb_ary_push(rb_ret, rb_encdec_buildmatch(csm[i]));
