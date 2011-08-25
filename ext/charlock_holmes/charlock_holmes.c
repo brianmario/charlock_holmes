@@ -134,7 +134,7 @@ static VALUE rb_encdec_detect_all(int argc, VALUE *argv, VALUE self)
 }
 
 /*
- * call-seq: EncodingDetector.strip_tags?
+ * call-seq: EncodingDetector#strip_tags?
  *
  * Returns whether or not the strip_tags flag is set on this detector
  *
@@ -156,7 +156,7 @@ static VALUE rb_get_strip_tags(VALUE self)
 }
 
 /*
- * call-seq: EncodingDetector.strip_tags = true
+ * call-seq: EncodingDetector#strip_tags = true
  *
  * Enable or disable the stripping of HTML/XML tags from the input before
  * attempting any detection
