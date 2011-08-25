@@ -72,7 +72,7 @@ static VALUE rb_encdec_detect(VALUE self, VALUE rb_str)
  * Attempt to detect the encoding of this string, and return
  * a list with all the possible encodings that match it.
  *
- * Returns: a List with zero or more Hashes,
+ * Returns: an Array with zero or more Hashes,
  *	each one of them with with :encoding, :language and :confidence
  */
 static VALUE rb_encdec_detect_all(VALUE self, VALUE rb_str)
