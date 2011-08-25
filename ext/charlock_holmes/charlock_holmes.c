@@ -79,7 +79,7 @@ static VALUE rb_encdec_detect_all(VALUE self, VALUE rb_str)
 {
 	UErrorCode status = U_ZERO_ERROR;
 	UCharsetDetector *csd;
-    const UCharsetMatch **csm;
+	const UCharsetMatch **csm;
 	VALUE rb_ret;
 	int i, match_count;
 
