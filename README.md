@@ -10,7 +10,7 @@ First you'll need to require it
 require 'charlock_holmes'
 ```
 
-Now if you want to detect the encoding of a set of bytes:
+## Encoding detection
 
 ``` ruby
 contents = File.read('test.xml')
@@ -34,7 +34,7 @@ detection2 = detector.detect(File.read('test2.json'))
 # and so on...
 ```
 
-## String monkey patch
+### String monkey patch
 
 Alternatively, you can just use the `detect_encoding` method on the `String` class
 
@@ -46,7 +46,7 @@ contents = File.read('test.xml')
 detection = contents.detect_encoding
 ```
 
-## Ruby 1.9 specific
+### Ruby 1.9 specific
 
 NOTE: This method only exists on Ruby 1.9+
 
@@ -60,6 +60,18 @@ contents = File.read('test.xml')
 # this will detect and set the encoding of `contents`
 contents.detect_encoding!
 ```
+
+## Transcoding
+
+Being able to detect the encoding of some arbitrary content is nice, but what you probably want is to be able to transcode that content into an encoding your application is using.
+
+``` ruby
+content = File.read('test2.txt')
+detection = CharlockHolmes::EncodingDetector.detect(content)
+utf8_encoded_content CharlockHolmes::Converter.convert content, detection[:encoding], 'UTF-8'
+```
+
+The first parameter is the content to transcode, the second is the source encoding (the encoding the content is assumed to be in), and the third parameter is the destination encoding.
 
 ## Installing
 
