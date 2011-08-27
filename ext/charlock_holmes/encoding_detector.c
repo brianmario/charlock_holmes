@@ -43,7 +43,7 @@ static VALUE rb_encdec_binarymatch() {
 	rb_match = rb_hash_new();
 
 	rb_hash_aset(rb_match, ID2SYM(rb_intern("type")), ID2SYM(rb_intern("binary")));
-	rb_hash_aset(rb_match, ID2SYM(rb_intern("confidence")), INT2NUM(10));
+	rb_hash_aset(rb_match, ID2SYM(rb_intern("confidence")), INT2NUM(100));
 
 	return rb_match;
 }
