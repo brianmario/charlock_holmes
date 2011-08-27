@@ -81,7 +81,7 @@ If the traditional `gem install charlock_holmes` doesn't work, you may need to s
 
 At the time of writing, Homebrew for OSX installs ICU (icu4c is the package name) and libmagic as keg-only installs so you'll have to specify the location during the gem install:
 
-`gem install charlock_holmes --with-icu-dir=/usr/local/Cellar/icu4c/4.4.1 --with-magic-dir=/usr/local/Cellar/libmagic/5.04`
+`gem install charlock_holmes -- --with-icu-dir=/usr/local/Cellar/icu4c/4.4.1 --with-magic-dir=/usr/local/Cellar/libmagic/5.04`
 
 If you're using Bundler and need to specify a custom path(s), you can do so with the `bundle config` command:
 
