@@ -79,7 +79,7 @@ The first parameter is the content to transcode, the second is the source encodi
 
 If the traditional `gem install charlock_holmes` doesn't work, you may need to specify the path to your installation of ICU and libmagic using the `--with-icu-dir` and/or `--with-magic-dir` option during the gem install.
 
-At the time of writing, Homebrew for OSX installs ICU and libmagic as keg-only installs so you'll have to specify the location during the gem install:
+At the time of writing, Homebrew for OSX installs ICU (icu4c is the package name) and libmagic as keg-only installs so you'll have to specify the location during the gem install:
 
 `gem install charlock_holmes --with-icu-dir=/usr/local/Cellar/icu4c/4.4.1 --with-magic-dir=/usr/local/Cellar/libmagic/5.04`
 
