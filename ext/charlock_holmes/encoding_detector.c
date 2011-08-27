@@ -1,8 +1,14 @@
 #include "unicode/ucsdet.h"
+#include "magic.h"
 #include "common.h"
 
 extern VALUE rb_mCharlockHolmes;
 static VALUE rb_cEncodingDetector;
+
+typedef struct {
+	UCharsetDetector *csd;
+	magic_t magic;
+} charlock_detector_t;
 
 static VALUE rb_encdec_buildmatch(const UCharsetMatch *match)
 {
@@ -21,6 +27,7 @@ static VALUE rb_encdec_buildmatch(const UCharsetMatch *match)
 
 	rb_match = rb_hash_new();
 
+	rb_hash_aset(rb_match, ID2SYM(rb_intern("type")), ID2SYM(rb_intern("text")));
 	rb_hash_aset(rb_match, ID2SYM(rb_intern("encoding")), charlock_new_str2(mname));
 	rb_hash_aset(rb_match, ID2SYM(rb_intern("confidence")), INT2NUM(mconfidence));
 
@@ -28,6 +35,36 @@ static VALUE rb_encdec_buildmatch(const UCharsetMatch *match)
 		rb_hash_aset(rb_match, ID2SYM(rb_intern("language")), charlock_new_str2(mlang));
 
 	return rb_match;
+}
+
+static VALUE rb_encdec_binarymatch() {
+	VALUE rb_match;
+
+	rb_match = rb_hash_new();
+
+	rb_hash_aset(rb_match, ID2SYM(rb_intern("type")), ID2SYM(rb_intern("binary")));
+	rb_hash_aset(rb_match, ID2SYM(rb_intern("confidence")), INT2NUM(10));
+
+	return rb_match;
+}
+
+static int detect_binary_content(charlock_detector_t *detector, VALUE rb_str) {
+	const char *binary_result;
+
+	binary_result = magic_buffer(detector->magic, RSTRING_PTR(rb_str), RSTRING_LEN(rb_str));
+
+	if (binary_result) {
+		if (strstr(binary_result, "library") ||
+				strstr(binary_result, "bundle") ||
+				strstr(binary_result, "archive") ||
+				(!strstr(binary_result, "text") && strstr(binary_result, "executable")) ||
+				strstr(binary_result, "data"))
+			return 1;
+	} else {
+		rb_raise(rb_eStandardError, magic_error(detector->magic));
+	}
+
+	return 0;
 }
 
 /*
@@ -44,23 +81,30 @@ static VALUE rb_encdec_buildmatch(const UCharsetMatch *match)
 static VALUE rb_encdec_detect(int argc, VALUE *argv, VALUE self)
 {
 	UErrorCode status = U_ZERO_ERROR;
-	UCharsetDetector *csd;
+	charlock_detector_t *detector;
 	VALUE rb_str;
 	VALUE rb_enc_hint;
 
 	rb_scan_args(argc, argv, "11", &rb_str, &rb_enc_hint);
 
 	Check_Type(rb_str, T_STRING);
-	Data_Get_Struct(self, UCharsetDetector, csd);
+	Data_Get_Struct(self, charlock_detector_t, detector);
 
-	ucsdet_setText(csd, RSTRING_PTR(rb_str), (int32_t)RSTRING_LEN(rb_str), &status);
+	// first lets see if this is binary content
+	if (detect_binary_content(detector, rb_str)) {
+		return rb_encdec_binarymatch();
+	}
+
+	// if we got here - the data doesn't look like binary
+	// lets try to figure out what encoding the text is in
+	ucsdet_setText(detector->csd, RSTRING_PTR(rb_str), (int32_t)RSTRING_LEN(rb_str), &status);
 
 	if (!NIL_P(rb_enc_hint)) {
 		Check_Type(rb_enc_hint, T_STRING);
-		ucsdet_setDeclaredEncoding(csd, RSTRING_PTR(rb_enc_hint), RSTRING_LEN(rb_enc_hint), &status);
+		ucsdet_setDeclaredEncoding(detector->csd, RSTRING_PTR(rb_enc_hint), RSTRING_LEN(rb_enc_hint), &status);
 	}
 
-	return rb_encdec_buildmatch(ucsdet_detect(csd, &status));
+	return rb_encdec_buildmatch(ucsdet_detect(detector->csd, &status));
 }
 
 
@@ -81,32 +125,42 @@ static VALUE rb_encdec_detect(int argc, VALUE *argv, VALUE self)
 static VALUE rb_encdec_detect_all(int argc, VALUE *argv, VALUE self)
 {
 	UErrorCode status = U_ZERO_ERROR;
-	UCharsetDetector *csd;
+	charlock_detector_t *detector;
 	const UCharsetMatch **csm;
 	VALUE rb_ret;
 	int i, match_count;
 	VALUE rb_str;
 	VALUE rb_enc_hint;
+	VALUE binary_match;
 
 	rb_scan_args(argc, argv, "11", &rb_str, &rb_enc_hint);
 
 	Check_Type(rb_str, T_STRING);
-	Data_Get_Struct(self, UCharsetDetector, csd);
+	Data_Get_Struct(self, charlock_detector_t, detector);
 
 	rb_ret = rb_ary_new();
 
-	ucsdet_setText(csd, RSTRING_PTR(rb_str), (int32_t)RSTRING_LEN(rb_str), &status);
+	// first lets see if this is binary content
+	binary_match = Qnil;
+	if (detect_binary_content(detector, rb_str)) {
+		binary_match = rb_encdec_binarymatch();
+	}
+
+	ucsdet_setText(detector->csd, RSTRING_PTR(rb_str), (int32_t)RSTRING_LEN(rb_str), &status);
 
 	if (!NIL_P(rb_enc_hint)) {
 		Check_Type(rb_enc_hint, T_STRING);
-		ucsdet_setDeclaredEncoding(csd, RSTRING_PTR(rb_enc_hint), RSTRING_LEN(rb_enc_hint), &status);
+		ucsdet_setDeclaredEncoding(detector->csd, RSTRING_PTR(rb_enc_hint), RSTRING_LEN(rb_enc_hint), &status);
 	}
 
-	csm = ucsdet_detectAll(csd, &match_count, &status);
+	csm = ucsdet_detectAll(detector->csd, &match_count, &status);
 
 	for (i = 0; i < match_count; ++i) {
 		rb_ary_push(rb_ret, rb_encdec_buildmatch(csm[i]));
 	}
+
+	if (!NIL_P(binary_match))
+		rb_ary_unshift(rb_ret, binary_match);
 
 	return rb_ret;
 }
@@ -120,13 +174,13 @@ static VALUE rb_encdec_detect_all(int argc, VALUE *argv, VALUE self)
  */
 static VALUE rb_get_strip_tags(VALUE self)
 {
-	UCharsetDetector *csd;
+	charlock_detector_t *detector;
 	UBool val;
 	VALUE rb_val;
 
-	Data_Get_Struct(self, UCharsetDetector, csd);
+	Data_Get_Struct(self, charlock_detector_t, detector);
 
-	val = ucsdet_isInputFilterEnabled(csd);
+	val = ucsdet_isInputFilterEnabled(detector->csd);
 
 	rb_val = val == 1 ? Qtrue : Qfalse;
 
@@ -143,14 +197,14 @@ static VALUE rb_get_strip_tags(VALUE self)
  */
 static VALUE rb_set_strip_tags(VALUE self, VALUE rb_val)
 {
-	UCharsetDetector *csd;
+	charlock_detector_t *detector;
 	UBool val;
 
-	Data_Get_Struct(self, UCharsetDetector, csd);
+	Data_Get_Struct(self, charlock_detector_t, detector);
 
 	val = rb_val == Qtrue ? 1 : 0;
 
-	ucsdet_enableInputFilter(csd, val);
+	ucsdet_enableInputFilter(detector->csd, val);
 
 	return rb_val;
 }
@@ -195,16 +249,42 @@ static VALUE rb_get_supported_encodings(VALUE klass)
 	return rb_encoding_list;
 }
 
-static void rb_encdec__free(void *csd)
+static void rb_encdec__free(void *obj)
 {
-	ucsdet_close((UCharsetDetector *)csd);
+	charlock_detector_t *detector;
+
+	detector = (charlock_detector_t *)obj;
+
+	if (detector->csd)
+		ucsdet_close(detector->csd);
+
+	if (detector->magic)
+		magic_close(detector->magic);
 }
 
 static VALUE rb_encdec__alloc(VALUE klass)
 {
+	charlock_detector_t *detector;
 	UErrorCode status = U_ZERO_ERROR;
-	UCharsetDetector *csd = ucsdet_open(&status);
-	return Data_Wrap_Struct(klass, NULL, rb_encdec__free, (void *)csd);
+	VALUE obj;
+
+	obj = Data_Make_Struct(klass, charlock_detector_t, NULL, rb_encdec__free, (void *)detector);
+
+	detector->csd = ucsdet_open(&status);
+	if (U_FAILURE(status)) {
+		rb_raise(rb_eStandardError, u_errorName(status));
+	}
+
+	detector->magic = magic_open(0);
+	if (detector->magic == NULL) {
+		rb_raise(rb_eStandardError, magic_error(detector->magic));
+	}
+
+	// load the libmagic database
+	// NULL means use the default or whatever is specified by the MAGIC env var
+	magic_load(detector->magic, NULL);
+
+	return obj;
 }
 
 void _init_charlock_encoding_detector()
