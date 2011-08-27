@@ -92,16 +92,17 @@ describe CharlockHolmes::EncodingDetector do
 
   context 'encoding detection' do
     MAPPING = [
-      ['repl2.cljs',                'ISO-8859-1'],
-      ['core.rkt',                  'UTF-8'],
-      ['cl-messagepack.lisp',       'ISO-8859-1'],
-      ['TwigExtensionsDate.es.yml', 'UTF-8'],
-      ['AnsiGraph.psm1',            'UTF-16LE'],
-      ['laholator.py',              'UTF-8']
+      ['repl2.cljs',                'ISO-8859-1', :text],
+      ['core.rkt',                  'UTF-8',      :text],
+      ['cl-messagepack.lisp',       'ISO-8859-1', :text],
+      ['TwigExtensionsDate.es.yml', 'UTF-8',      :text],
+      ['AnsiGraph.psm1',            'UTF-16LE',   :text],
+      ['laholator.py',              'UTF-8',      :text],
+      ['hello_world',               nil,          :binary]
     ]
 
     MAPPING.each do |mapping|
-      file, encoding = mapping
+      file, encoding, type = mapping
 
       test "#{file} should be detected as #{encoding}" do
         path = File.expand_path "../fixtures/#{file}", __FILE__
@@ -109,6 +110,7 @@ describe CharlockHolmes::EncodingDetector do
         guessed = @detector.detect content
 
         assert_equal encoding, guessed[:encoding]
+        assert_equal type, guessed[:type]
 
         if content.respond_to? :force_encoding
           content.force_encoding guessed[:encoding]
