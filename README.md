@@ -15,13 +15,15 @@ require 'charlock_holmes'
 ``` ruby
 contents = File.read('test.xml')
 detection = CharlockHolmes::EncodingDetector.detect(contents)
-# => {:encoding => 'UTF-8', :confidence => 100}
+# => {:encoding => 'UTF-8', :confidence => 100, :type => :text}
 
 # optionally there will be a :language key as well, but
 # that's mostly only returned for legacy encodings like ISO-8859-1
 ```
 
 NOTE: `CharlockHolmes::EncodingDetector.detect` will return `nil` if it was unable to find an encoding.
+
+For binary content, `:type` will be set to `:binary`
 
 Though it's more efficient to reuse once detector instance:
 

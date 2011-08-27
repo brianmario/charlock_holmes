@@ -76,7 +76,7 @@ static int detect_binary_content(charlock_detector_t *detector, VALUE rb_str) {
  * hint_enc - an optional String (like "UTF-8"), the encoding name which will
  *            be used as an additional hint to the charset detector
  *
- * Returns: a Hash with :encoding, :language and :confidence
+ * Returns: a Hash with :encoding, :language, :type and :confidence
  */
 static VALUE rb_encdec_detect(int argc, VALUE *argv, VALUE self)
 {
@@ -120,7 +120,7 @@ static VALUE rb_encdec_detect(int argc, VALUE *argv, VALUE self)
  *            be used as an additional hint to the charset detector
  *
  * Returns: an Array with zero or more Hashes,
- *          each one of them with with :encoding, :language and :confidence
+ *          each one of them with with :encoding, :language, :type and :confidence
  */
 static VALUE rb_encdec_detect_all(int argc, VALUE *argv, VALUE self)
 {

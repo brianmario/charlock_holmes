@@ -10,7 +10,7 @@ module CharlockHolmes
     # hint_enc - an optional String (like "UTF-8"), the encoding name which will
     #            be used as an additional hint to the charset detector
     #
-    # Returns: a Hash with :encoding, :language and :confidence
+    # Returns: a Hash with :encoding, :language, :type and :confidence
     def self.detect(str, hint_enc=nil)
       new.detect(str, hint_enc)
     end
@@ -25,7 +25,7 @@ module CharlockHolmes
     #            be used as an additional hint to the charset detector
     #
     # Returns: an Array with zero or more Hashes,
-    # each one of them with with :encoding, :language and :confidence
+    # each one of them with with :encoding, :language, :type and :confidence
     def self.detect_all(str, hint_enc=nil)
       new.detect_all(str, hint_enc)
     end
