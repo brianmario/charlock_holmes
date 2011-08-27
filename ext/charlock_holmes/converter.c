@@ -49,6 +49,5 @@ static VALUE rb_converter_convert(VALUE self, VALUE rb_txt, VALUE rb_src_enc, VA
 void _init_charlock_converter() {
 	rb_cConverter = rb_define_class_under(rb_mCharlockHolmes, "Converter", rb_cObject);
 
-	// rb_define_alloc_func(rb_cConverter, rb_converter__alloc);
 	rb_define_singleton_method(rb_cConverter, "convert", rb_converter_convert, 3);
 }
