@@ -16,14 +16,14 @@ DETECTOR = CharlockHolmes::EncodingDetector.new
 
 Benchmark.bmbm do |x|
   # new detector every iteration
-  x.report 'class-level detect' do
+  x.report 'singleton call' do
     TIMES.times do
       CharlockHolmes::EncodingDetector.detect CONTENT
     end
   end
 
   # shared detector for all iterations
-  x.report 'instance-level detect' do
+  x.report 'reusing a single detector' do
     TIMES.times do
       DETECTOR.detect CONTENT
     end
