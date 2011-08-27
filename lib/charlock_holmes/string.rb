@@ -21,12 +21,12 @@ class String
     # Attempt to detect the encoding of this string
     # then set the encoding to what was detected ala `force_encoding`
     #
-    # Returns: a Hash with :encoding, :language and :confidence
+    # Returns: self
     def detect_encoding!(hint_enc=nil)
       if detected = self.detect_encoding(hint_enc)
         self.force_encoding detected[:encoding]
-        detected
       end
+      self
     end
   end
 

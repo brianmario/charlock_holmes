@@ -59,7 +59,7 @@ require 'charlock_holmes/string'
 
 contents = File.read('test.xml')
 
-# this will detect and set the encoding of `contents`
+# this will detect and set the encoding of `contents`, then return self
 contents.detect_encoding!
 ```
 
