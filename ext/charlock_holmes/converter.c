@@ -25,17 +25,17 @@ static VALUE rb_converter_convert(VALUE self, VALUE rb_txt, VALUE rb_src_enc, VA
 	if (status != U_BUFFER_OVERFLOW_ERROR) {
 		rb_raise(rb_eArgError, u_errorName(status));
 	}
-	out_buf = xmalloc(out_len);
+	out_buf = malloc(out_len);
 
 	// now do the actual conversion
 	status = U_ZERO_ERROR;
 	out_len = ucnv_convert(dst_enc, src_enc, out_buf, out_len, src_txt, src_len, &status);
 	if (U_FAILURE(status)) {
-		xfree(out_buf);
+		free(out_buf);
 		rb_raise(rb_eArgError, u_errorName(status));
 	}
 
-	xfree(out_buf);
+	free(out_buf);
 
 #ifdef HAVE_RUBY_ENCODING_H
 	(rb_encoding *)rb_enc = rb_enc_find(dst_enc);
