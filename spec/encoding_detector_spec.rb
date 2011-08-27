@@ -112,7 +112,7 @@ describe CharlockHolmes::EncodingDetector do
         assert_equal encoding, guessed[:encoding]
         assert_equal type, guessed[:type]
 
-        if content.respond_to? :force_encoding
+        if content.respond_to?(:force_encoding) && guessed[:type] == :text
           content.force_encoding guessed[:encoding]
           assert content.valid_encoding?
         end

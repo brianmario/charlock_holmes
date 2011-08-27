@@ -260,6 +260,8 @@ static void rb_encdec__free(void *obj)
 
 	if (detector->magic)
 		magic_close(detector->magic);
+
+	xfree(detector);
 }
 
 static VALUE rb_encdec__alloc(VALUE klass)
@@ -268,7 +270,8 @@ static VALUE rb_encdec__alloc(VALUE klass)
 	UErrorCode status = U_ZERO_ERROR;
 	VALUE obj;
 
-	obj = Data_Make_Struct(klass, charlock_detector_t, NULL, rb_encdec__free, (void *)detector);
+	detector = xmalloc(sizeof(charlock_detector_t*));
+	obj = Data_Wrap_Struct(klass, NULL, rb_encdec__free, (void *)detector);
 
 	detector->csd = ucsdet_open(&status);
 	if (U_FAILURE(status)) {
