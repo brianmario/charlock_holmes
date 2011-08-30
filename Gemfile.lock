@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    charlock_holmes (0.6.1)
+    charlock_holmes (0.6.2)
 
 GEM
   remote: http://rubygems.org/
