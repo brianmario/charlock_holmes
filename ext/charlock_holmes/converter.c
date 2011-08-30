@@ -35,13 +35,13 @@ static VALUE rb_converter_convert(VALUE self, VALUE rb_txt, VALUE rb_src_enc, VA
 		rb_raise(rb_eArgError, u_errorName(status));
 	}
 
-	free(out_buf);
-
 #ifdef HAVE_RUBY_ENCODING_H
 	(rb_encoding *)rb_enc = rb_enc_find(dst_enc);
 #endif
 
 	rb_out = charlock_new_enc_str(out_buf, out_len, rb_enc);
+
+	free(out_buf);
 
 	return rb_out;
 }
