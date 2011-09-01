@@ -17,23 +17,21 @@ if `which make`.strip.empty?
   exit(1)
 end
 
-unless File.exists?(CWD + '/libmagic_ext.a')
-  src = File.basename('file-5.08.tar.gz')
-  dir = File.basename(src, '.tar.gz')
+src = File.basename('file-5.08.tar.gz')
+dir = File.basename(src, '.tar.gz')
 
-  Dir.chdir("#{CWD}/src") do
-    FileUtils.rm_rf(dir) if File.exists?(dir)
+Dir.chdir("#{CWD}/src") do
+  FileUtils.rm_rf(dir) if File.exists?(dir)
 
-    sys("tar zxvf #{src}")
-    Dir.chdir(dir) do
-      sys("./configure --prefix=#{CWD}/dst/ --disable-shared --enable-static")
-      sys("make")
-      sys("make install")
-    end
+  sys("tar zxvf #{src}")
+  Dir.chdir(dir) do
+    sys("./configure --prefix=#{CWD}/dst/ --disable-shared --enable-static --with-pic")
+    sys("make")
+    sys("make install")
   end
-
-  FileUtils.cp "#{CWD}/dst/lib/libmagic.a", "#{CWD}/libmagic_ext.a"
 end
+
+FileUtils.cp "#{CWD}/dst/lib/libmagic.a", "#{CWD}/libmagic_ext.a"
 
 $INCFLAGS[0,0] = "-I#{CWD}/dst/include "
 $LDFLAGS << " -L#{CWD}"
