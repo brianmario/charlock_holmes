@@ -21,7 +21,7 @@ unless File.exists?(CWD + '/libmagic_ext.a')
   src = File.basename('file-5.08.tar.gz')
   dir = File.basename(src, '.tar.gz')
 
-  Dir.chdir('src') do
+  Dir.chdir("#{CWD}/src") do
     FileUtils.rm_rf(dir) if File.exists?(dir)
 
     sys("tar zxvf #{src}")
@@ -36,6 +36,7 @@ unless File.exists?(CWD + '/libmagic_ext.a')
 end
 
 $INCFLAGS[0,0] = "-I#{CWD}/dst/include "
+$LDFLAGS << " -L#{CWD}"
 
 $CFLAGS << ' -Wall -funroll-loops'
 $CFLAGS << ' -Wextra -O0 -ggdb3' if ENV['DEBUG']
