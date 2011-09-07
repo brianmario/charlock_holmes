@@ -70,7 +70,7 @@ Being able to detect the encoding of some arbitrary content is nice, but what yo
 ``` ruby
 content = File.read('test2.txt')
 detection = CharlockHolmes::EncodingDetector.detect(content)
-utf8_encoded_content CharlockHolmes::Converter.convert content, detection[:encoding], 'UTF-8'
+utf8_encoded_content = CharlockHolmes::Converter.convert content, detection[:encoding], 'UTF-8'
 ```
 
 The first parameter is the content to transcode, the second is the source encoding (the encoding the content is assumed to be in), and the third parameter is the destination encoding.
