@@ -17,6 +17,38 @@ if `which make`.strip.empty?
   exit(1)
 end
 
+##
+# ICU dependency
+#
+
+dir_config 'icu'
+
+# detect homebrew installs
+if !have_library 'icui18n'
+  base = if !`which brew`.empty?
+    `brew --prefix`.strip
+  elsif File.exists?("/usr/local/Cellar/icu4c")
+    '/usr/local/Cellar'
+  end
+
+  if base and icu4c = Dir[File.join(base, 'Cellar/icu4c/*')].sort.last
+    $INCFLAGS << " -I#{icu4c}/include "
+    $LDFLAGS  << " -L#{icu4c}/lib "
+  end
+end
+
+unless have_library 'icui18n' and have_header 'unicode/ucnv.h'
+  STDERR.puts "\n\n"
+  STDERR.puts "***************************************************************************************"
+  STDERR.puts "*********** icu required (brew install icu4c or apt-get install libicu-dev) ***********"
+  STDERR.puts "***************************************************************************************"
+  exit(1)
+end
+
+##
+# libmagic dependency
+#
+
 src = File.basename('file-5.08.tar.gz')
 dir = File.basename(src, '.tar.gz')
 
@@ -33,16 +65,19 @@ end
 
 FileUtils.cp "#{CWD}/dst/lib/libmagic.a", "#{CWD}/libmagic_ext.a"
 
-$INCFLAGS[0,0] = "-I#{CWD}/dst/include "
-$LDFLAGS << " -L#{CWD}"
+$INCFLAGS[0,0] = " -I#{CWD}/dst/include "
+$LDFLAGS << " -L#{CWD} "
+
+dir_config 'magic'
+unless have_library 'magic_ext' and have_header 'magic.h'
+  STDERR.puts "\n\n"
+  STDERR.puts "***************************************************************************************"
+  STDERR.puts "********* error compiling and linking libmagic. please report issue on github *********"
+  STDERR.puts "***************************************************************************************"
+  exit(1)
+end
 
 $CFLAGS << ' -Wall -funroll-loops'
 $CFLAGS << ' -Wextra -O0 -ggdb3' if ENV['DEBUG']
-
-dir_config 'icu'
-have_library 'icui18n'
-
-dir_config 'magic'
-have_library 'magic_ext'
 
 create_makefile 'charlock_holmes'
