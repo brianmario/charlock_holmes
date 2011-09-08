@@ -104,7 +104,7 @@ describe CharlockHolmes::EncodingDetector do
     MAPPING.each do |mapping|
       file, encoding, type = mapping
 
-      test "#{file} should be detected as #{encoding}" do
+      test "#{file} should be detected as #{encoding || 'binary'}" do
         path = File.expand_path "../fixtures/#{file}", __FILE__
         content = File.read path
         guessed = @detector.detect content
