@@ -59,6 +59,7 @@ Dir.chdir("#{CWD}/src") do
   Dir.chdir(dir) do
     sys("./configure --prefix=#{CWD}/dst/ --disable-shared --enable-static --with-pic")
     sys("make -C src install")
+    sys("make -C magic install")
   end
 end
 
