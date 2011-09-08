@@ -54,11 +54,7 @@ static int detect_binary_content(charlock_detector_t *detector, VALUE rb_str) {
 	binary_result = magic_buffer(detector->magic, RSTRING_PTR(rb_str), RSTRING_LEN(rb_str));
 
 	if (binary_result) {
-		if (strstr(binary_result, "library") ||
-				strstr(binary_result, "bundle") ||
-				strstr(binary_result, "archive") ||
-				(!strstr(binary_result, "text") && strstr(binary_result, "executable")) ||
-				strstr(binary_result, "data"))
+		if (!strstr(binary_result, "text"))
 			return 1;
 	} else {
 		rb_raise(rb_eStandardError, magic_error(detector->magic));
