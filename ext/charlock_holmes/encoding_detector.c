@@ -57,7 +57,7 @@ static int detect_binary_content(charlock_detector_t *detector, VALUE rb_str) {
 		if (!strstr(binary_result, "text"))
 			return 1;
 	} else {
-		rb_raise(rb_eStandardError, magic_error(detector->magic));
+		rb_raise(rb_eStandardError, "%s", magic_error(detector->magic));
 	}
 
 	return 0;
@@ -271,12 +271,12 @@ static VALUE rb_encdec__alloc(VALUE klass)
 
 	detector->csd = ucsdet_open(&status);
 	if (U_FAILURE(status)) {
-		rb_raise(rb_eStandardError, u_errorName(status));
+		rb_raise(rb_eStandardError, "%s", u_errorName(status));
 	}
 
 	detector->magic = magic_open(0);
 	if (detector->magic == NULL) {
-		rb_raise(rb_eStandardError, magic_error(detector->magic));
+		rb_raise(rb_eStandardError, "%s", magic_error(detector->magic));
 	}
 
 	// load the libmagic database

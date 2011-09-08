@@ -23,7 +23,7 @@ static VALUE rb_converter_convert(VALUE self, VALUE rb_txt, VALUE rb_src_enc, VA
 	// first determin the size of the output buffer
 	out_len = ucnv_convert(dst_enc, src_enc, NULL, 0, src_txt, src_len, &status);
 	if (status != U_BUFFER_OVERFLOW_ERROR) {
-		rb_raise(rb_eArgError, u_errorName(status));
+		rb_raise(rb_eArgError, "%s", u_errorName(status));
 	}
 	out_buf = malloc(out_len);
 
@@ -32,7 +32,7 @@ static VALUE rb_converter_convert(VALUE self, VALUE rb_txt, VALUE rb_src_enc, VA
 	out_len = ucnv_convert(dst_enc, src_enc, out_buf, out_len, src_txt, src_len, &status);
 	if (U_FAILURE(status)) {
 		free(out_buf);
-		rb_raise(rb_eArgError, u_errorName(status));
+		rb_raise(rb_eArgError, "%s", u_errorName(status));
 	}
 
 #ifdef HAVE_RUBY_ENCODING_H
