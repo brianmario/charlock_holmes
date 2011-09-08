@@ -58,8 +58,7 @@ Dir.chdir("#{CWD}/src") do
   sys("tar zxvf #{src}")
   Dir.chdir(dir) do
     sys("./configure --prefix=#{CWD}/dst/ --disable-shared --enable-static --with-pic")
-    sys("make")
-    sys("make install")
+    sys("make -C src install")
   end
 end
 
