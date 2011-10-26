@@ -29,7 +29,7 @@ Dir.chdir("#{CWD}/src") do
 
   sys("tar zxvf #{src}")
   Dir.chdir(File.join(dir, 'source')) do
-    sys("./configure --prefix=#{CWD}/dst/ --enable-static")
+    sys("./configure --prefix=#{CWD}/dst/ --disable-tests --disable-samples --disable-icuio --disable-extras --disable-layout --enable-static")
     sys("make install")
   end
 end
