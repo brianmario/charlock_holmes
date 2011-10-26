@@ -21,26 +21,28 @@ end
 # ICU dependency
 #
 
-dir_config 'icu'
+src = File.basename('icu4c-4_8_1-src.tgz')
+dir = File.basename('icu')
 
-# detect homebrew installs
-if !have_library 'icui18n'
-  base = if !`which brew`.empty?
-    `brew --prefix`.strip
-  elsif File.exists?("/usr/local/Cellar/icu4c")
-    '/usr/local/Cellar'
-  end
+Dir.chdir("#{CWD}/src") do
+  FileUtils.rm_rf(dir) if File.exists?(dir)
 
-  if base and icu4c = Dir[File.join(base, 'Cellar/icu4c/*')].sort.last
-    $INCFLAGS << " -I#{icu4c}/include "
-    $LDFLAGS  << " -L#{icu4c}/lib "
+  sys("tar zxvf #{src}")
+  Dir.chdir(File.join(dir, 'source')) do
+    sys("./configure --prefix=#{CWD}/dst/ --disable-tests --disable-samples --disable-icuio --disable-extras --disable-layout --enable-static")
+    sys("make install")
   end
 end
+
+dir_config 'icu'
+
+$INCFLAGS << " -I#{CWD}/dst/include "
+$LDFLAGS  << " -L#{CWD}/dst/lib "
 
 unless have_library 'icui18n' and have_header 'unicode/ucnv.h'
   STDERR.puts "\n\n"
   STDERR.puts "***************************************************************************************"
-  STDERR.puts "*********** icu required (brew install icu4c or apt-get install libicu-dev) ***********"
+  STDERR.puts "********* error compiling and linking icu4c. please report issue on github *********"
   STDERR.puts "***************************************************************************************"
   exit(1)
 end
