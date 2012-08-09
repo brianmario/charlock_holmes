@@ -5,7 +5,8 @@ class String
   #
   # Returns: a Hash with :encoding, :language, :type and :confidence
   def detect_encoding(hint_enc=nil)
-    encoding_detector.detect(self, hint_enc)
+    detector = CharlockHolmes::EncodingDetector.new
+    detector.detect(self, hint_enc)
   end
 
   # Attempt to detect the encoding of this string, and return
@@ -14,7 +15,8 @@ class String
   # Returns: an Array with zero or more Hashes,
   #          each one of them with with :encoding, :language, :type and :confidence
   def detect_encodings(hint_enc=nil)
-    encoding_detector.detect_all(self, hint_enc)
+    detector = CharlockHolmes::EncodingDetector.new
+    detector.detect_all(self, hint_enc)
   end
 
   if RUBY_VERSION =~ /1.9/
@@ -28,10 +30,5 @@ class String
       end
       self
     end
-  end
-
-  protected
-  def encoding_detector
-    @encoding_detector ||= CharlockHolmes::EncodingDetector.new
   end
 end
