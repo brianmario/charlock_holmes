@@ -37,6 +37,8 @@ if !have_library 'icui18n'
   end
 end
 
+pkg_config 'icu-i18n'
+
 unless have_library 'icui18n' and have_header 'unicode/ucnv.h'
   STDERR.puts "\n\n"
   STDERR.puts "***************************************************************************************"
@@ -76,6 +78,8 @@ unless have_library 'magic_ext' and have_header 'magic.h'
   STDERR.puts "***************************************************************************************"
   exit(1)
 end
+
+pkg_config 'zlib'
 
 $CFLAGS << ' -Wall -funroll-loops'
 $CFLAGS << ' -Wextra -O0 -ggdb3' if ENV['DEBUG']
