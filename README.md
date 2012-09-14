@@ -77,12 +77,35 @@ The first parameter is the content to transcode, the second is the source encodi
 
 ## Installing
 
-If the traditional `gem install charlock_holmes` doesn't work, you may need to specify the path to your installation of ICU using the `--with-icu-dir` option during the gem install.
+If the traditional `gem install charlock_holmes` doesn't work, you may need to specify the path to
+your installation of ICU using the `--with-icu-dir` option during the gem install or by configuring Bundler to
+pass those arguments to Gem:
 
-At the time of writing, Homebrew for OSX installs ICU (icu4c is the package name) as a keg-only install so you'll have to specify the location during the gem install:
+Configure Bundler to always use the correct arguments when installing:
 
-`gem install charlock_holmes -- --with-icu-dir=/usr/local/Cellar/icu4c/4.4.1`
+    bundle config build.charlock_holmes --with-icu-dir=/path/to/installed/icu4c
 
-If you're using Bundler and need to specify a custom path(s), you can do so with the `bundle config` command:
+Using Gem to install directly without Bundler:
 
-`bundle config build.charlock_holmes --with-icu-dir=/usr/local/Cellar/icu4c/4.4.1`
+    gem install charlock_holmes -- --with-icu-dir=/path/to/installed/icu4c
+
+
+### Homebrew
+
+If you're installing on Mac OS X then using [Homebrew](http://mxcl.github.com/homebrew/) is
+the easiest way to install ICU.
+
+However, be warned; it is a Keg-Only (see [homedir issue #167](https://github.com/mxcl/homebrew/issues/167)
+for more info) install meaning RubyGems won't find it when installing without specifying `--with-icu-dir`
+
+To install ICU with Homebrew:
+
+    brew install icu4c
+
+Configure Bundler to always use the correct arguments when installing:
+
+    bundle config build.charlock_holmes --with-icu-dir=/usr/local/opt/icu4u
+
+Using Gem to install directly without Bundler:
+
+    gem install charlock_holmes -- --with-icu-dir=/usr/local/opt/icu4c
