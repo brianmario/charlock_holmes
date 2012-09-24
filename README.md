@@ -104,7 +104,7 @@ To install ICU with Homebrew:
 
 Configure Bundler to always use the correct arguments when installing:
 
-    bundle config build.charlock_holmes --with-icu-dir=/usr/local/opt/icu4u
+    bundle config build.charlock_holmes --with-icu-dir=/usr/local/opt/icu4c
 
 Using Gem to install directly without Bundler:
 
