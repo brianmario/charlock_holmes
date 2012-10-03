@@ -26,7 +26,7 @@ class String
     # Returns: self
     def detect_encoding!(hint_enc=nil)
       if detected = self.detect_encoding(hint_enc)
-        self.force_encoding detected[:encoding]
+        self.force_encoding(detected[:encoding]) if detected[:encoding]
       end
       self
     end
