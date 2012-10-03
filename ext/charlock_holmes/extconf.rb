@@ -37,7 +37,7 @@ end
 dir_config 'icu'
 
 $INCFLAGS << " -I#{CWD}/dst/include "
-$LDFLAGS  << " -L#{CWD}/dst/lib -R#{CWD}/dst/lib"
+$LDFLAGS  << " -L#{CWD}/dst/lib"
 
 unless have_library 'icui18n' and have_library 'icudata' and have_library 'icutu' and have_library 'icuuc' and have_header 'unicode/ucnv.h'
   STDERR.puts "\n\n"
