@@ -81,5 +81,5 @@ end
 
 $CFLAGS << ' -Wall -funroll-loops'
 $CFLAGS << ' -Wextra -O0 -ggdb3' if ENV['DEBUG']
-
+$LIBS << " -lstdc++"
 create_makefile 'charlock_holmes/charlock_holmes'
