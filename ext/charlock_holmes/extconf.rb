@@ -40,6 +40,15 @@ end
 pkg_config 'icu-i18n'
 
 unless have_library 'icui18n' and have_header 'unicode/ucnv.h'
+  pcs = `which -a pkg-config`
+  pcs.lines.each do |pc|
+    $PKGCONFIG = pc.chomp
+    pkg_config 'icu-i18n'
+    break if have_library 'icui18n' and have_header 'unicode/ucnv.h'
+  end
+end
+
+unless have_library 'icui18n' and have_header 'unicode/ucnv.h'
   STDERR.puts "\n\n"
   STDERR.puts "***************************************************************************************"
   STDERR.puts "*********** icu required (brew install icu4c or apt-get install libicu-dev) ***********"
