@@ -2,6 +2,18 @@
 
 Character encoding detecting library for Ruby using [ICU](http://site.icu-project.org/)
 
+
+## Requirements
+
+[ICU4C]http://icu-project.org/download/4.2.html#ICU4C
+
+Feel free to download and compile from source:
+
+```ruby
+ $ tar -xzvf icu4c-4_2_1-src.tgz;
+ $ cd icu/source
+ $ ./configure && make && make install
+```    
 ## Usage
 
 First you'll need to require it
