@@ -274,14 +274,10 @@ static VALUE rb_encdec__alloc(VALUE klass)
 		rb_raise(rb_eStandardError, "%s", u_errorName(status));
 	}
 
-	detector->magic = magic_open(0);
+	detector->magic = magic_open(MAGIC_NO_CHECK_SOFT);
 	if (detector->magic == NULL) {
 		rb_raise(rb_eStandardError, "%s", magic_error(detector->magic));
 	}
-
-	// load the libmagic database
-	// NULL means use the default or whatever is specified by the MAGIC env var
-	magic_load(detector->magic, NULL);
 
 	return obj;
 }
