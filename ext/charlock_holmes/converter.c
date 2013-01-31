@@ -15,6 +15,10 @@ static VALUE rb_converter_convert(VALUE self, VALUE rb_txt, VALUE rb_src_enc, VA
 	int32_t out_len;
 	UErrorCode status = U_ZERO_ERROR;
 
+	Check_Type(rb_txt, T_STRING);
+	Check_Type(rb_src_enc, T_STRING);
+	Check_Type(rb_dst_enc, T_STRING);
+
 	src_txt = RSTRING_PTR(rb_txt);
 	src_len = RSTRING_LEN(rb_txt);
 	src_enc = RSTRING_PTR(rb_src_enc);

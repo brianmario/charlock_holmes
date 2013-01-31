@@ -26,4 +26,22 @@ describe CharlockHolmes::Converter do
     assert input.bytesize == output.bytesize
     assert input == output
   end
+
+  test 'all params must be strings' do
+    assert_raises TypeError do
+      CharlockHolmes::Converter.convert nil, 'UTF-8', 'UTF-16'
+    end
+
+    assert_raises TypeError do
+      CharlockHolmes::Converter.convert 'lol', nil, 'UTF-16'
+    end
+
+    assert_raises TypeError do
+      CharlockHolmes::Converter.convert 'lol', 'UTF-8', nil
+    end
+
+    assert_nothing_raised do
+      CharlockHolmes::Converter.convert 'lol', 'UTF-8', 'UTF-16'
+    end
+  end
 end
