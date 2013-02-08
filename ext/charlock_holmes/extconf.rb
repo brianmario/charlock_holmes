@@ -21,23 +21,39 @@ end
 # ICU dependency
 #
 
-src = File.basename('icu4c-49_1_2-src.tgz')
-dir = File.basename('icu')
+# detect homebrew installs
+if !have_library 'icui18n'
+  base = if !`which brew`.empty?
+    `brew --prefix`.strip
+  elsif File.exists?("/usr/local/Cellar/icu4c")
+    '/usr/local/Cellar'
+  end
 
-Dir.chdir("#{CWD}/src") do
-  FileUtils.rm_rf(dir) if File.exists?(dir)
-
-  sys("tar zxvf #{src}")
-  Dir.chdir(File.join(dir, 'source')) do
-    sys("LDFLAGS= CXXFLAGS=\"-O2 -fPIC\" CFLAGS=\"-O2 -fPIC\" ./configure --prefix=#{CWD}/dst/ --disable-tests --disable-samples --disable-icuio --disable-extras --disable-layout --enable-static --disable-shared")
-    sys("make install")
+  if base and icu4c = Dir[File.join(base, 'Cellar/icu4c/*')].sort.last
+    $INCFLAGS << " -I#{icu4c}/include "
+    $LDFLAGS  << " -L#{icu4c}/lib "
   end
 end
 
-dir_config 'icu'
+unless have_library 'icui18n' and have_library 'icudata' and have_library 'icutu' and have_library 'icuuc' and have_header 'unicode/ucnv.h'
+  src = File.basename('icu4c-49_1_2-src.tgz')
+  dir = File.basename('icu')
 
-$INCFLAGS << " -I#{CWD}/dst/include "
-$LDFLAGS  << " -L#{CWD}/dst/lib"
+  Dir.chdir("#{CWD}/src") do
+    FileUtils.rm_rf(dir) if File.exists?(dir)
+
+    sys("tar zxvf #{src}")
+    Dir.chdir(File.join(dir, 'source')) do
+      sys("LDFLAGS= CXXFLAGS=\"-O2 -fPIC\" CFLAGS=\"-O2 -fPIC\" ./configure --prefix=#{CWD}/dst/ --disable-tests --disable-samples --disable-icuio --disable-extras --disable-layout --enable-static --disable-shared")
+      sys("make install")
+    end
+  end
+
+  dir_config 'icu'
+
+  $INCFLAGS << " -I#{CWD}/dst/include "
+  $LDFLAGS  << " -L#{CWD}/dst/lib"
+end
 
 unless have_library 'icui18n' and have_library 'icudata' and have_library 'icutu' and have_library 'icuuc' and have_header 'unicode/ucnv.h'
   STDERR.puts "\n\n"
