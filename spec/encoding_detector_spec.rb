@@ -98,6 +98,7 @@ describe CharlockHolmes::EncodingDetector do
       ['TwigExtensionsDate.es.yml', 'UTF-8',      :text],
       ['AnsiGraph.psm1',            'UTF-16LE',   :text],
       ['laholator.py',              'UTF-8',      :text],
+      ['test.tcl',                  'ISO-8859-1', :text],
       ['hello_world',               nil,          :binary]
     ]
 
