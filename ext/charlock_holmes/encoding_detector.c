@@ -54,7 +54,7 @@ static int detect_binary_content(charlock_detector_t *detector, VALUE rb_str) {
 	binary_result = magic_buffer(detector->magic, RSTRING_PTR(rb_str), RSTRING_LEN(rb_str));
 
 	if (binary_result) {
-		if (!strstr(binary_result, "text"))
+		if (strstr(binary_result, "charset=binary"))
 			return 1;
 	} else {
 		rb_raise(rb_eStandardError, "%s", magic_error(detector->magic));
@@ -274,7 +274,7 @@ static VALUE rb_encdec__alloc(VALUE klass)
 		rb_raise(rb_eStandardError, "%s", u_errorName(status));
 	}
 
-	detector->magic = magic_open(0);
+	detector->magic = magic_open(MAGIC_MIME);
 	if (detector->magic == NULL) {
 		rb_raise(rb_eStandardError, "%s", magic_error(detector->magic));
 	}
