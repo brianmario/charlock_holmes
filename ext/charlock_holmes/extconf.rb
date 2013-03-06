@@ -46,6 +46,7 @@ unless have_library 'icui18n' and have_library 'icudata' and have_library 'icutu
     Dir.chdir(File.join(dir, 'source')) do
       sys("LDFLAGS= CXXFLAGS=\"-O2 -fPIC\" CFLAGS=\"-O2 -fPIC\" ./configure --prefix=#{CWD}/dst/ --disable-tests --disable-samples --disable-icuio --disable-extras --disable-layout --enable-static --disable-shared")
       sys("make install")
+      sys("make clean")
     end
   end
 
@@ -79,10 +80,13 @@ Dir.chdir("#{CWD}/src") do
     sys("patch -p0 < ../file-soft-check.patch")
     sys("make -C src install")
     sys("make -C magic install")
+    sys("make -C src clean")
+    sys("make -C magic clean")
   end
 end
 
 FileUtils.cp "#{CWD}/dst/lib/libmagic.a", "#{CWD}/libmagic_ext.a"
+FileUtils.rm_rf("#{CWD}/src")
 
 $INCFLAGS[0,0] = " -I#{CWD}/dst/include "
 $LDFLAGS << " -L#{CWD} "
