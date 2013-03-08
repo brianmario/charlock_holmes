@@ -1,25 +1,23 @@
-# encoding: utf-8
+require File.expand_path("../helper", __FILE__)
 
-require 'spec_helper'
-
-describe CharlockHolmes::EncodingDetector do
-  before :all do
+class EncodingDetectorTest < MiniTest::Unit::TestCase
+  def setup
     @detector = CharlockHolmes::EncodingDetector.new
   end
 
-  test 'has a class-level detect method' do
+  def test_has_class_level_detect_method
     CharlockHolmes::EncodingDetector.respond_to? :detect
     detected = CharlockHolmes::EncodingDetector.detect 'test'
     assert_equal 'ISO-8859-1', detected[:encoding]
   end
 
-  test 'has a class-level detect method that accepts an encoding hint' do
+  def test_class_level_detect_accepts_encoding_hint
     CharlockHolmes::EncodingDetector.respond_to? :detect
     detected = CharlockHolmes::EncodingDetector.detect 'test', 'UTF-8'
     assert_equal 'ISO-8859-1', detected[:encoding]
   end
 
-  test 'has a class-level detect_all method' do
+  def test_has_class_level_detect_all_method
     CharlockHolmes::EncodingDetector.respond_to? :detect_all
     detected_list = CharlockHolmes::EncodingDetector.detect_all 'test'
     assert detected_list.is_a? Array
@@ -28,7 +26,7 @@ describe CharlockHolmes::EncodingDetector do
     assert_equal ['ISO-8859-1', 'ISO-8859-2', 'UTF-8'], encoding_list
   end
 
-  test 'has a class-level detect_all method that accepts an encoding hint' do
+  def test_class_level_detect_all_method_accepts_encoding_hint
     CharlockHolmes::EncodingDetector.respond_to? :detect_all
     detected_list = CharlockHolmes::EncodingDetector.detect_all 'test', 'UTF-8'
     assert detected_list.is_a? Array
@@ -37,19 +35,19 @@ describe CharlockHolmes::EncodingDetector do
     assert_equal ['ISO-8859-1', 'ISO-8859-2', 'UTF-8'], encoding_list
   end
 
-  test 'has a detect method' do
+  def test_has_detect_method
     @detector.respond_to? :detect
     detected = @detector.detect 'test'
     assert_equal 'ISO-8859-1', detected[:encoding]
   end
 
-  test 'has a detect method that accepts an encoding hint' do
+  def test_detect_accepts_encoding_hint
     @detector.respond_to? :detect
     detected = @detector.detect 'test', 'UTF-8'
     assert_equal 'ISO-8859-1', detected[:encoding]
   end
 
-  test 'has a detect_all method' do
+  def test_has_detect_all_method
     @detector.respond_to? :detect_all
     detected_list = @detector.detect_all 'test'
     assert detected_list.is_a? Array
@@ -58,7 +56,7 @@ describe CharlockHolmes::EncodingDetector do
     assert_equal ['ISO-8859-1', 'ISO-8859-2', 'UTF-8'], encoding_list
   end
 
-  test 'has a detect_all method that accepts an encoding hint' do
+  def test_detect_all_accepts_encoding_hint
     @detector.respond_to? :detect_all
     detected_list = @detector.detect_all 'test', 'UTF-8'
     assert detected_list.is_a? Array
@@ -67,7 +65,7 @@ describe CharlockHolmes::EncodingDetector do
     assert_equal ['ISO-8859-1', 'ISO-8859-2', 'UTF-8'], encoding_list
   end
 
-  test 'has a strip_tags flag' do
+  def test_strip_tags_flag
     detector = CharlockHolmes::EncodingDetector.new
     detector.strip_tags = true
     assert detector.strip_tags
@@ -82,7 +80,7 @@ describe CharlockHolmes::EncodingDetector do
     assert_equal 'UTF-8', detection[:encoding]
   end
 
-  test 'has a list of supported encodings' do
+  def test_has_list_of_supported_encodings
     CharlockHolmes::EncodingDetector.respond_to? :supported_encodings
     supported_encodings = CharlockHolmes::EncodingDetector.supported_encodings
 
@@ -90,32 +88,30 @@ describe CharlockHolmes::EncodingDetector do
     assert supported_encodings.include? 'UTF-8'
   end
 
-  context 'encoding detection' do
-    MAPPING = [
-      ['repl2.cljs',                'ISO-8859-1', :text],
-      ['core.rkt',                  'UTF-8',      :text],
-      ['cl-messagepack.lisp',       'ISO-8859-1', :text],
-      ['TwigExtensionsDate.es.yml', 'UTF-8',      :text],
-      ['AnsiGraph.psm1',            'UTF-16LE',   :text],
-      ['laholator.py',              'UTF-8',      :text],
-      ['hello_world',               nil,          :binary]
-    ]
+  MAPPING = [
+    ['repl2.cljs',                'ISO-8859-1', :text],
+    ['core.rkt',                  'UTF-8',      :text],
+    ['cl-messagepack.lisp',       'ISO-8859-1', :text],
+    ['TwigExtensionsDate.es.yml', 'UTF-8',      :text],
+    ['AnsiGraph.psm1',            'UTF-16LE',   :text],
+    ['laholator.py',              'UTF-8',      :text],
+    ['hello_world',               nil,          :binary]
+  ]
 
+  def test_detection_works_as_expected
     MAPPING.each do |mapping|
       file, encoding, type = mapping
 
-      test "#{file} should be detected as #{encoding || 'binary'}" do
-        path = File.expand_path "../fixtures/#{file}", __FILE__
-        content = File.read path
-        guessed = @detector.detect content
+      path = File.expand_path "../fixtures/#{file}", __FILE__
+      content = File.read path
+      guessed = @detector.detect content
 
-        assert_equal encoding, guessed[:encoding]
-        assert_equal type, guessed[:type]
+      assert_equal encoding, guessed[:encoding]
+      assert_equal type, guessed[:type]
 
-        if content.respond_to?(:force_encoding) && guessed[:type] == :text
-          content.force_encoding guessed[:encoding]
-          assert content.valid_encoding?
-        end
+      if content.respond_to?(:force_encoding) && guessed[:type] == :text
+        content.force_encoding guessed[:encoding]
+        assert content.valid_encoding?
       end
     end
   end

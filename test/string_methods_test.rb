@@ -1,8 +1,8 @@
-require 'spec_helper'
+require File.expand_path("../helper", __FILE__)
 require 'charlock_holmes/string'
 
-describe String do
-  test 'has a detect_encoding method' do
+class StringMethodsTest < MiniTest::Unit::TestCase
+  def test_adds_detect_encoding_method
     str = 'test'
     str.respond_to? :detect_encoding
 
@@ -10,7 +10,7 @@ describe String do
     assert_equal 'ISO-8859-1', detected[:encoding]
   end
 
-  test 'has a detect_encoding method that accepts an encoding hint' do
+  def test_detect_encoding_accepts_encoding_hint_param
     str = 'test'
     str.respond_to? :detect_encoding
 
@@ -18,7 +18,7 @@ describe String do
     assert_equal 'ISO-8859-1', detected[:encoding]
   end
 
-  test 'has a detect_encodings method' do
+  def test_adds_detect_encodings_method
     str = 'test'
     str.respond_to? :detect_encodings
 
@@ -29,7 +29,7 @@ describe String do
     assert_equal ['ISO-8859-1', 'ISO-8859-2', 'UTF-8'], encoding_list
   end
 
-  test 'has a detect_encodings method that accepts an encoding hint' do
+  def test_detect_encodings_accepts_encoding_hint_param
     str = 'test'
     str.respond_to? :detect_encodings
 
@@ -41,7 +41,7 @@ describe String do
   end
 
   if RUBY_VERSION =~ /1.9/
-    test 'has a detect_encoding! method' do
+    def test_adds_detect_encoding_bang_method
       str = 'test'
       str.respond_to? :detect_encoding!
 
