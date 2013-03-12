@@ -32,13 +32,13 @@ static VALUE rb_converter_convert(VALUE self, VALUE rb_txt, VALUE rb_src_enc, VA
 	if (status != U_BUFFER_OVERFLOW_ERROR) {
 		rb_raise(rb_eArgError, "%s", u_errorName(status));
 	}
-	out_buf = malloc(out_len);
+	out_buf = xmalloc(out_len);
 
 	// now do the actual conversion
 	status = U_ZERO_ERROR;
 	out_len = ucnv_convert(dst_enc, src_enc, out_buf, out_len, src_txt, src_len, &status);
 	if (!U_SUCCESS(status)) {
-		free(out_buf);
+		xfree(out_buf);
 		rb_raise(rb_eArgError, "%s", u_errorName(status));
 	}
 
@@ -48,7 +48,7 @@ static VALUE rb_converter_convert(VALUE self, VALUE rb_txt, VALUE rb_src_enc, VA
 
 	rb_out = charlock_new_enc_str(out_buf, out_len, rb_enc);
 
-	free(out_buf);
+	xfree(out_buf);
 
 	return rb_out;
 }
@@ -75,14 +75,14 @@ static inline UChar *cstr_to_uchar(const char *src, int32_t src_len, int32_t *ou
 		rb_raise(rb_eArgError, "%s", u_errorName(status));
 	}
 	*out_len = dst_uchar_len;
-	dst_uchars = malloc(dst_uchar_len);
+	dst_uchars = xmalloc(dst_uchar_len);
 
 	status = U_ZERO_ERROR;
 	// actually do the char -> UChar conversion
 	dst_uchar_len = ucnv_toUChars(utf8_conv, dst_uchars, dst_uchar_len, src, src_len, &status);
 	if (!U_SUCCESS(status)) {
 		ucnv_close(utf8_conv);
-		free(dst_uchars);
+		xfree(dst_uchars);
 		rb_raise(rb_eArgError, "%s", u_errorName(status));
 	}
 
@@ -112,14 +112,14 @@ static inline char *uchar_to_cstr(UChar *src, int32_t src_len, int32_t *out_len)
 		rb_raise(rb_eArgError, "%s", u_errorName(status));
 	}
 	*out_len = dst_cstr_len;
-	dst_cstr = malloc(dst_cstr_len);
+	dst_cstr = xmalloc(dst_cstr_len);
 
 	status = U_ZERO_ERROR;
 	// actually do the UChar -> char conversion
 	dst_cstr_len = ucnv_fromUChars(utf8_conv, dst_cstr, dst_cstr_len, src, src_len, &status);
 	if (!U_SUCCESS(status)) {
 		ucnv_close(utf8_conv);
-		free(dst_cstr);
+		xfree(dst_cstr);
 		rb_raise(rb_eArgError, "%s", u_errorName(status));
 	}
 
@@ -158,7 +158,7 @@ static VALUE rb_converter_transliterate(VALUE self, VALUE rb_txt, VALUE rb_trans
 	// TODO: track UParseError parameter
 	trans = utrans_openU(uchar_id, uchar_id_len, UTRANS_FORWARD, NULL, 0, NULL, &status);
 	if (!U_SUCCESS(status)) {
-		free(uchar_id);
+		xfree(uchar_id);
 		rb_raise(rb_eArgError, "%s", u_errorName(status));
 	}
 
@@ -168,8 +168,8 @@ static VALUE rb_converter_transliterate(VALUE self, VALUE rb_txt, VALUE rb_trans
 
 	utrans_transUChars(trans, uchar_txt, &uchar_txt_len, uchar_txt_len, 0, &limit, &status);
 	if (!U_SUCCESS(status)) {
-		free(uchar_id);
-		free(uchar_txt);
+		xfree(uchar_id);
+		xfree(uchar_txt);
 		rb_raise(rb_eArgError, "%s", u_errorName(status));
 	}
 
@@ -183,9 +183,9 @@ static VALUE rb_converter_transliterate(VALUE self, VALUE rb_txt, VALUE rb_trans
 	rb_out = charlock_new_enc_str(out_txt, out_len, rb_enc);
 
 	utrans_close(trans);
-	free(uchar_id);
-	free(uchar_txt);
-	free(out_txt);
+	xfree(uchar_id);
+	xfree(uchar_txt);
+	xfree(out_txt);
 
 	return rb_out;
 }
