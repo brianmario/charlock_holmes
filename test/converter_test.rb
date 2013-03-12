@@ -47,12 +47,18 @@ class ConverterTest < MiniTest::Unit::TestCase
   end
 
   def test_transliterate
+    trans_id = "Any-NFD; Any-Latin; Latin-ASCII; Any-NFC"
+
     input = 'Schloß - Assunção - Łódź'
     assert_equal "Schloss - Assuncao - Lodz",
-      CharlockHolmes::Converter.transliterate(input, "Latin-ASCII")
+      CharlockHolmes::Converter.transliterate(input, trans_id)
 
     input = "TÜM GOLLER Fb 4-1 Bursa Maç Özeti Íƶle"
     assert_equal "TUM GOLLER Fb 4-1 Bursa Mac Ozeti Izle",
-      CharlockHolmes::Converter.transliterate(input, "Latin-ASCII")
+      CharlockHolmes::Converter.transliterate(input, trans_id)
+
+    input = "ฉันกินกระจกได้ แต่มันไม่ทำให้ฉันเจ็บ"
+    assert_equal "chan kin krack di tae man mi thahi chan ceb",
+      CharlockHolmes::Converter.transliterate(input, trans_id)
   end
 end
