@@ -49,8 +49,7 @@ class ConverterTest < MiniTest::Unit::TestCase
   def test_transliterate
     input = 'Schloß - Assunção - Łódź'
 
-    p input
-    p CharlockHolmes::Converter.convert input, 'UTF-8', 'US-ASCII'
-    p CharlockHolmes::Converter.transliterate input, "NFD; [:Nonspacing Mark:] Remove; NFC"
+    assert_equal "Schloss - Assuncao - Lodz",
+      CharlockHolmes::Converter.transliterate(input, "Latin-ASCII")
   end
 end

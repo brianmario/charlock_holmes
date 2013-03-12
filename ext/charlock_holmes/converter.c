@@ -185,7 +185,7 @@ static VALUE rb_converter_transliterate(VALUE self, VALUE rb_txt, VALUE rb_trans
 	utrans_close(trans);
 	free(uchar_id);
 	free(uchar_txt);
-	free(rb_out);
+	free(out_txt);
 
 	return rb_out;
 }
