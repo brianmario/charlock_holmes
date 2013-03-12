@@ -48,8 +48,11 @@ class ConverterTest < MiniTest::Unit::TestCase
 
   def test_transliterate
     input = 'Schloß - Assunção - Łódź'
-
     assert_equal "Schloss - Assuncao - Lodz",
+      CharlockHolmes::Converter.transliterate(input, "Latin-ASCII")
+
+    input = "TÜM GOLLER Fb 4-1 Bursa Maç Özeti Íƶle"
+    assert_equal "TUM GOLLER Fb 4-1 Bursa Mac Ozeti Izle",
       CharlockHolmes::Converter.transliterate(input, "Latin-ASCII")
   end
 end
