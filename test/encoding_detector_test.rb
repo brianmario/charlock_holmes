@@ -1,3 +1,4 @@
+# encoding: utf-8
 require File.expand_path("../helper", __FILE__)
 
 class EncodingDetectorTest < MiniTest::Unit::TestCase

@@ -1,3 +1,4 @@
+# encoding: utf-8
 require File.expand_path("../helper", __FILE__)
 
 class ConverterTest < MiniTest::Unit::TestCase
@@ -43,5 +44,13 @@ class ConverterTest < MiniTest::Unit::TestCase
     rescue Exception => e
       assert_nil e, "#{e.class.name} raised, expected nothing"
     end
+  end
+
+  def test_transliterate
+    input = 'Schloß - Assunção - Łódź'
+
+    p input
+    p CharlockHolmes::Converter.convert input, 'UTF-8', 'US-ASCII'
+    p CharlockHolmes::Converter.transliterate input, "NFD; [:Nonspacing Mark:] Remove; NFC"
   end
 end
