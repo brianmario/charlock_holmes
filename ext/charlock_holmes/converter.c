@@ -4,6 +4,13 @@
 #include "unicode/ucnv.h"
 #include "unicode/utrans.h"
 
+#ifndef UC_DECOMPOSITION_MAX_LENGTH
+/* Maximum size of decomposition of a single Unicode character.  */
+#define UC_DECOMPOSITION_MAX_LENGTH 32
+#endif
+
+#define DECOMPOSITION_SIZE(sz) (sizeof(UChar)*sz)*UC_DECOMPOSITION_MAX_LENGTH
+
 extern VALUE rb_mCharlockHolmes;
 static VALUE rb_cConverter;
 
@@ -75,7 +82,7 @@ static inline UChar *cstr_to_uchar(const char *src, int32_t src_len, int32_t *ou
 		rb_raise(rb_eArgError, "%s", u_errorName(status));
 	}
 	*out_len = dst_uchar_len;
-	dst_uchars = xmalloc(dst_uchar_len);
+	dst_uchars = xmalloc(DECOMPOSITION_SIZE(dst_uchar_len));
 
 	status = U_ZERO_ERROR;
 	// actually do the char -> UChar conversion
@@ -166,7 +173,7 @@ static VALUE rb_converter_transliterate(VALUE self, VALUE rb_txt, VALUE rb_trans
 	uchar_txt = cstr_to_uchar(src_txt, src_len, &uchar_txt_len);
 	limit = uchar_txt_len;
 
-	utrans_transUChars(trans, uchar_txt, &uchar_txt_len, uchar_txt_len, 0, &limit, &status);
+	utrans_transUChars(trans, uchar_txt, &uchar_txt_len, DECOMPOSITION_SIZE(uchar_txt_len), 0, &limit, &status);
 	if (!U_SUCCESS(status)) {
 		xfree(uchar_id);
 		xfree(uchar_txt);
