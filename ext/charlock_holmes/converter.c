@@ -173,7 +173,7 @@ static VALUE rb_converter_transliterate(VALUE self, VALUE rb_txt, VALUE rb_trans
 	uchar_txt = cstr_to_uchar(src_txt, src_len, &uchar_txt_len);
 	limit = uchar_txt_len;
 
-	utrans_transUChars(trans, uchar_txt, &uchar_txt_len, DECOMPOSITION_SIZE(uchar_txt_len), 0, &limit, &status);
+	utrans_transUChars(trans, uchar_txt, &uchar_txt_len, uchar_txt_len*UC_DECOMPOSITION_MAX_LENGTH, 0, &limit, &status);
 	if (!U_SUCCESS(status)) {
 		xfree(uchar_id);
 		xfree(uchar_txt);
