@@ -9,8 +9,6 @@
 #define UC_DECOMPOSITION_MAX_LENGTH 32
 #endif
 
-#define DECOMPOSITION_SIZE(sz) (sizeof(UChar)*sz)*UC_DECOMPOSITION_MAX_LENGTH
-
 extern VALUE rb_mCharlockHolmes;
 static VALUE rb_cConverter;
 
@@ -82,7 +80,7 @@ static inline UChar *cstr_to_uchar(const char *src, int32_t src_len, int32_t *ou
 		rb_raise(rb_eArgError, "%s", u_errorName(status));
 	}
 	*out_len = dst_uchar_len;
-	dst_uchars = xmalloc(DECOMPOSITION_SIZE(dst_uchar_len));
+	dst_uchars = xmalloc((sizeof(UChar)*dst_uchar_len)*UC_DECOMPOSITION_MAX_LENGTH);
 
 	status = U_ZERO_ERROR;
 	// actually do the char -> UChar conversion
