@@ -18,7 +18,6 @@ static VALUE rb_transliterator_transliterate(VALUE self, VALUE rb_txt, VALUE rb_
   size_t id_len;
   UnicodeString *u_txt;
   std::string result;
-  void *rb_enc = NULL;
   VALUE rb_out;
 
   Check_Type(rb_txt, T_STRING);
@@ -41,11 +40,7 @@ static VALUE rb_transliterator_transliterate(VALUE self, VALUE rb_txt, VALUE rb_
   delete u_txt;
   delete trans;
 
-#ifdef HAVE_RUBY_ENCODING_H
-  rb_enc = (void *)rb_utf8_encoding();
-#endif
-
-  rb_out = charlock_new_enc_str(result.data(), result.length(), rb_enc);
+  rb_out = charlock_new_str(result.data(), result.length());
 
   return rb_out;
 }
