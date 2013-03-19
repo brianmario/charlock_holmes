@@ -93,7 +93,8 @@ class ConverterTest < MiniTest::Unit::TestCase
       "Schloß - Assunção - Łódź" =>
         "Schloss - Assuncao - Lodz",
       "TÜM GOLLER Fb 4-1 Bursa Maç Özeti Íƶle" =>
-        "TUM GOLLER Fb 4-1 Bursa Mac Ozeti Izle"
+        "TUM GOLLER Fb 4-1 Bursa Mac Ozeti Izle",
+      "ßßßßß" => "ssssssssss"
   }
 
   def test_transliterate
