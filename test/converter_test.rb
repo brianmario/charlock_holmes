@@ -110,6 +110,6 @@ class ConverterTest < MiniTest::Unit::TestCase
   end
 
   def trans(text, id)
-    CharlockHolmes::Converter.transliterate(text, id)
+    CharlockHolmes::Transliterator.transliterate(text, id)
   end
 end

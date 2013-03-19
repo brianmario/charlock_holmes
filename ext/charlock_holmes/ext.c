@@ -11,4 +11,5 @@ void Init_charlock_holmes() {
 
 	_init_charlock_encoding_detector();
 	_init_charlock_converter();
+	_init_charlock_transliterator();
 }

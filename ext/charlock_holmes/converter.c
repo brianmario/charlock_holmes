@@ -50,15 +50,8 @@ static VALUE rb_converter_convert(VALUE self, VALUE rb_txt, VALUE rb_src_enc, VA
 	return rb_out;
 }
 
-extern VALUE rb_charlock_transliterate(VALUE self, VALUE rb_txt, VALUE rb_id);
-
-static VALUE rb_converter_transliterate(VALUE self, VALUE rb_txt, VALUE rb_trans_id) {
-	return rb_charlock_transliterate(self, rb_txt, rb_trans_id);
-}
-
 void _init_charlock_converter() {
 	rb_cConverter = rb_define_class_under(rb_mCharlockHolmes, "Converter", rb_cObject);
 
 	rb_define_singleton_method(rb_cConverter, "convert", rb_converter_convert, 3);
-	rb_define_singleton_method(rb_cConverter, "transliterate", rb_converter_transliterate, 2);
 }

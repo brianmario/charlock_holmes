@@ -5,7 +5,10 @@
 
 extern "C" {
 
-VALUE rb_charlock_transliterate(VALUE self, VALUE rb_txt, VALUE rb_id) {
+extern VALUE rb_mCharlockHolmes;
+static VALUE rb_cTransliterator;
+
+static VALUE rb_transliterator_transliterate(VALUE self, VALUE rb_txt, VALUE rb_id) {
   UErrorCode status = U_ZERO_ERROR;
   UParseError p_error;
   Transliterator *trans;
@@ -45,6 +48,12 @@ VALUE rb_charlock_transliterate(VALUE self, VALUE rb_txt, VALUE rb_id) {
   rb_out = charlock_new_enc_str(result.data(), result.length(), rb_enc);
 
   return rb_out;
+}
+
+void _init_charlock_transliterator() {
+  rb_cTransliterator = rb_define_class_under(rb_mCharlockHolmes, "Transliterator", rb_cObject);
+
+  rb_define_singleton_method(rb_cTransliterator, "transliterate", (VALUE(*)(...))rb_transliterator_transliterate, 2);
 }
 
 }
