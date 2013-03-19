@@ -109,6 +109,54 @@ class ConverterTest < MiniTest::Unit::TestCase
     end
   end
 
+  if "".respond_to? :force_encoding
+    def test_transliterate_id_must_be_utf8_or_ascii
+      trans_id = "Any-NFD; Any-Latin; Latin-ASCII; Any-NFC".force_encoding('big5')
+      txt = "blah blah blah"
+
+      assert_raises Encoding::CompatibilityError do
+        trans(txt, trans_id)
+      end
+
+      trans_id.force_encoding('UTF-8')
+      begin
+        trans(txt, trans_id)
+      rescue Encoding::CompatibilityError => e
+        assert_nil e, "#{e.class.name} raised, expected not to"
+      end
+
+      trans_id.force_encoding('US-ASCII')
+      begin
+        trans(txt, trans_id)
+      rescue Encoding::CompatibilityError => e
+        assert_nil e, "#{e.class.name} raised, expected not to"
+      end
+    end
+
+    def test_transliterate_text_must_be_utf8_or_ascii
+      trans_id = "Any-NFD; Any-Latin; Latin-ASCII; Any-NFC"
+      txt = "blah blah blah".force_encoding('big5')
+
+      assert_raises Encoding::CompatibilityError do
+        trans(txt, trans_id)
+      end
+
+      txt.force_encoding('UTF-8')
+      begin
+        trans(txt, trans_id)
+      rescue Encoding::CompatibilityError => e
+        assert_nil e, "#{e.class.name} raised, expected not to"
+      end
+
+      txt.force_encoding('US-ASCII')
+      begin
+        trans(txt, trans_id)
+      rescue Encoding::CompatibilityError => e
+        assert_nil e, "#{e.class.name} raised, expected not to"
+      end
+    end
+  end
+
   def trans(text, id)
     CharlockHolmes::Transliterator.transliterate(text, id)
   end
