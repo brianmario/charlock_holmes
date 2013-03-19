@@ -1,18 +1,9 @@
 #include "common.h"
 #undef UChar
 
-#include <iostream>
 #include <unicode/translit.h>
 
-#ifndef UC_DECOMPOSITION_MAX_LENGTH
-/* Maximum size of decomposition of a single Unicode character.  */
-#define UC_DECOMPOSITION_MAX_LENGTH 32
-#endif
-
 extern "C" {
-
-extern VALUE rb_mCharlockHolmes;
-static VALUE rb_cTransliterator;
 
 VALUE rb_charlock_transliterate(VALUE self, VALUE rb_txt, VALUE rb_id) {
   UErrorCode status = U_ZERO_ERROR;
