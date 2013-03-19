@@ -28,7 +28,7 @@ VALUE rb_charlock_transliterate(VALUE self, VALUE rb_txt, VALUE rb_id) {
 
   trans = Transliterator::createInstance(UnicodeString(id, id_len), UTRANS_FORWARD, p_error, status);
   if(!U_SUCCESS(status)) {
-    rb_raise(rb_eRuntimeError, u_errorName(status));
+    rb_raise(rb_eArgError, "%s", u_errorName(status));
   }
 
   u_txt = new UnicodeString(txt, txt_len);
