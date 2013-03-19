@@ -1,13 +1,5 @@
-#include "common.h"
-#undef UChar
-
 #include "unicode/ucnv.h"
-#include "unicode/utrans.h"
-
-#ifndef UC_DECOMPOSITION_MAX_LENGTH
-/* Maximum size of decomposition of a single Unicode character.  */
-#define UC_DECOMPOSITION_MAX_LENGTH 32
-#endif
+#include "common.h"
 
 extern VALUE rb_mCharlockHolmes;
 static VALUE rb_cConverter;
