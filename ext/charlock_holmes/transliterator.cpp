@@ -1,6 +1,7 @@
 #include "common.h"
 #undef UChar
 
+#include <string>
 #include <unicode/translit.h>
 
 extern "C" {
