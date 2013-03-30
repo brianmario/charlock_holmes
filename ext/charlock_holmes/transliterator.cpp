@@ -64,7 +64,8 @@ static VALUE rb_transliterator_transliterate(VALUE self, VALUE rb_txt, VALUE rb_
 
   u_txt = new UnicodeString(txt, txt_len);
   trans->transliterate(*u_txt);
-  result = u_txt->toUTF8String(result);
+  StringByteSink<std::string> sink(&result);
+  u_txt->toUTF8(sink);
 
   delete u_txt;
   delete trans;
