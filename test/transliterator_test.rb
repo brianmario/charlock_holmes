@@ -113,6 +113,10 @@ class TransliteratorTest < MiniTest::Unit::TestCase
     end
   end
 
+  def test_transliterator_id_list_shouldnt_be_empty
+    assert !CharlockHolmes::Transliterator.id_list.empty?
+  end
+
   def trans(text, id)
     CharlockHolmes::Transliterator.transliterate(text, id)
   end

@@ -34,6 +34,47 @@ static void check_utf8_encoding(VALUE str) {}
 extern VALUE rb_mCharlockHolmes;
 static VALUE rb_cTransliterator;
 
+static VALUE rb_transliterator_id_list(VALUE self) {
+  UErrorCode status = U_ZERO_ERROR;
+  StringEnumeration *id_list;
+  int32_t id_list_size;
+  const char *curr_id;
+  int32_t curr_id_len;
+  VALUE rb_ary;
+  VALUE rb_curr_id;
+
+  id_list_size = 0;
+  id_list = Transliterator::getAvailableIDs(status);
+  if(!U_SUCCESS(status)) {
+    rb_raise(rb_eArgError, "%s", u_errorName(status));
+  }
+
+  status = U_ZERO_ERROR;
+  id_list_size = id_list->count(status);
+  if(!U_SUCCESS(status)) {
+    rb_raise(rb_eArgError, "%s", u_errorName(status));
+  }
+
+  rb_ary = rb_ary_new2(id_list_size);
+
+  do {
+    curr_id_len = 0;
+    curr_id = id_list->next(&curr_id_len, status);
+    if(!U_SUCCESS(status)) {
+      rb_raise(rb_eArgError, "%s", u_errorName(status));
+    }
+
+    if (curr_id != NULL) {
+      rb_curr_id = charlock_new_str(curr_id, curr_id_len);
+      rb_ary_push(rb_ary, rb_curr_id);
+    }
+  } while(curr_id != NULL);
+
+  delete id_list;
+
+  return rb_ary;
+}
+
 static VALUE rb_transliterator_transliterate(VALUE self, VALUE rb_txt, VALUE rb_id) {
   UErrorCode status = U_ZERO_ERROR;
   UParseError p_error;
@@ -82,6 +123,7 @@ void _init_charlock_transliterator() {
 
   rb_cTransliterator = rb_define_class_under(rb_mCharlockHolmes, "Transliterator", rb_cObject);
 
+  rb_define_singleton_method(rb_cTransliterator, "id_list", (VALUE(*)(...))rb_transliterator_id_list, 0);
   rb_define_singleton_method(rb_cTransliterator, "transliterate", (VALUE(*)(...))rb_transliterator_transliterate, 2);
 }
 
