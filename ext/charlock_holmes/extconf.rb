@@ -1,4 +1,5 @@
 require 'mkmf'
+require 'fileutils'
 
 CWD = File.expand_path(File.dirname(__FILE__))
 def sys(cmd)
@@ -21,23 +22,52 @@ end
 # ICU dependency
 #
 
-src = File.basename('icu4c-49_1_2-src.tgz')
-dir = File.basename('icu')
+# detect homebrew installs
+if !have_library 'icui18n'
+  base = if !`which brew`.empty?
+    `brew --prefix`.strip
+  elsif File.exists?("/usr/local/Cellar/icu4c")
+    '/usr/local/Cellar'
+  end
 
-Dir.chdir("#{CWD}/src") do
-  FileUtils.rm_rf(dir) if File.exists?(dir)
-
-  sys("tar zxvf #{src}")
-  Dir.chdir(File.join(dir, 'source')) do
-    sys("LDFLAGS= CXXFLAGS=\"-O2 -fPIC\" CFLAGS=\"-O2 -fPIC\" ./configure --prefix=#{CWD}/dst/ --disable-tests --disable-samples --disable-icuio --disable-extras --disable-layout --enable-static --disable-shared")
-    sys("make install")
+  if base and icu4c = Dir[File.join(base, 'Cellar/icu4c/*')].sort.last
+    $INCFLAGS << " -I#{icu4c}/include "
+    $LDFLAGS  << " -L#{icu4c}/lib "
   end
 end
 
-dir_config 'icu'
+icu_version = "49_1_2"
 
-$INCFLAGS << " -I#{CWD}/dst/include "
-$LDFLAGS  << " -L#{CWD}/dst/lib"
+# If the ICU version is changed 
+bundled_icu_flag = "#{CWD}/bundled_icu_flag_#{icu_version}"
+
+if File.exists?(bundled_icu_flag)
+  $INCFLAGS << " -I#{CWD}/dst/include "
+  $LDFLAGS  << " -L#{CWD}/dst/lib"
+end
+
+unless have_library 'icui18n' and have_library 'icudata' and have_library 'icutu' and have_library 'icuuc' and have_header 'unicode/ucnv.h'
+  src = File.basename("icu4c-#{icu_version}-src.tgz")
+  dir = File.basename('icu')
+
+  Dir.chdir("#{CWD}/src") do
+    FileUtils.rm_rf(dir) if File.exists?(dir)
+
+    sys("tar zxvf #{src}")
+    Dir.chdir(File.join(dir, 'source')) do
+      sys("LDFLAGS= CXXFLAGS=\"-O2 -fPIC\" CFLAGS=\"-O2 -fPIC\" ./configure --prefix=#{CWD}/dst/ --disable-tests --disable-samples --disable-icuio --disable-extras --disable-layout --enable-static --disable-shared")
+      sys("make install")
+      sys("make clean")
+    end
+  end
+
+  dir_config 'icu'
+
+  FileUtils.touch(bundled_icu_flag)
+
+  $INCFLAGS << " -I#{CWD}/dst/include "
+  $LDFLAGS  << " -L#{CWD}/dst/lib"
+end
 
 unless have_library 'icui18n' and have_library 'icudata' and have_library 'icutu' and have_library 'icuuc' and have_header 'unicode/ucnv.h'
   STDERR.puts "\n\n"
@@ -51,27 +81,40 @@ end
 # libmagic dependency
 #
 
-src = File.basename('file-5.08.tar.gz')
-dir = File.basename(src, '.tar.gz')
+libmagic_version = "5.08"
 
-Dir.chdir("#{CWD}/src") do
-  FileUtils.rm_rf(dir) if File.exists?(dir)
+bundled_libmagic_flag = "#{CWD}/bundled_libmagic_flag_#{icu_version}_#{libmagic_version}"
 
-  sys("tar zxvf #{src}")
-  Dir.chdir(dir) do
-    sys("./configure --prefix=#{CWD}/dst/ --disable-shared --enable-static --with-pic")
-    sys("patch -p0 < ../file-soft-check.patch")
-    sys("make -C src install")
-    sys("make -C magic install")
+if File.exists?(bundled_libmagic_flag)
+  $LDFLAGS << " -L#{CWD} "
+else
+  src = File.basename("file-#{libmagic_version}.tar.gz")
+  dir = File.basename(src, '.tar.gz')
+
+  Dir.chdir("#{CWD}/src") do
+    FileUtils.rm_rf(dir) if File.exists?(dir)
+
+    sys("tar zxvf #{src}")
+    Dir.chdir(dir) do
+      sys("./configure --prefix=#{CWD}/dst/ --disable-shared --enable-static --with-pic")
+      sys("patch -p0 < ../file-soft-check.patch")
+      sys("make -C src install")
+      sys("make -C magic install")
+      sys("make -C src clean")
+      sys("make -C magic clean")
+    end
   end
+
+  FileUtils.cp "#{CWD}/dst/lib/libmagic.a", "#{CWD}/libmagic_ext.a"
+  FileUtils.rm_rf("#{CWD}/src/icu")
+  FileUtils.rm_rf("#{CWD}/src/file-5.08")
+
+  $INCFLAGS[0,0] = " -I#{CWD}/dst/include "
+  $LDFLAGS << " -L#{CWD} "
 end
 
-FileUtils.cp "#{CWD}/dst/lib/libmagic.a", "#{CWD}/libmagic_ext.a"
-
-$INCFLAGS[0,0] = " -I#{CWD}/dst/include "
-$LDFLAGS << " -L#{CWD} "
-
 dir_config 'magic'
+
 unless have_library 'magic_ext' and have_header 'magic.h'
   STDERR.puts "\n\n"
   STDERR.puts "***************************************************************************************"
