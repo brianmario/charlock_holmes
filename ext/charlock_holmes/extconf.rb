@@ -62,6 +62,7 @@ end
 
 src = File.basename('file-5.08.tar.gz')
 dir = File.basename(src, '.tar.gz')
+libdir = 'lib'
 
 Dir.chdir("#{CWD}/src") do
   FileUtils.rm_rf(dir) if File.exists?(dir)
@@ -69,12 +70,15 @@ Dir.chdir("#{CWD}/src") do
   sys("tar zxvf #{src}")
   Dir.chdir(dir) do
     sys("./configure --prefix=#{CWD}/dst/ --disable-shared --enable-static --with-pic")
+    sys("patch -p0 < ../file-soft-check.patch")
     sys("make -C src install")
     sys("make -C magic install")
+    # this should evaluate to either 'lib' or 'lib64'
+    libdir = `grep ^libdir config.log`.strip().split("'")[1].split('/')[-1]
   end
 end
 
-FileUtils.cp "#{CWD}/dst/lib/libmagic.a", "#{CWD}/libmagic_ext.a"
+FileUtils.cp "#{CWD}/dst/#{libdir}/libmagic.a", "#{CWD}/libmagic_ext.a"
 
 $INCFLAGS[0,0] = " -I#{CWD}/dst/include "
 $LDFLAGS << " -L#{CWD} "

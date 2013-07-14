@@ -1,9 +1,8 @@
 # encoding: utf-8
+require File.expand_path("../helper", __FILE__)
 
-require 'spec_helper'
-
-describe CharlockHolmes::Converter do
-  test 'is able to convert regular ascii content from ISO-8859-1 to UTF-16, and back again' do
+class ConverterTest < MiniTest::Unit::TestCase
+  def test_convert_ascii_from_iso859_1_to_utf16_and_back
     input = 'test'
 
     output = CharlockHolmes::Converter.convert input, 'ISO-8859-1', 'UTF-16'
@@ -15,7 +14,7 @@ describe CharlockHolmes::Converter do
     assert input == output
   end
 
-  test 'is able to convert UTF-8 content from UTF-8 to UTF-16, and back again' do
+  def test_convert_utf8_to_utf16_and_back
     input = 'λ, λ, λ'
 
     output = CharlockHolmes::Converter.convert input, 'UTF-8', 'UTF-16'
@@ -27,7 +26,7 @@ describe CharlockHolmes::Converter do
     assert input == output
   end
 
-  test 'all params must be strings' do
+  def test_params_must_be_strings
     assert_raises TypeError do
       CharlockHolmes::Converter.convert nil, 'UTF-8', 'UTF-16'
     end
@@ -40,8 +39,10 @@ describe CharlockHolmes::Converter do
       CharlockHolmes::Converter.convert 'lol', 'UTF-8', nil
     end
 
-    assert_nothing_raised do
+    begin
       CharlockHolmes::Converter.convert 'lol', 'UTF-8', 'UTF-16'
+    rescue Exception => e
+      assert_nil e, "#{e.class.name} raised, expected nothing"
     end
   end
 end
