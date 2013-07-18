@@ -23,18 +23,19 @@ end
 
 dir_config 'icu'
 
-# detect homebrew installs
-if !have_library 'icui18n'
-  base = if !`which brew`.empty?
-    `brew --prefix`.strip
-  elsif File.exists?("/usr/local/Cellar/icu4c")
-    '/usr/local/Cellar'
-  end
+icu_config = with_config('icu-config', 'icu-config')
 
-  if base and icu4c = Dir[File.join(base, 'Cellar/icu4c/*')].sort.last
-    $INCFLAGS << " -I#{icu4c}/include "
-    $LDFLAGS  << " -L#{icu4c}/lib "
-  end
+def find_brew_executable(command)
+  brew = find_executable('brew') or return nil
+  find_executable(command, `eval $(#{brew} --env icu4c) && echo $PATH`.strip)
+end
+
+if icu_config = find_executable(icu_config) || find_brew_executable(icu_config)
+  $CPPFLAGS = `#{icu_config} --cppflags`.strip << ' ' << $CPPFLAGS
+  $LDFLAGS  = `#{icu_config} --ldflags`.strip  << ' ' << $LDFLAGS
+  $LIBPATH  = `#{icu_config} --ldflags-searchpath`.strip.shellsplit.map { |arg|
+    arg[/\A-L(.+)/, 1]
+  } | $LIBPATH
 end
 
 unless have_library 'icui18n' and have_header 'unicode/ucnv.h'
@@ -74,7 +75,7 @@ end
 FileUtils.cp "#{CWD}/dst/#{libdir}/libmagic.a", "#{CWD}/libmagic_ext.a"
 
 $INCFLAGS[0,0] = " -I#{CWD}/dst/include "
-$LDFLAGS << " -L#{CWD} "
+$LIBPATH = [CWD] | $LIBPATH
 
 dir_config 'magic'
 unless have_library 'magic_ext' and have_header 'magic.h'
