@@ -9,7 +9,7 @@ def sys(cmd)
   ret
 end
 
-if `which make`.strip.empty?
+if !find_executable('make')
   STDERR.puts "\n\n"
   STDERR.puts "***************************************************************************************"
   STDERR.puts "*************** make required (apt-get install make build-essential) =( ***************"
