@@ -45,6 +45,10 @@ unless have_library 'icui18n' and have_header 'unicode/ucnv.h'
   exit(1)
 end
 
+have_library 'z' or abort 'libz missing'
+have_library 'icuuc' or abort 'libicuuc missing'
+have_library 'icudata' or abort 'libicudata missing'
+
 ##
 # libmagic dependency
 #
