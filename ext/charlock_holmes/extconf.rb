@@ -21,7 +21,7 @@ end
 # ICU dependency
 #
 
-src = File.basename('icu4c-49_1_2-src.tgz')
+src = File.basename('icu4c-52_1-src.tgz')
 dir = File.basename('icu')
 
 Dir.chdir("#{CWD}/src") do
