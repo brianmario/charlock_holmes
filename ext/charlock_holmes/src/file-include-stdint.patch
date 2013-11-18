@@ -1,0 +1,10 @@
+--- src/magic.c.orig	2011-05-26 10:27:59.000000000 +0900
++++ src/magic.c	2013-11-18 17:15:17.303645050 +0900
+@@ -39,6 +39,7 @@
+ #include "magic.h"
+ 
+ #include <stdlib.h>
++#include <stdint.h>
+ #include <unistd.h>
+ #include <string.h>
+ #ifdef QUICK

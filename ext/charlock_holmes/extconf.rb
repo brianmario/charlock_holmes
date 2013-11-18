@@ -64,6 +64,7 @@ Dir.chdir("#{CWD}/src") do
   Dir.chdir(dir) do
     sys("./configure --prefix=#{CWD}/dst/ --disable-shared --enable-static --with-pic")
     sys("patch -p0 < ../file-soft-check.patch")
+    sys("patch -p0 < ../file-include-stdint.patch")
     sys("make -C src install")
     sys("make -C magic install")
     # this should evaluate to either 'lib' or 'lib64'
