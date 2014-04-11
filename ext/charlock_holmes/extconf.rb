@@ -4,7 +4,7 @@ CWD = File.expand_path(File.dirname(__FILE__))
 def sys(cmd)
   puts "  -- #{cmd}"
   unless ret = xsystem(cmd)
-    raise "#{cmd} failed, please report issue on http://github.com/brianmario/charlock_holmes"
+    raise "#{cmd} failed, please report issue on https://github.com/brianmario/charlock_holmes"
   end
   ret
 end
