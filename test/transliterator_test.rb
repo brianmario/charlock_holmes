@@ -1,7 +1,7 @@
 # encoding: utf-8
 require File.expand_path("../helper", __FILE__)
 
-class TransliteratorTest < MiniTest::Unit::TestCase
+class TransliteratorTest < MiniTest::Test
   DONT_CONVERT = [
     "Vitrum edere possum; mihi non nocet.", # Latin
     "Je puis mangier del voirre. Ne me nuit.", # Old French

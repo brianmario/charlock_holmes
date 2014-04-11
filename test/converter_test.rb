@@ -1,7 +1,7 @@
 # encoding: utf-8
 require File.expand_path("../helper", __FILE__)
 
-class ConverterTest < MiniTest::Unit::TestCase
+class ConverterTest < MiniTest::Test
   def test_convert_ascii_from_iso859_1_to_utf16_and_back
     input = 'test'
 

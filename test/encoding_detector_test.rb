@@ -1,7 +1,7 @@
 # encoding: utf-8
 require File.expand_path("../helper", __FILE__)
 
-class EncodingDetectorTest < MiniTest::Unit::TestCase
+class EncodingDetectorTest < MiniTest::Test
   def setup
     @detector = CharlockHolmes::EncodingDetector.new
   end
