@@ -19,7 +19,7 @@ class String
     detector.detect_all(self, hint_enc)
   end
 
-  if RUBY_VERSION =~ /1.9/
+  if RUBY_VERSION =~ /^(1.9|2)/
     # Attempt to detect the encoding of this string
     # then set the encoding to what was detected ala `force_encoding`
     #
