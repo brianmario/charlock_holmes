@@ -96,7 +96,8 @@ class EncodingDetectorTest < MiniTest::Unit::TestCase
     ['TwigExtensionsDate.es.yml', 'UTF-8',      :text],
     ['AnsiGraph.psm1',            'UTF-16LE',   :text],
     ['laholator.py',              'UTF-8',      :text],
-    ['hello_world',               nil,          :binary]
+    ['hello_world',               nil,          :binary],
+    ['vimrc',                     'UTF-8',      :text]
   ]
 
   def test_detection_works_as_expected
