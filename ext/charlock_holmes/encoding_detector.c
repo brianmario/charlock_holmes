@@ -1,5 +1,4 @@
 #include "unicode/ucsdet.h"
-#include "magic.h"
 #include "common.h"
 
 extern VALUE rb_mCharlockHolmes;
@@ -7,7 +6,6 @@ static VALUE rb_cEncodingDetector;
 
 typedef struct {
 	UCharsetDetector *csd;
-	magic_t magic;
 } charlock_detector_t;
 
 static VALUE rb_encdec_buildmatch(const UCharsetMatch *match)
@@ -48,19 +46,37 @@ static VALUE rb_encdec_binarymatch() {
 	return rb_match;
 }
 
+#define FIRST_FEW_BYTES 8000
 static int detect_binary_content(charlock_detector_t *detector, VALUE rb_str) {
-	const char *binary_result;
+	size_t buf_len;
+	const char *buf;
 
-	binary_result = magic_buffer(detector->magic, RSTRING_PTR(rb_str), RSTRING_LEN(rb_str));
+	buf = RSTRING_PTR(rb_str);
+	buf_len = RSTRING_LEN(rb_str);
 
-	if (binary_result) {
-		if (!strstr(binary_result, "text"))
-			return 1;
-	} else {
-		rb_raise(rb_eStandardError, "%s", magic_error(detector->magic));
+	if (buf_len > 3) {
+		if (!memcmp(buf, "\0\0\xfe\xff", 4))
+			return 0;
+
+		if (!memcmp(buf, "\xff\xfe\0\0", 4))
+			return 0;
 	}
 
-	return 0;
+	if (buf_len > 1) {
+		if (!memcmp(buf, "\xfe\xff", 2))
+			return 0;
+
+		if (!memcmp(buf, "\xff\xfe", 2))
+			return 0;
+	}
+
+	/*
+	 * If we got this far, any NULL bytes within the`FIRST_FEW_BYTES` range
+	 * will likely mean the contents are binary.
+	 */
+	if (FIRST_FEW_BYTES < buf_len)
+		buf_len = FIRST_FEW_BYTES;
+	return !!memchr(buf, 0, buf_len);
 }
 
 /*
@@ -254,9 +270,6 @@ static void rb_encdec__free(void *obj)
 	if (detector->csd)
 		ucsdet_close(detector->csd);
 
-	if (detector->magic)
-		magic_close(detector->magic);
-
 	free(detector);
 }
 
@@ -272,11 +285,6 @@ static VALUE rb_encdec__alloc(VALUE klass)
 	detector->csd = ucsdet_open(&status);
 	if (U_FAILURE(status)) {
 		rb_raise(rb_eStandardError, "%s", u_errorName(status));
-	}
-
-	detector->magic = magic_open(MAGIC_NO_CHECK_SOFT);
-	if (detector->magic == NULL) {
-		rb_raise(rb_eStandardError, "%s", magic_error(detector->magic));
 	}
 
 	return obj;
