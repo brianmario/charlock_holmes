@@ -46,6 +46,7 @@ static VALUE rb_encdec_binarymatch() {
 	return rb_match;
 }
 
+#define FIRST_FEW_BYTES (1024*1024)*10
 static int detect_binary_content(charlock_detector_t *detector, VALUE rb_str) {
 	size_t buf_len;
 	const char *buf;
@@ -69,6 +70,12 @@ static int detect_binary_content(charlock_detector_t *detector, VALUE rb_str) {
 			return 0;
 	}
 
+	/*
+	 * If we got this far, any NULL bytes within the `FIRST_FEW_BYTES`
+	 * range will likely mean the contents are binary.
+	 */
+	if (FIRST_FEW_BYTES < buf_len)
+		buf_len = FIRST_FEW_BYTES;
 	return !!memchr(buf, 0, buf_len);
 }
 
