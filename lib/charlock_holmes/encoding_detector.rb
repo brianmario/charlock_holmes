@@ -15,6 +15,7 @@ module CharlockHolmes
     # Attempt to detect the encoding of this string
     #
     # NOTE: This will create a new CharlockHolmes::EncodingDetector instance on every call
+    # as well as use the default binary scan length
     #
     # str      - a String, what you want to detect the encoding of
     # hint_enc - an optional String (like "UTF-8"), the encoding name which will
@@ -29,6 +30,7 @@ module CharlockHolmes
     # a list with all the possible encodings that match it.
     #
     # NOTE: This will create a new CharlockHolmes::EncodingDetector instance on every call
+    # as well as use the default binary scan length
     #
     # str      - a String, what you want to detect the encoding of
     # hint_enc - an optional String (like "UTF-8"), the encoding name which will
