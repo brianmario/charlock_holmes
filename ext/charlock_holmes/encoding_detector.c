@@ -46,13 +46,13 @@ static VALUE rb_encdec_binarymatch() {
 	return rb_match;
 }
 
-#define FIRST_FEW_BYTES (1024*1024)*10
-static int detect_binary_content(charlock_detector_t *detector, VALUE rb_str) {
-	size_t buf_len;
+static int detect_binary_content(VALUE self, VALUE rb_str) {
+	size_t buf_len, scan_len;
 	const char *buf;
 
 	buf = RSTRING_PTR(rb_str);
 	buf_len = RSTRING_LEN(rb_str);
+	scan_len = NUM2ULL(rb_iv_get(self, "@binary_scan_length"));
 
 	if (buf_len > 3) {
 		if (!memcmp(buf, "\0\0\xfe\xff", 4))
@@ -71,11 +71,11 @@ static int detect_binary_content(charlock_detector_t *detector, VALUE rb_str) {
 	}
 
 	/*
-	 * If we got this far, any NULL bytes within the `FIRST_FEW_BYTES`
+	 * If we got this far, any NULL bytes within the `scan_len`
 	 * range will likely mean the contents are binary.
 	 */
-	if (FIRST_FEW_BYTES < buf_len)
-		buf_len = FIRST_FEW_BYTES;
+	if (scan_len < buf_len)
+		buf_len = scan_len;
 	return !!memchr(buf, 0, buf_len);
 }
 
@@ -103,7 +103,7 @@ static VALUE rb_encdec_detect(int argc, VALUE *argv, VALUE self)
 	Data_Get_Struct(self, charlock_detector_t, detector);
 
 	// first lets see if this is binary content
-	if (detect_binary_content(detector, rb_str)) {
+	if (detect_binary_content(self, rb_str)) {
 		return rb_encdec_binarymatch();
 	}
 
@@ -154,7 +154,7 @@ static VALUE rb_encdec_detect_all(int argc, VALUE *argv, VALUE self)
 
 	// first lets see if this is binary content
 	binary_match = Qnil;
-	if (detect_binary_content(detector, rb_str)) {
+	if (detect_binary_content(self, rb_str)) {
 		binary_match = rb_encdec_binarymatch();
 	}
 

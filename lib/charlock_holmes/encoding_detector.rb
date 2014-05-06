@@ -1,6 +1,16 @@
 module CharlockHolmes
   class EncodingDetector
+    # Default length for which to scan content for NULL bytes
+    DEFAULT_BINARY_SCAN_LEN = 1024*1024
+
+    # Length for which to scan content for NULL bytes
+    attr_accessor :binary_scan_length
+
     alias :strip_tags? :strip_tags
+
+    def initialize(scan_len=DEFAULT_BINARY_SCAN_LEN)
+      @binary_scan_length = scan_len
+    end
 
     # Attempt to detect the encoding of this string
     #
