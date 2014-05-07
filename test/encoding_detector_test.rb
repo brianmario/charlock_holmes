@@ -97,7 +97,13 @@ class EncodingDetectorTest < MiniTest::Unit::TestCase
     ['AnsiGraph.psm1',            'UTF-16LE',   :text],
     ['laholator.py',              'UTF-8',      :text],
     ['hello_world',               nil,          :binary],
-    ['vimrc',                     'UTF-8',      :text]
+    ['vimrc',                     'UTF-8',      :text],
+    ['octocat.png',               nil,          :binary],
+    ['octocat.jpg',               nil,          :binary],
+    ['octocat.psd',               nil,          :binary],
+    ['octocat.gif',               nil,          :binary],
+    ['octocat.ai',                nil,          :binary],
+    ['foo.pdf',                   nil,          :binary]
   ]
 
   def test_detection_works_as_expected
