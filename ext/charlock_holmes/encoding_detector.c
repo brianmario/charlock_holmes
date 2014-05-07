@@ -62,7 +62,7 @@ static int detect_binary_content(VALUE self, VALUE rb_str) {
 
 	if (buf_len > 7) {
 		// image/png
-		if (!memcmp(buf, "\x89\x50\x4E\x47\x0D\x0A\x1A\x0A", 8))
+		if (!memcmp(buf, "\x89PNG\x0D\x0A\x1A\x0A", 8))
 			return 1;
 	}
 
