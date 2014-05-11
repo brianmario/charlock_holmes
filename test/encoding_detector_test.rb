@@ -91,19 +91,22 @@ class EncodingDetectorTest < MiniTest::Unit::TestCase
 
   MAPPING = [
     ['repl2.cljs',                'ISO-8859-1', :text],
-    ['core.rkt',                  'UTF-8',      :text],
     ['cl-messagepack.lisp',       'ISO-8859-1', :text],
+    ['core.rkt',                  'UTF-8',      :text],
     ['TwigExtensionsDate.es.yml', 'UTF-8',      :text],
-    ['AnsiGraph.psm1',            'UTF-16LE',   :text],
     ['laholator.py',              'UTF-8',      :text],
-    ['hello_world',               nil,          :binary],
     ['vimrc',                     'UTF-8',      :text],
+    ['AnsiGraph.psm1',            'UTF-16LE',   :text],
+    ['utf16be.html',              'UTF-16BE',   :text],
+    ['utf32le.html',              'UTF-32LE',   :text],
+    ['utf32be.html',              'UTF-32BE',   :text],
+    ['hello_world',               nil,          :binary],
     ['octocat.png',               nil,          :binary],
     ['octocat.jpg',               nil,          :binary],
     ['octocat.psd',               nil,          :binary],
     ['octocat.gif',               nil,          :binary],
     ['octocat.ai',                nil,          :binary],
-    ['foo.pdf',                   nil,          :binary]
+    ['foo.pdf',                   nil,          :binary],
   ]
 
   def test_detection_works_as_expected
