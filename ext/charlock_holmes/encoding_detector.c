@@ -87,7 +87,7 @@ static int detect_binary_content(VALUE self, VALUE rb_str) {
 		if (!memcmp(buf, "\0\0\xfe\xff", 4))
 			return 0;
 
-		// UTF-32BE
+		// UTF-32LE
 		if (!memcmp(buf, "\xff\xfe\0\0", 4))
 			return 0;
 	}
