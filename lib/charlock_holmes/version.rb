@@ -1,3 +1,3 @@
 module CharlockHolmes
-  VERSION = "0.6.9.4"
+  VERSION = "0.7.0"
 end
