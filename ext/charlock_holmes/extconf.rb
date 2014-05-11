@@ -23,6 +23,7 @@ end
 
 dir_config 'icu'
 
+rubyopt = ENV.delete("RUBYOPT")
 # detect homebrew installs
 if !have_library 'icui18n'
   base = if !`which brew`.empty?
@@ -52,4 +53,5 @@ have_library 'icudata' or abort 'libicudata missing'
 $CFLAGS << ' -Wall -funroll-loops'
 $CFLAGS << ' -Wextra -O0 -ggdb3' if ENV['DEBUG']
 
+ENV['RUBYOPT'] = rubyopt
 create_makefile 'charlock_holmes/charlock_holmes'
