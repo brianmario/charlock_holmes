@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email = %q{seniorlopez@gmail.com}
   s.extensions = ["ext/charlock_holmes/extconf.rb"]
   s.files = `git ls-files`.split("\n")
-  s.homepage = %q{http://github.com/brianmario/charlock_holmes}
+  s.homepage = %q{https://github.com/brianmario/charlock_holmes}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.4.2}
