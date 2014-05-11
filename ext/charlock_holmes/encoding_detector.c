@@ -1,5 +1,4 @@
 #include "unicode/ucsdet.h"
-#include "magic.h"
 #include "common.h"
 
 extern VALUE rb_mCharlockHolmes;
@@ -7,7 +6,6 @@ static VALUE rb_cEncodingDetector;
 
 typedef struct {
 	UCharsetDetector *csd;
-	magic_t magic;
 } charlock_detector_t;
 
 static VALUE rb_encdec_buildmatch(const UCharsetMatch *match)
@@ -48,19 +46,75 @@ static VALUE rb_encdec_binarymatch() {
 	return rb_match;
 }
 
-static int detect_binary_content(charlock_detector_t *detector, VALUE rb_str) {
-	const char *binary_result;
+static int detect_binary_content(VALUE self, VALUE rb_str) {
+	size_t buf_len, scan_len;
+	const char *buf;
 
-	binary_result = magic_buffer(detector->magic, RSTRING_PTR(rb_str), RSTRING_LEN(rb_str));
+	buf = RSTRING_PTR(rb_str);
+	buf_len = RSTRING_LEN(rb_str);
+	scan_len = NUM2ULL(rb_iv_get(self, "@binary_scan_length"));
 
-	if (binary_result) {
-		if (!strstr(binary_result, "text"))
+	if (buf_len > 10) {
+		// application/postscript
+		if (!memcmp(buf, "%!PS-Adobe-", 11))
 			return 1;
-	} else {
-		rb_raise(rb_eStandardError, "%s", magic_error(detector->magic));
 	}
 
-	return 0;
+	if (buf_len > 7) {
+		// image/png
+		if (!memcmp(buf, "\x89PNG\x0D\x0A\x1A\x0A", 8))
+			return 1;
+	}
+
+	if (buf_len > 5) {
+		// image/gif
+		if (!memcmp(buf, "GIF87a", 6))
+			return 1;
+
+		// image/gif
+		if (!memcmp(buf, "GIF89a", 6))
+			return 1;
+	}
+
+	if (buf_len > 4) {
+		// application/pdf
+		if (!memcmp(buf, "%PDF-", 5))
+			return 1;
+	}
+
+	if (buf_len > 3) {
+		// UTF-32BE
+		if (!memcmp(buf, "\0\0\xfe\xff", 4))
+			return 0;
+
+		// UTF-32LE
+		if (!memcmp(buf, "\xff\xfe\0\0", 4))
+			return 0;
+	}
+
+	if (buf_len > 2) {
+		// image/jpeg
+		if (!memcmp(buf, "\xFF\xD8\xFF", 3))
+			return 1;
+	}
+
+	if (buf_len > 1) {
+		// UTF-16BE
+		if (!memcmp(buf, "\xfe\xff", 2))
+			return 0;
+
+		// UTF-16LE
+		if (!memcmp(buf, "\xff\xfe", 2))
+			return 0;
+	}
+
+	/*
+	 * If we got this far, any NULL bytes within the `scan_len`
+	 * range will likely mean the contents are binary.
+	 */
+	if (scan_len < buf_len)
+		buf_len = scan_len;
+	return !!memchr(buf, 0, buf_len);
 }
 
 /*
@@ -87,7 +141,7 @@ static VALUE rb_encdec_detect(int argc, VALUE *argv, VALUE self)
 	Data_Get_Struct(self, charlock_detector_t, detector);
 
 	// first lets see if this is binary content
-	if (detect_binary_content(detector, rb_str)) {
+	if (detect_binary_content(self, rb_str)) {
 		return rb_encdec_binarymatch();
 	}
 
@@ -138,7 +192,7 @@ static VALUE rb_encdec_detect_all(int argc, VALUE *argv, VALUE self)
 
 	// first lets see if this is binary content
 	binary_match = Qnil;
-	if (detect_binary_content(detector, rb_str)) {
+	if (detect_binary_content(self, rb_str)) {
 		binary_match = rb_encdec_binarymatch();
 	}
 
@@ -254,9 +308,6 @@ static void rb_encdec__free(void *obj)
 	if (detector->csd)
 		ucsdet_close(detector->csd);
 
-	if (detector->magic)
-		magic_close(detector->magic);
-
 	free(detector);
 }
 
@@ -272,11 +323,6 @@ static VALUE rb_encdec__alloc(VALUE klass)
 	detector->csd = ucsdet_open(&status);
 	if (U_FAILURE(status)) {
 		rb_raise(rb_eStandardError, "%s", u_errorName(status));
-	}
-
-	detector->magic = magic_open(MAGIC_NO_CHECK_SOFT);
-	if (detector->magic == NULL) {
-		rb_raise(rb_eStandardError, "%s", magic_error(detector->magic));
 	}
 
 	return obj;
