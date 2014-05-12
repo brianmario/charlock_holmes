@@ -4,6 +4,7 @@ require './lib/charlock_holmes/version' unless defined? CharlockHolmes::VERSION
 
 Gem::Specification.new do |s|
   s.name = %q{charlock_holmes}
+  s.license = "MIT"
   s.version = CharlockHolmes::VERSION
   s.authors = ["Brian Lopez", "Vicent Martí"]
   s.date = Time.now.utc.strftime("%Y-%m-%d")
@@ -15,6 +16,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.4.2}
   s.summary = %q{Character encoding detection, brought to you by ICU}
+  s.description = "charlock_holmes provides binary and text detection as well as text transcoding using libicu"
   s.test_files = `git ls-files spec`.split("\n")
 
   # tests

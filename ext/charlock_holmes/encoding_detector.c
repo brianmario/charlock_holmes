@@ -57,7 +57,7 @@ static int detect_binary_content(VALUE self, VALUE rb_str) {
 	if (buf_len > 10) {
 		// application/postscript
 		if (!memcmp(buf, "%!PS-Adobe-", 11))
-			return 1;
+			return 0;
 	}
 
 	if (buf_len > 7) {
