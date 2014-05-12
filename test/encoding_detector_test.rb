@@ -92,6 +92,7 @@ class EncodingDetectorTest < MiniTest::Test
   MAPPING = [
     ['repl2.cljs',                'ISO-8859-1', :text],
     ['cl-messagepack.lisp',       'ISO-8859-1', :text],
+    ['sierpinski.ps',             'ISO-8859-1', :text],
     ['core.rkt',                  'UTF-8',      :text],
     ['TwigExtensionsDate.es.yml', 'UTF-8',      :text],
     ['laholator.py',              'UTF-8',      :text],
