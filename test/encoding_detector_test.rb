@@ -89,6 +89,17 @@ class EncodingDetectorTest < MiniTest::Test
     assert supported_encodings.include? 'UTF-8'
   end
 
+  def test_returns_a_ruby_compatible_encoding_name
+    detected = @detector.detect 'test'
+    assert_equal 'ISO-8859-1', detected[:encoding]
+    assert_equal 'ISO-8859-1', detected[:ruby_encoding]
+
+    not_compat_txt = fixture("ISO-2022-KR.txt").read
+    detected = @detector.detect not_compat_txt
+    assert_equal 'ISO-2022-KR', detected[:encoding]
+    assert_equal 'binary', detected[:ruby_encoding]
+  end
+
   MAPPING = [
     ['repl2.cljs',                'ISO-8859-1', :text],
     ['cl-messagepack.lisp',       'ISO-8859-1', :text],
@@ -114,8 +125,7 @@ class EncodingDetectorTest < MiniTest::Test
     MAPPING.each do |mapping|
       file, encoding, type = mapping
 
-      path = File.expand_path "../fixtures/#{file}", __FILE__
-      content = File.read path
+      content = fixture(file).read
       guessed = @detector.detect content
 
       assert_equal encoding, guessed[:encoding]
