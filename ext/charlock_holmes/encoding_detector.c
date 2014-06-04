@@ -15,6 +15,9 @@ static VALUE rb_encdec_buildmatch(const UCharsetMatch *match)
 	const char *mlang;
 	int mconfidence;
 	VALUE rb_match;
+	VALUE enc_tbl;
+	VALUE enc_name;
+	VALUE compat_enc;
 
 	if (!match)
 		return Qnil;
@@ -26,7 +29,16 @@ static VALUE rb_encdec_buildmatch(const UCharsetMatch *match)
 	rb_match = rb_hash_new();
 
 	rb_hash_aset(rb_match, ID2SYM(rb_intern("type")), ID2SYM(rb_intern("text")));
-	rb_hash_aset(rb_match, ID2SYM(rb_intern("encoding")), charlock_new_str2(mname));
+
+	enc_name = charlock_new_str2(mname);
+	rb_hash_aset(rb_match, ID2SYM(rb_intern("encoding")), enc_name);
+
+	enc_tbl = rb_iv_get(rb_cEncodingDetector, "@encoding_table");
+	compat_enc = rb_hash_aref(enc_tbl, enc_name);
+	if (!NIL_P(compat_enc)) {
+		rb_hash_aset(rb_match, ID2SYM(rb_intern("ruby_encoding")), compat_enc);
+	}
+
 	rb_hash_aset(rb_match, ID2SYM(rb_intern("confidence")), INT2NUM(mconfidence));
 
 	if (mlang && mlang[0])
