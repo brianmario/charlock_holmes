@@ -299,6 +299,12 @@ static VALUE rb_get_supported_encodings(VALUE klass)
 		rb_encoding_list = rb_ary_new();
 		enc_count = uenum_count(encoding_list, &status);
 
+		rb_ary_push(rb_encoding_list, charlock_new_str2("windows-1250"));
+		rb_ary_push(rb_encoding_list, charlock_new_str2("windows-1252"));
+		rb_ary_push(rb_encoding_list, charlock_new_str2("windows-1253"));
+		rb_ary_push(rb_encoding_list, charlock_new_str2("windows-1254"));
+		rb_ary_push(rb_encoding_list, charlock_new_str2("windows-1255"));
+
 		for(i=0; i < enc_count; i++) {
 			enc_name = uenum_next(encoding_list, &enc_name_len, &status);
 			rb_ary_push(rb_encoding_list, charlock_new_str(enc_name, enc_name_len));
