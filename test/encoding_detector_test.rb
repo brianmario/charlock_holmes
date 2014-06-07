@@ -87,6 +87,11 @@ class EncodingDetectorTest < MiniTest::Test
 
     assert supported_encodings.is_a?(Array)
     assert supported_encodings.include? 'UTF-8'
+    assert supported_encodings.include? 'windows-1250'
+    assert supported_encodings.include? 'windows-1252'
+    assert supported_encodings.include? 'windows-1253'
+    assert supported_encodings.include? 'windows-1254'
+    assert supported_encodings.include? 'windows-1255'
   end
 
   def test_returns_a_ruby_compatible_encoding_name
