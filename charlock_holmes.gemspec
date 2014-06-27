@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.summary = %q{Character encoding detection, brought to you by ICU}
   s.description = "charlock_holmes provides binary and text detection as well as text transcoding using libicu"
   s.test_files = `git ls-files spec`.split("\n")
+  s.required_ruby_version = '>= 1.9.3'
 
   # tests
   s.add_development_dependency 'rake-compiler', ">= 0.7.5"
