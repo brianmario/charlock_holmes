@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require './lib/charlock_holmes/version' unless defined? CharlockHolmes::VERSION
 
 Gem::Specification.new "charlock_holmes", CharlockHolmes::VERSION do |s|
