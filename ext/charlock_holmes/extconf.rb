@@ -40,12 +40,18 @@ dir_config 'icu'
 $INCFLAGS << " -I#{CWD}/dst/include "
 $LDFLAGS  << " -L#{CWD}/dst/lib"
 
-unless have_library 'icui18n' and have_library 'icudata' and have_library 'icutu' and have_library 'icuuc' and have_header 'unicode/ucnv.h'
+libs = %w(icui18n icudata icutu icuuc)
+
+unless libs.all?{|l| have_library(l) } and have_header 'unicode/ucnv.h'
   STDERR.puts "\n\n"
   STDERR.puts "***************************************************************************************"
   STDERR.puts "********* error compiling and linking icu4c. please report issue on github *********"
   STDERR.puts "***************************************************************************************"
   exit(1)
+end
+
+libs.each do |l|
+  $LOCAL_LIBS << "-l#{l} "
 end
 
 $CFLAGS << ' -Wall -funroll-loops'
