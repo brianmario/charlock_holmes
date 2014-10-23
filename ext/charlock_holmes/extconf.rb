@@ -25,6 +25,7 @@ src = File.basename('icu4c-49_1_2-src.tgz')
 dir = File.basename('icu')
 
 rubyopt = ENV.delete("RUBYOPT")
+Dir.chdir("#{CWD}/src") do
   FileUtils.rm_rf(dir) if File.exists?(dir)
 
   sys("tar zxvf #{src}")
