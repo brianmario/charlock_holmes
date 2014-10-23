@@ -6,7 +6,7 @@ end
 
 task :default => :test
 
-gem 'rake-compiler', '>= 0.7.5'
+gem 'rake-compiler', '>= 0.9.3'
 require "rake/extensiontask"
 
 Rake::ExtensionTask.new 'charlock_holmes' do |ext|

@@ -13,7 +13,7 @@ Gem::Specification.new "charlock_holmes", CharlockHolmes::VERSION do |s|
   s.required_ruby_version = '>= 1.9.3'
 
   # tests
-  s.add_development_dependency 'rake-compiler', ">= 0.7.5"
+  s.add_development_dependency 'rake-compiler', ">= 0.9.3"
   s.add_development_dependency 'minitest'
   # benchmarks
   s.add_development_dependency 'chardet'
