@@ -19,14 +19,14 @@ class String
     detector.detect_all(self, hint_enc)
   end
 
-  if RUBY_VERSION =~ /1.9/
+  if method_defined? :force_encoding
     # Attempt to detect the encoding of this string
     # then set the encoding to what was detected ala `force_encoding`
     #
     # Returns: self
     def detect_encoding!(hint_enc=nil)
       if detected = self.detect_encoding(hint_enc)
-        self.force_encoding(detected[:encoding]) if detected[:encoding]
+        self.force_encoding(detected[:ruby_encoding]) if detected[:ruby_encoding]
       end
       self
     end
