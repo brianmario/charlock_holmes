@@ -343,11 +343,6 @@ static VALUE rb_encdec__alloc(VALUE klass)
 		rb_raise(rb_eStandardError, "%s", u_errorName(status));
 	}
 
-	detector->magic = magic_open(MAGIC_NO_CHECK_SOFT);
-	if (detector->magic == NULL) {
-		rb_raise(rb_eStandardError, "%s", magic_error(detector->magic));
-	}
-
 	return obj;
 }
 
