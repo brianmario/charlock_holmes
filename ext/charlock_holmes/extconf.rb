@@ -21,19 +21,22 @@ end
 # ICU dependency
 #
 
-src = File.basename('icu4c-49_1_2-src.tgz')
-dir = File.basename('icu')
+src = "icu4c-54_1-src.tgz"
+dir = File.expand_path("../src/icu", __FILE__)
 
 rubyopt = ENV.delete("RUBYOPT")
-Dir.chdir("#{CWD}/src") do
-  FileUtils.rm_rf(dir) if File.exists?(dir)
-
-  sys("tar zxvf #{src}")
-  Dir.chdir(File.join(dir, 'source')) do
-    sys("LDFLAGS= CXXFLAGS=\"-O2 -fPIC\" CFLAGS=\"-O2 -fPIC\" ./configure --prefix=#{CWD}/dst/ --disable-tests --disable-samples --disable-icuio --disable-extras --disable-layout --enable-static --disable-shared")
-    $LDFLAGS  << " -L#{icu4c}/lib "
-    sys("make install")
+if !File.exists?(dir)
+  Dir.chdir("#{CWD}/src") do
+    sys("tar zxvf #{src}")
+    Dir.chdir(File.join(dir, 'source')) do
+      sys("LDFLAGS= CXXFLAGS=\"-O2 -fPIC --std=c++0x\" CFLAGS=\"-O2 -fPIC\" ./configure --prefix=#{CWD}/dst/ --disable-tests --disable-samples --disable-icuio --disable-extras --disable-layout --enable-static --disable-shared")
+    end
   end
+end
+
+$LDFLAGS  << " -L#{CWD}/dst/lib "
+Dir.chdir(File.join(dir, 'source')) do
+  sys("make install")
 end
 
 dir_config 'icu'
