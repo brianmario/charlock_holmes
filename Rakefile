@@ -13,4 +13,13 @@ Rake::ExtensionTask.new 'charlock_holmes' do |ext|
   ext.lib_dir = File.join 'lib', 'charlock_holmes'
 end
 
-Rake::Task[:test].prerequisites << :compile
+task :clean_icu do
+  icu_dst_dir = File.expand_path("../ext/charlock_holmes/dst", __FILE__)
+  FileUtils.rm_rf(icu_dst_dir) if File.exist?(icu_dst_dir)
+
+  icu_src_dir = File.expand_path("../ext/charlock_holmes/src/icu", __FILE__)
+  FileUtils.rm_rf(icu_src_dir) if File.exist?(icu_src_dir)
+end
+
+Rake::Task[:clean].prerequisites << :clean_icu
+Rake::Task[:test].prerequisites  << :compile
