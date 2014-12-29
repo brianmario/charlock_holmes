@@ -5,7 +5,7 @@ Gem::Specification.new "charlock_holmes", CharlockHolmes::VERSION do |s|
   s.authors = ["Brian Lopez", "Vicent Martí"]
   s.email = "seniorlopez@gmail.com"
   s.extensions = ["ext/charlock_holmes/extconf.rb"]
-  s.files = `git ls-files lib`.split("\n")
+  s.files = `git ls-files ext lib`.split("\n")
   s.homepage = "https://github.com/brianmario/charlock_holmes"
   s.rdoc_options = ["--charset=UTF-8"]
   s.summary = "Character encoding detection, brought to you by ICU"
