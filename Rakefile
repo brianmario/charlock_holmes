@@ -22,8 +22,8 @@ file "tmp/#{TGZ}" => "tmp" do |f|
 end
 
 task :vendor => "tmp/#{TGZ}" do |f|
-  rm_r "vendor/icu"
-  sh "tar", "zxf", f.prerequisites[0], "-C", "vendor/"
+  rm_rf "vendor/icu"
+  sh "tar", "zxf", f.prerequisites[0], "-C", "vendor/", "icu/source/"
 end
 
 CLEAN.include "tmp/icu"
