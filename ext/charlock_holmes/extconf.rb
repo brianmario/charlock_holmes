@@ -1,6 +1,9 @@
 require 'mkmf'
 
-CWD = File.expand_path(File.dirname(__FILE__))
+ROOT = File.expand_path("../../..", __FILE__)
+TMP  = File.join(ROOT, "tmp")
+SRC  = File.join(TMP, "icu/source")
+
 def sys(cmd)
   puts "  -- #{cmd}"
   unless ret = xsystem(cmd)
@@ -21,28 +24,19 @@ end
 # ICU dependency
 #
 
-src = "icu4c-54_1-src.tgz"
-dir = File.expand_path("../src/icu", __FILE__)
-
 rubyopt = ENV.delete("RUBYOPT")
-if !File.exists?(dir)
-  Dir.chdir("#{CWD}/src") do
-    sys("tar zxvf #{src}")
-    Dir.chdir(File.join(dir, 'source')) do
-      sys("LDFLAGS= CXXFLAGS=\"-O2 -fPIC --std=c++0x\" CFLAGS=\"-O2 -fPIC\" ./configure --prefix=#{CWD}/dst/ --disable-tests --disable-samples --disable-icuio --disable-extras --disable-layout --enable-static --disable-shared")
-    end
-  end
-end
 
-$LDFLAGS  << " -L#{CWD}/dst/lib "
-Dir.chdir(File.join(dir, 'source')) do
-  sys("make install")
+sys("cp -R #{ROOT}/vendor/icu #{TMP}/icu") unless File.exists?("#{TMP}/icu")
+
+Dir.chdir(SRC) do
+  sys("LDFLAGS= CXXFLAGS=\"-O2 -fPIC --std=c++0x\" CFLAGS=\"-O2 -fPIC\" ./configure --disable-tests --disable-samples --disable-icuio --disable-extras --disable-layout --enable-static --disable-shared")
+  sys("make")
 end
 
 dir_config 'icu'
 
-$INCFLAGS << " -I#{CWD}/dst/include "
-$LDFLAGS  << " -L#{CWD}/dst/lib"
+$INCFLAGS << " -I#{SRC}/common -I#{SRC}/i18n "
+$LDFLAGS  << " -L#{SRC}/lib"
 
 unless have_library 'icui18n' and have_library 'icudata' and have_library 'icutu' and have_library 'icuuc' and have_header 'unicode/ucnv.h'
   STDERR.puts "\n\n"

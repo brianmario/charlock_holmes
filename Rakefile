@@ -13,13 +13,19 @@ Rake::ExtensionTask.new 'charlock_holmes' do |ext|
   ext.lib_dir = File.join 'lib', 'charlock_holmes'
 end
 
-task :clean_icu do
-  icu_dst_dir = File.expand_path("../ext/charlock_holmes/dst", __FILE__)
-  FileUtils.rm_rf(icu_dst_dir) if File.exist?(icu_dst_dir)
+ICU_VERSION = "54.1"
+TGZ = "icu4c-#{ICU_VERSION.sub('.', '_')}-src.tgz"
 
-  icu_src_dir = File.expand_path("../ext/charlock_holmes/src/icu", __FILE__)
-  FileUtils.rm_rf(icu_src_dir) if File.exist?(icu_src_dir)
+file "tmp/#{TGZ}" => "tmp" do |f|
+  url = "http://download.icu-project.org/files/icu4c/#{ICU_VERSION}/#{TGZ}"
+  sh "curl -L #{url} > #{f.name}"
 end
 
-Rake::Task[:clean].prerequisites << :clean_icu
+task :vendor => "tmp/#{TGZ}" do |f|
+  rm_r "vendor/icu"
+  sh "tar", "zxf", f.prerequisites[0], "-C", "vendor/"
+end
+
+CLEAN.include "tmp/icu"
+
 Rake::Task[:test].prerequisites  << :compile
