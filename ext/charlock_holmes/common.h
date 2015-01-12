@@ -11,7 +11,7 @@
 #include <ruby/encoding.h>
 #endif
 
-static VALUE charlock_new_enc_str(const char *str, size_t len, void *encoding)
+static inline VALUE charlock_new_enc_str(const char *str, size_t len, void *encoding)
 {
 #ifdef HAVE_RUBY_ENCODING_H
 	return rb_external_str_new_with_enc(str, len, (rb_encoding *)encoding);
@@ -20,7 +20,7 @@ static VALUE charlock_new_enc_str(const char *str, size_t len, void *encoding)
 #endif
 }
 
-static VALUE charlock_new_str(const char *str, size_t len)
+static inline VALUE charlock_new_str(const char *str, size_t len)
 {
 #ifdef HAVE_RUBY_ENCODING_H
 	return rb_external_str_new_with_enc(str, len, rb_utf8_encoding());
@@ -29,7 +29,7 @@ static VALUE charlock_new_str(const char *str, size_t len)
 #endif
 }
 
-static VALUE charlock_new_str2(const char *str)
+static inline VALUE charlock_new_str2(const char *str)
 {
 #ifdef HAVE_RUBY_ENCODING_H
 	return rb_external_str_new_with_enc(str, strlen(str), rb_utf8_encoding());
