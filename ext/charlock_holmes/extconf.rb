@@ -36,23 +36,9 @@ end
 dir_config 'icu'
 
 $INCFLAGS << " -I#{SRC}/common -I#{SRC}/i18n "
-$LDFLAGS  << " -L#{SRC}/lib"
-
-unless have_library 'icui18n' and have_library 'icudata' and have_library 'icutu' and have_library 'icuuc' and have_header 'unicode/ucnv.h'
-  STDERR.puts "\n\n"
-  STDERR.puts "***************************************************************************************"
-  STDERR.puts "********* error compiling and linking icu4c. please report issue on github *********"
-  STDERR.puts "***************************************************************************************"
-  exit(1)
-end
-
-have_library 'z' or abort 'libz missing'
-have_library 'icuuc' or abort 'libicuuc missing'
-have_library 'icudata' or abort 'libicudata missing'
-
 $CFLAGS << ' -Wall -funroll-loops'
 $CFLAGS << ' -Wextra -O0 -ggdb3' if ENV['DEBUG']
-$LIBS << " -lstdc++"
+$LIBS << " " + Dir["#{SRC}/lib/*"].join(" ")
 
 ENV['RUBYOPT'] = rubyopt
 create_makefile 'charlock_holmes/charlock_holmes'
