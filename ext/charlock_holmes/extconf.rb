@@ -38,7 +38,7 @@ dir_config 'icu'
 $INCFLAGS << " -I#{SRC}/common -I#{SRC}/i18n "
 $CFLAGS << ' -Wall -funroll-loops'
 $CFLAGS << ' -Wextra -O0 -ggdb3' if ENV['DEBUG']
-$LIBS << " " + Dir["#{SRC}/lib/*"].join(" ")
+$LIBS << " " + Dir["#{SRC}/lib/{libicudata,libicui18n,libicutu,libicuuc}.*"].join(" ")
 
 ENV['RUBYOPT'] = rubyopt
 create_makefile 'charlock_holmes/charlock_holmes'
