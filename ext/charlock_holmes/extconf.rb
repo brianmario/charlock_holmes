@@ -11,14 +11,6 @@ def sys(cmd)
   ret
 end
 
-if `which make`.strip.empty?
-  STDERR.puts "\n\n"
-  STDERR.puts "***************************************************************************************"
-  STDERR.puts "*************** make required (apt-get install make build-essential) =( ***************"
-  STDERR.puts "***************************************************************************************"
-  exit(1)
-end
-
 ##
 # ICU dependency
 #
