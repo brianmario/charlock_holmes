@@ -24,6 +24,7 @@ end
 task :vendor => "tmp/#{TGZ}" do |f|
   rm_rf "vendor/icu"
   sh "tar", "zxf", f.prerequisites[0], "-C", "vendor/", "icu/source/"
+  sh "git add -A -f vendor/icu/source"
 end
 
 CLEAN.include "tmp/icu"

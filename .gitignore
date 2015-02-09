@@ -6,3 +6,4 @@ tmp/
 ext/charlock_holmes/src/icu
 ext/charlock_holmes/src/file-*
 ext/charlock_holmes/src/mkmf.log
+/vendor/icu/source

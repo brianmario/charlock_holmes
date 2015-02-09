@@ -1,8 +1,7 @@
 require 'mkmf'
 
 ROOT = File.expand_path("../../..", __FILE__)
-TMP  = File.join(ROOT, "tmp")
-SRC  = File.join(TMP, "icu/source")
+SRC  = File.join(ROOT, "vendor/icu/source")
 
 def sys(cmd)
   puts "  -- #{cmd}"
@@ -25,8 +24,6 @@ end
 #
 
 rubyopt = ENV.delete("RUBYOPT")
-
-sys("cp -R #{ROOT}/vendor/icu #{TMP}/icu") unless File.exists?("#{TMP}/icu")
 
 Dir.chdir(SRC) do
   sys("LDFLAGS= CXXFLAGS=\"-O2 -fPIC --std=c++0x\" CFLAGS=\"-O2 -fPIC\" ./configure --disable-tests --disable-samples --disable-icuio --disable-extras --disable-layout --enable-static --disable-shared")
