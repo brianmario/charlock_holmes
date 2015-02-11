@@ -140,7 +140,6 @@ static int detect_binary_content(VALUE self, VALUE rb_str) {
  */
 static VALUE rb_encdec_is_binary(VALUE self, VALUE str)
 {
-	// first lets see if this is binary content
 	if (detect_binary_content(self, str))
 		return Qtrue;
 	else
