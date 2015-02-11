@@ -132,7 +132,7 @@ static int detect_binary_content(VALUE self, VALUE rb_str) {
 /*
  * call-seq: true/false = EncodingDetector.is_binary? str
  *
- * Attempt to detect the encoding of this string
+ * Attempt to detect if a string is binary or text
  *
  * str      - a String, what you want to perform the binary check on
  *
