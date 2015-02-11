@@ -130,6 +130,24 @@ static int detect_binary_content(VALUE self, VALUE rb_str) {
 }
 
 /*
+ * call-seq: true/false = EncodingDetector.is_binary? str
+ *
+ * Attempt to detect the encoding of this string
+ *
+ * str      - a String, what you want to perform the binary check on
+ *
+ * Returns: true or false
+ */
+static VALUE rb_encdec_is_binary(VALUE self, VALUE str)
+{
+	// first lets see if this is binary content
+	if (detect_binary_content(self, str))
+		return Qtrue;
+	else
+		return Qfalse;
+}
+
+/*
  * call-seq: detection_hash = EncodingDetector.detect str[, hint_enc]
  *
  * Attempt to detect the encoding of this string
@@ -350,6 +368,7 @@ void _init_charlock_encoding_detector()
 {
 	rb_cEncodingDetector = rb_define_class_under(rb_mCharlockHolmes, "EncodingDetector", rb_cObject);
 	rb_define_alloc_func(rb_cEncodingDetector, rb_encdec__alloc);
+	rb_define_method(rb_cEncodingDetector, "is_binary?", rb_encdec_is_binary, 1);
 	rb_define_method(rb_cEncodingDetector, "detect", rb_encdec_detect, -1);
 	rb_define_method(rb_cEncodingDetector, "detect_all", rb_encdec_detect_all, -1);
 	rb_define_method(rb_cEncodingDetector, "strip_tags", rb_get_strip_tags, 0);
