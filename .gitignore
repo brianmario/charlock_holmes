@@ -1,9 +1,11 @@
 /Gemfile.lock
 .bundle/
 tmp/
-vendor/
 *.bundle
-ext/charlock_holmes/dst
 *.a
+ext/charlock_holmes/src/icu
 ext/charlock_holmes/src/file-*
 ext/charlock_holmes/src/mkmf.log
+/vendor/icu/source
+/vendor/gems
+/bin

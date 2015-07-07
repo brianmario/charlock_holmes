@@ -1,6 +1,8 @@
 require 'mkmf'
 
-CWD = File.expand_path(File.dirname(__FILE__))
+ROOT = File.expand_path("../../..", __FILE__)
+SRC  = File.join(ROOT, "vendor/icu/source")
+
 def sys(cmd)
   puts "  -- #{cmd}"
   unless ret = xsystem(cmd)
@@ -9,49 +11,23 @@ def sys(cmd)
   ret
 end
 
-if `which make`.strip.empty?
-  STDERR.puts "\n\n"
-  STDERR.puts "***************************************************************************************"
-  STDERR.puts "*************** make required (apt-get install make build-essential) =( ***************"
-  STDERR.puts "***************************************************************************************"
-  exit(1)
-end
-
 ##
 # ICU dependency
 #
 
+rubyopt = ENV.delete("RUBYOPT")
+
+Dir.chdir(SRC) do
+  sys("LDFLAGS= CXXFLAGS=\"-O2 -fPIC --std=c++0x\" CFLAGS=\"-O2 -fPIC\" ./configure --disable-tests --disable-samples --disable-icuio --disable-extras --disable-layout --enable-static --disable-shared")
+  sys("make")
+end
+
 dir_config 'icu'
 
-rubyopt = ENV.delete("RUBYOPT")
-# detect homebrew installs
-if !have_library 'icui18n'
-  base = if !`which brew`.empty?
-    `brew --prefix`.strip
-  elsif File.exists?("/usr/local/Cellar/icu4c")
-    '/usr/local/Cellar'
-  end
-
-  if base and icu4c = Dir[File.join(base, 'Cellar/icu4c/*')].sort.last
-    $INCFLAGS << " -I#{icu4c}/include "
-    $LDFLAGS  << " -L#{icu4c}/lib "
-  end
-end
-
-unless have_library 'icui18n' and have_header 'unicode/ucnv.h'
-  STDERR.puts "\n\n"
-  STDERR.puts "***************************************************************************************"
-  STDERR.puts "*********** icu required (brew install icu4c or apt-get install libicu-dev) ***********"
-  STDERR.puts "***************************************************************************************"
-  exit(1)
-end
-
-have_library 'z' or abort 'libz missing'
-have_library 'icuuc' or abort 'libicuuc missing'
-have_library 'icudata' or abort 'libicudata missing'
-
+$INCFLAGS << " -I#{SRC}/common -I#{SRC}/i18n "
 $CFLAGS << ' -Wall -funroll-loops'
 $CFLAGS << ' -Wextra -O0 -ggdb3' if ENV['DEBUG']
+$LIBS << " " + Dir["#{SRC}/lib/{libicui18n,libicuuc,libicutu,libicudata}*"].join(" ")
 
 ENV['RUBYOPT'] = rubyopt
 create_makefile 'charlock_holmes/charlock_holmes'
