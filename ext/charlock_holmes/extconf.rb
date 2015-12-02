@@ -24,8 +24,10 @@ end
 dir_config 'icu'
 
 rubyopt = ENV.delete("RUBYOPT")
+icui18n_present = have_library('icui18n')
+
 # detect homebrew installs
-if !have_library 'icui18n'
+if !icui18n_present
   base = if !`which brew`.empty?
     `brew --prefix`.strip
   elsif File.exists?("/usr/local/Cellar/icu4c")
@@ -38,7 +40,7 @@ if !have_library 'icui18n'
   end
 end
 
-unless have_library 'icui18n' and have_header 'unicode/ucnv.h'
+unless icui18n_present and have_header 'unicode/ucnv.h'
   STDERR.puts "\n\n"
   STDERR.puts "***************************************************************************************"
   STDERR.puts "*********** icu required (brew install icu4c or apt-get install libicu-dev) ***********"
