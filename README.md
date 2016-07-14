@@ -109,3 +109,17 @@ Configure Bundler to always use the correct arguments when installing:
 Using Gem to install directly without Bundler:
 
     gem install charlock_holmes -- --with-icu-dir=/usr/local/opt/icu4c
+
+### Other
+
+RedHat, CentOS, Fedora:
+
+    yum install libicu-devel
+
+Debian, Ubuntu, Mint:
+
+    apt-get install libicu-de
+
+Then:
+
+    gem install charlock_holmes
