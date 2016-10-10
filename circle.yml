@@ -1,0 +1,11 @@
+machine:
+  ruby:
+    version:
+      - 2.2
+      - 2.1
+      - 2.0.0
+      - 1.9.3
+
+test:
+  post:
+    - bundle exec rake test
