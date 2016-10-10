@@ -24,3 +24,5 @@ end
 # put lib and test dirs directly on load path
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 $LOAD_PATH.unshift File.expand_path('..', __FILE__)
+
+SUPPORTED_ENCODINGS = ["ISO-8859-1", "ISO-8859-2", "UTF-16BE", "UTF-16LE", "UTF-8"]
