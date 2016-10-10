@@ -1,5 +1,7 @@
 # CharlockHolmes
 
+[![Build Status](https://circleci.com/gh/brianmario/charlock_holmes.png?style=shield)](https://circleci.com/gh/brianmario/charlock_holmes/tree/master)
+
 Character encoding detecting library for Ruby using [ICU](http://site.icu-project.org/)
 
 ## Usage
