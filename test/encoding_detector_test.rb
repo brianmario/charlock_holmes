@@ -2,6 +2,7 @@
 require File.expand_path("../helper", __FILE__)
 
 class EncodingDetectorTest < MiniTest::Test
+
   def setup
     @detector = CharlockHolmes::EncodingDetector.new
   end
@@ -24,7 +25,7 @@ class EncodingDetectorTest < MiniTest::Test
     assert detected_list.is_a? Array
 
     encoding_list = detected_list.map {|d| d[:encoding]}.sort
-    assert_equal ['ISO-8859-1', 'ISO-8859-2', 'UTF-8'], encoding_list
+    assert_equal  EXPECTED_ENCODINGS, encoding_list
   end
 
   def test_class_level_detect_all_method_accepts_encoding_hint
@@ -33,7 +34,7 @@ class EncodingDetectorTest < MiniTest::Test
     assert detected_list.is_a? Array
 
     encoding_list = detected_list.map {|d| d[:encoding]}.sort
-    assert_equal ['ISO-8859-1', 'ISO-8859-2', 'UTF-8'], encoding_list
+    assert_equal EXPECTED_ENCODINGS, encoding_list
   end
 
   def test_has_detect_method
@@ -54,7 +55,7 @@ class EncodingDetectorTest < MiniTest::Test
     assert detected_list.is_a? Array
 
     encoding_list = detected_list.map {|d| d[:encoding]}.sort
-    assert_equal ['ISO-8859-1', 'ISO-8859-2', 'UTF-8'], encoding_list
+    assert_equal EXPECTED_ENCODINGS, encoding_list
   end
 
   def test_detect_all_accepts_encoding_hint
@@ -63,7 +64,7 @@ class EncodingDetectorTest < MiniTest::Test
     assert detected_list.is_a? Array
 
     encoding_list = detected_list.map {|d| d[:encoding]}.sort
-    assert_equal ['ISO-8859-1', 'ISO-8859-2', 'UTF-8'], encoding_list
+    assert_equal EXPECTED_ENCODINGS, encoding_list
   end
 
   def test_strip_tags_flag
