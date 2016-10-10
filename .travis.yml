@@ -7,3 +7,5 @@ rvm:
   - 2.1
   - 2.0.0
   - 1.9.3
+before_script: bundle install
+script: bundle exec rake test
