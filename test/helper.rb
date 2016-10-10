@@ -25,12 +25,15 @@ end
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 $LOAD_PATH.unshift File.expand_path('..', __FILE__)
 
+# iso encodings
 SUPPORTED_ENCODINGS = Encoding.name_list.grep(/^ISO-8859-(1|2)$/)
 
+# utf16 variants
 if Encoding.name_list.grep(/UTF-16/)
   (SUPPORTED_ENCODINGS << Encoding.name_list.grep(/^UTF-16(BE|LE)/).flatten).flatten!
 end
 
+# utf8
 if Encoding.name_list.grep("UTF-8")
   SUPPORTED_ENCODINGS << "UTF-8"
 end
