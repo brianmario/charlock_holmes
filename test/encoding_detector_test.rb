@@ -106,6 +106,17 @@ class EncodingDetectorTest < MiniTest::Test
     assert_equal 'binary', detected[:ruby_encoding]
   end
 
+  def test_is_binary
+    png = fixture('octocat.png').read
+    assert @detector.is_binary?(png)
+
+    utf16 = fixture('AnsiGraph.psm1').read
+    refute @detector.is_binary?(utf16)
+
+    utf8 = fixture('core.rkt').read
+    refute @detector.is_binary?(utf8)
+  end
+
   MAPPING = [
     ['repl2.cljs',                'ISO-8859-1', :text],
     ['cl-messagepack.lisp',       'ISO-8859-1', :text],
