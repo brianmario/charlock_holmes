@@ -1,0 +1,14 @@
+dependencies:
+  override:
+    - 'rvm-exec 2.2.0 bundle install'
+    - 'rvm-exec 2.1.5 bundle install'
+    - 'rvm-exec 2.0.0-p598 bundle install'
+    - 'rvm-exec 1.9.3 bundle install'
+
+test:
+  override:
+    - 'rvm-exec 2.0.0-p598 bundle exec rake'
+    - 'rvm-exec 2.1.5 bundle exec rake'
+    - 'rvm-exec 2.2.0 bundle exec rake'
+    - 'rvm-exec 1.9.3 bundle exec rake'
+
