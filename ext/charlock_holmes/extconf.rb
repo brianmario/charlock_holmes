@@ -50,6 +50,7 @@ have_library 'z' or abort 'libz missing'
 have_library 'icuuc' or abort 'libicuuc missing'
 have_library 'icudata' or abort 'libicudata missing'
 
+$CXXFLAGS << ' -std=c++11'
 $CFLAGS << ' -Wall -funroll-loops'
 $CFLAGS << ' -Wextra -O0 -ggdb3' if ENV['DEBUG']
 
