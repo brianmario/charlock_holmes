@@ -29,12 +29,12 @@ icu4c = "/usr"
 # detect homebrew installs
 if !have_library 'icui18n'
   base = if !`which brew`.empty?
-    `brew --prefix`.strip
+    `brew --cellar`.strip
   elsif File.exists?("/usr/local/Cellar/icu4c")
     '/usr/local/Cellar'
   end
 
-  if base and icu4c = Dir[File.join(base, 'Cellar/icu4c/*')].sort.last
+  if base and icu4c = Dir[File.join(base, 'icu4c/*')].sort.last
     $INCFLAGS << " -I#{icu4c}/include "
     $LDFLAGS  << " -L#{icu4c}/lib "
   end
