@@ -25,6 +25,7 @@ dir_config 'icu'
 
 rubyopt = ENV.delete("RUBYOPT")
 
+icuconfig = ""
 icu4c = "/usr"
 # detect homebrew installs
 if !have_library 'icui18n'
@@ -37,6 +38,7 @@ if !have_library 'icui18n'
   if base and icu4c = Dir[File.join(base, 'icu4c/*')].sort.last
     $INCFLAGS << " -I#{icu4c}/include "
     $LDFLAGS  << " -L#{icu4c}/lib "
+    icuconfig = "#{icu4c}/bin/icu-config"
   end
 end
 
@@ -53,8 +55,7 @@ have_library 'icuuc' or abort 'libicuuc missing'
 have_library 'icudata' or abort 'libicudata missing'
 
 # icu4c might be built in C++11 mode, but it also might not have been
-icuconfig = `which icu-config`.chomp
-icuconfig = "#{icu4c}/bin/icu-config" if icuconfig.empty?
+icuconfig = `which icu-config`.chomp if icuconfig.empty?
 if File.exist?(icuconfig) && `#{icuconfig} --cxxflags`.include?("c++11")
   $CXXFLAGS << ' -std=c++11'
 end
