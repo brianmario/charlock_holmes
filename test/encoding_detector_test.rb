@@ -148,7 +148,12 @@ class EncodingDetectorTest < MiniTest::Test
       content = fixture(file).read
       guessed = @detector.detect content
 
-      assert_equal encoding, guessed[:encoding]
+      if encoding == nil
+        assert_nil guessed[:encoding]
+      else
+        assert_equal encoding, guessed[:encoding]
+      end
+
       assert_equal type, guessed[:type]
 
       if content.respond_to?(:force_encoding) && guessed[:type] == :text
