@@ -36,7 +36,7 @@ static VALUE rb_cTransliterator;
 
 static VALUE rb_transliterator_id_list(VALUE self) {
   UErrorCode status = U_ZERO_ERROR;
-  StringEnumeration *id_list;
+  icu::StringEnumeration *id_list;
   int32_t id_list_size;
   const char *curr_id;
   int32_t curr_id_len;
@@ -44,7 +44,7 @@ static VALUE rb_transliterator_id_list(VALUE self) {
   VALUE rb_curr_id;
 
   id_list_size = 0;
-  id_list = Transliterator::getAvailableIDs(status);
+  id_list = icu::Transliterator::getAvailableIDs(status);
   if(!U_SUCCESS(status)) {
     rb_raise(rb_eArgError, "%s", u_errorName(status));
   }
@@ -78,12 +78,12 @@ static VALUE rb_transliterator_id_list(VALUE self) {
 static VALUE rb_transliterator_transliterate(VALUE self, VALUE rb_txt, VALUE rb_id) {
   UErrorCode status = U_ZERO_ERROR;
   UParseError p_error;
-  Transliterator *trans;
+  icu::Transliterator *trans;
   const char *txt;
   size_t txt_len;
   const char *id;
   size_t id_len;
-  UnicodeString *u_txt;
+  icu::UnicodeString *u_txt;
   std::string result;
   VALUE rb_out;
 
@@ -98,14 +98,14 @@ static VALUE rb_transliterator_transliterate(VALUE self, VALUE rb_txt, VALUE rb_
   id = RSTRING_PTR(rb_id);
   id_len = RSTRING_LEN(rb_id);
 
-  trans = Transliterator::createInstance(UnicodeString(id, id_len), UTRANS_FORWARD, p_error, status);
+  trans = icu::Transliterator::createInstance(icu::UnicodeString(id, id_len), UTRANS_FORWARD, p_error, status);
   if(!U_SUCCESS(status)) {
     rb_raise(rb_eArgError, "%s", u_errorName(status));
   }
 
-  u_txt = new UnicodeString(txt, txt_len);
+  u_txt = new icu::UnicodeString(txt, txt_len);
   trans->transliterate(*u_txt);
-  StringByteSink<std::string> sink(&result);
+  icu::StringByteSink<std::string> sink(&result);
   u_txt->toUTF8(sink);
 
   delete u_txt;
