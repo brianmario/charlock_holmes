@@ -88,7 +88,10 @@ Configure Bundler to always use the correct arguments when installing:
 Using Gem to install directly without Bundler:
 
     gem install charlock_holmes -- --with-icu-dir=/path/to/installed/icu4c
+    
+If you get a compile time error that looks like `error: delegating constructors are permitted only in C++11` or something else related to C++11, you need to set the `--with-cxxflags=-std=c++11` options:
 
+    gem install charlock_holmes -- --with-icu-dir=/path/to/installed/icu4c --with-cxxflags=-std=c++11
 
 ### Homebrew
 
