@@ -42,6 +42,17 @@ if !have_library 'icui18n'
   end
 end
 
+pkg_config 'icu-i18n'
+
+unless have_library 'icui18n' and have_header 'unicode/ucnv.h'
+  pcs = `which -a pkg-config`
+  pcs.lines.each do |pc|
+    $PKGCONFIG = pc.chomp
+    pkg_config 'icu-i18n'
+    break if have_library 'icui18n' and have_header 'unicode/ucnv.h'
+  end
+end
+
 unless have_library 'icui18n' and have_header 'unicode/ucnv.h'
   STDERR.puts "\n\n"
   STDERR.puts "***************************************************************************************"
@@ -59,6 +70,8 @@ icuconfig = `which icu-config`.chomp if icuconfig.empty?
 if File.exist?(icuconfig) && `#{icuconfig} --cxxflags`.include?("c++11")
   $CXXFLAGS << ' -std=c++11'
 end
+
+pkg_config 'zlib'
 
 $CFLAGS << ' -Wall -funroll-loops'
 $CFLAGS << ' -Wextra -O0 -ggdb3' if ENV['DEBUG']
