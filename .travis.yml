@@ -11,3 +11,4 @@ rvm:
   - 2.2
   - 2.1
   - 2.0.0
+  - truffleruby-head
