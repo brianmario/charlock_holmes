@@ -26,7 +26,7 @@ static VALUE rb_converter_convert(VALUE self, VALUE rb_txt, VALUE rb_src_enc, VA
 
 	// first determin the size of the output buffer
 	out_len = ucnv_convert(dst_enc, src_enc, NULL, 0, src_txt, src_len, &status);
-	if (status != U_BUFFER_OVERFLOW_ERROR) {
+	if (status != U_BUFFER_OVERFLOW_ERROR && status != U_STRING_NOT_TERMINATED_WARNING) {
 		rb_raise(rb_eArgError, "%s", u_errorName(status));
 	}
 	out_buf = malloc(out_len);
