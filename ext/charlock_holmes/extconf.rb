@@ -34,8 +34,6 @@ pkg_config("icu-i18n")
 pkg_config("icu-io")
 pkg_config("icu-uc")
 
-$CXXFLAGS << ' -std=c++11' unless $CXXFLAGS.include?("-std=")
-
 unless have_library 'icui18n' and have_header 'unicode/ucnv.h'
   STDERR.puts "\n\n"
   STDERR.puts "***************************************************************************************"
