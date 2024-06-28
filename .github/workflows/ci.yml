@@ -1,0 +1,34 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu]
+        ruby: [ head, '3.2', '3.3' ]
+        ruby-opt: [""]
+        include:
+          - ruby: "3.3"
+            ruby-opt: "--enable-frozen-string-literal --debug-frozen-string-literal"
+            os: "ubuntu"
+
+    steps:
+      - name: Install g++
+        run: sudo apt-get install g++
+      - name: Install libicu
+        run: sudo apt-get install libicu-dev
+      - uses: actions/checkout@v4
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+
+      - name: Install dependencies
+        run: bundle install
+      - name: Run tests ${{ matrix.rubyopt }}
+        run: bundle exec rake RUBYOPT="${{ matrix.rubyopt }}"
