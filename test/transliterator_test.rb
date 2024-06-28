@@ -67,7 +67,7 @@ class TransliteratorTest < Minitest::Test
 
   if "".respond_to? :force_encoding
     def test_transliterate_id_must_be_utf8_or_ascii
-      trans_id = "Any-NFD; Any-Latin; Latin-ASCII; Any-NFC".force_encoding('big5')
+      trans_id = "Any-NFD; Any-Latin; Latin-ASCII; Any-NFC".dup.force_encoding('big5')
       txt = "blah blah blah"
 
       assert_raises Encoding::CompatibilityError do
@@ -91,7 +91,7 @@ class TransliteratorTest < Minitest::Test
 
     def test_transliterate_text_must_be_utf8_or_ascii
       trans_id = "Any-NFD; Any-Latin; Latin-ASCII; Any-NFC"
-      txt = "blah blah blah".force_encoding('big5')
+      txt = "blah blah blah".dup.force_encoding('big5')
 
       assert_raises Encoding::CompatibilityError do
         trans(txt, trans_id)
