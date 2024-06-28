@@ -55,7 +55,7 @@ class StringMethodsTest < Minitest::Test
 
   if "".respond_to? :force_encoding
     def test_adds_detect_encoding_bang_method
-      str = 'test'
+      str = 'test'.dup
       str.respond_to? :detect_encoding!
 
       str.detect_encoding!
@@ -63,7 +63,7 @@ class StringMethodsTest < Minitest::Test
     end
 
     def test_sets_a_ruby_compatible_encoding_name
-      str1 = 'test'
+      str1 = 'test'.dup
       str1.detect_encoding!
       assert_equal 'ISO-8859-1', str1.encoding.name
 
