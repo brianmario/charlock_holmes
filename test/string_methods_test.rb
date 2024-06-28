@@ -1,7 +1,7 @@
 require File.expand_path("../helper", __FILE__)
 require 'charlock_holmes/string'
 
-class StringMethodsTest < MiniTest::Test
+class StringMethodsTest < Minitest::Test
   def test_adds_detect_encoding_method
     str = 'test'
     str.respond_to? :detect_encoding
