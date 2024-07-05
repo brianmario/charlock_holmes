@@ -24,6 +24,8 @@ if RbConfig::CONFIG["host_os"] =~ /darwin/
     # commandline options, but we need to set default ldflags and cpp flags
     # in case the user doesn't have pkg-config installed
     ENV['PKG_CONFIG_PATH'] ||= pkg_conf
+
+    $CXXFLAGS << ' -std=c++11' unless $CXXFLAGS.include?("-std=")
   rescue
   end
 end
