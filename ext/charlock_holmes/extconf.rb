@@ -49,4 +49,30 @@ have_library 'icudata' or abort 'libicudata missing'
 $CFLAGS << ' -Wall -funroll-loops'
 $CFLAGS << ' -Wextra -O0 -ggdb3' if ENV['DEBUG']
 
+minimal_program = <<~SRC
+  #include <unicode/translit.h>
+  int main() { return 0; }
+SRC
+
+# Pass -x c++ to force gcc to compile the test program
+# as C++ (as it will end in .c by default).
+compile_options = +"-x c++"
+
+icu_requires_version_flag = checking_for("icu that requires explicit C++ version flag") do
+  !try_compile(minimal_program, compile_options)
+end
+
+if icu_requires_version_flag
+  abort "Cannot compile icu with your compiler: recent versions require C++17 support." unless %w[c++20 c++17 c++11 c++0x].any? do |std|
+    checking_for("icu that compiles with #{std} standard") do
+      flags = compile_options + " -std=#{std}"
+      if try_compile(minimal_program, flags)
+        $CPPFLAGS << flags
+
+        true
+      end
+    end
+  end
+end
+
 create_makefile 'charlock_holmes/charlock_holmes'

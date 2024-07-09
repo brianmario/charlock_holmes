@@ -38,4 +38,19 @@ static inline VALUE charlock_new_str2(const char *str)
 #endif
 }
 
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+extern void Init_charlock_holmes();
+extern void _init_charlock_encoding_detector();
+extern void _init_charlock_converter();
+extern void _init_charlock_transliterator();
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

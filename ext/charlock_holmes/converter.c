@@ -29,7 +29,7 @@ static VALUE rb_converter_convert(VALUE self, VALUE rb_txt, VALUE rb_src_enc, VA
 	if (status != U_BUFFER_OVERFLOW_ERROR) {
 		rb_raise(rb_eArgError, "%s", u_errorName(status));
 	}
-	out_buf = malloc(out_len);
+	out_buf = (char *) malloc(out_len);
 
 	// now do the actual conversion
 	status = U_ZERO_ERROR;
