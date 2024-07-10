@@ -44,10 +44,10 @@ extern "C"
 {
 #endif
 
-extern void Init_charlock_holmes();
-extern void _init_charlock_encoding_detector();
-extern void _init_charlock_converter();
-extern void _init_charlock_transliterator();
+extern void Init_charlock_holmes(void);
+extern void _init_charlock_encoding_detector(void);
+extern void _init_charlock_converter(void);
+extern void _init_charlock_transliterator(void);
 
 #ifdef __cplusplus
 }

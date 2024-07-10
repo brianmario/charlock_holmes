@@ -8,6 +8,25 @@ typedef struct {
 	UCharsetDetector *csd;
 } charlock_detector_t;
 
+static void rb_encdec__free(void *obj)
+{
+	charlock_detector_t *detector;
+
+	detector = (charlock_detector_t *)obj;
+
+	if (detector->csd)
+		ucsdet_close(detector->csd);
+
+	free(detector);
+}
+
+static const rb_data_type_t charlock_detector_type = {
+    "Charlock/Detector",
+    { 0, rb_encdec__free, 0, },
+    0, 0,
+    RUBY_TYPED_FREE_IMMEDIATELY,
+};
+
 static VALUE rb_encdec_buildmatch(const UCharsetMatch *match)
 {
 	UErrorCode status = U_ZERO_ERROR;
@@ -47,7 +66,7 @@ static VALUE rb_encdec_buildmatch(const UCharsetMatch *match)
 	return rb_match;
 }
 
-static VALUE rb_encdec_binarymatch() {
+static VALUE rb_encdec_binarymatch(void) {
 	VALUE rb_match;
 
 	rb_match = rb_hash_new();
@@ -167,7 +186,7 @@ static VALUE rb_encdec_detect(int argc, VALUE *argv, VALUE self)
 	rb_scan_args(argc, argv, "11", &rb_str, &rb_enc_hint);
 
 	Check_Type(rb_str, T_STRING);
-	Data_Get_Struct(self, charlock_detector_t, detector);
+	TypedData_Get_Struct(self, charlock_detector_t, &charlock_detector_type, detector);
 
 	// first lets see if this is binary content
 	if (detect_binary_content(self, rb_str)) {
@@ -180,7 +199,7 @@ static VALUE rb_encdec_detect(int argc, VALUE *argv, VALUE self)
 
 	if (!NIL_P(rb_enc_hint)) {
 		Check_Type(rb_enc_hint, T_STRING);
-		ucsdet_setDeclaredEncoding(detector->csd, RSTRING_PTR(rb_enc_hint), RSTRING_LEN(rb_enc_hint), &status);
+		ucsdet_setDeclaredEncoding(detector->csd, RSTRING_PTR(rb_enc_hint), (int32_t)RSTRING_LEN(rb_enc_hint), &status);
 	}
 
 	return rb_encdec_buildmatch(ucsdet_detect(detector->csd, &status));
@@ -215,7 +234,7 @@ static VALUE rb_encdec_detect_all(int argc, VALUE *argv, VALUE self)
 	rb_scan_args(argc, argv, "11", &rb_str, &rb_enc_hint);
 
 	Check_Type(rb_str, T_STRING);
-	Data_Get_Struct(self, charlock_detector_t, detector);
+	TypedData_Get_Struct(self, charlock_detector_t, &charlock_detector_type, detector);
 
 	rb_ret = rb_ary_new();
 
@@ -229,7 +248,7 @@ static VALUE rb_encdec_detect_all(int argc, VALUE *argv, VALUE self)
 
 	if (!NIL_P(rb_enc_hint)) {
 		Check_Type(rb_enc_hint, T_STRING);
-		ucsdet_setDeclaredEncoding(detector->csd, RSTRING_PTR(rb_enc_hint), RSTRING_LEN(rb_enc_hint), &status);
+		ucsdet_setDeclaredEncoding(detector->csd, RSTRING_PTR(rb_enc_hint), (int32_t)RSTRING_LEN(rb_enc_hint), &status);
 	}
 
 	csm = ucsdet_detectAll(detector->csd, &match_count, &status);
@@ -257,7 +276,7 @@ static VALUE rb_get_strip_tags(VALUE self)
 	UBool val;
 	VALUE rb_val;
 
-	Data_Get_Struct(self, charlock_detector_t, detector);
+	TypedData_Get_Struct(self, charlock_detector_t, &charlock_detector_type, detector);
 
 	val = ucsdet_isInputFilterEnabled(detector->csd);
 
@@ -279,7 +298,7 @@ static VALUE rb_set_strip_tags(VALUE self, VALUE rb_val)
 	charlock_detector_t *detector;
 	UBool val;
 
-	Data_Get_Struct(self, charlock_detector_t, detector);
+	TypedData_Get_Struct(self, charlock_detector_t, &charlock_detector_type, detector);
 
 	val = rb_val == Qtrue ? 1 : 0;
 
@@ -334,18 +353,6 @@ static VALUE rb_get_supported_encodings(VALUE klass)
 	return rb_encoding_list;
 }
 
-static void rb_encdec__free(void *obj)
-{
-	charlock_detector_t *detector;
-
-	detector = (charlock_detector_t *)obj;
-
-	if (detector->csd)
-		ucsdet_close(detector->csd);
-
-	free(detector);
-}
-
 static VALUE rb_encdec__alloc(VALUE klass)
 {
 	charlock_detector_t *detector;
@@ -353,7 +360,7 @@ static VALUE rb_encdec__alloc(VALUE klass)
 	VALUE obj;
 
 	detector = (charlock_detector_t *) calloc(1, sizeof(charlock_detector_t));
-	obj = Data_Wrap_Struct(klass, NULL, rb_encdec__free, (void *)detector);
+        obj = TypedData_Wrap_Struct(klass, &charlock_detector_type, (void *)detector);
 
 	detector->csd = ucsdet_open(&status);
 	if (U_FAILURE(status)) {
@@ -363,7 +370,7 @@ static VALUE rb_encdec__alloc(VALUE klass)
 	return obj;
 }
 
-void _init_charlock_encoding_detector()
+void _init_charlock_encoding_detector(void)
 {
 	rb_cEncodingDetector = rb_define_class_under(rb_mCharlockHolmes, "EncodingDetector", rb_cObject);
 	rb_define_alloc_func(rb_cEncodingDetector, rb_encdec__alloc);
