@@ -11,6 +11,11 @@ jobs:
       matrix:
         os: [macos]
         ruby: [ '3.2', '3.3' ]
+        compile_opt: [""]
+        include:
+          - os: "macos"
+            ruby: "3.3"
+            compile_opt: "ENABLE_STATIC=1"
 
     steps:
       - name: icu4c
@@ -23,5 +28,5 @@ jobs:
 
       - name: Install dependencies
         run: bundle install
-      - name: Run tests ${{ matrix.rubyopt }}
-        run: bundle exec rake RUBYOPT="${{ matrix.rubyopt }}"
+      - name: "Run tests with compile_opt: ${{ matrix.compile_opt }}, rubyopt: ${{ matrix.rubyopt }}"
+        run: ${{ matrix.compile_opt }} bundle exec rake RUBYOPT="${{ matrix.rubyopt }}"
