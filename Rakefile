@@ -11,6 +11,7 @@ require "rake/extensiontask"
 
 Rake::ExtensionTask.new 'charlock_holmes' do |ext|
   ext.lib_dir = File.join 'lib', 'charlock_holmes'
+  ext.config_options << '--enable-static' if ENV['ENABLE_STATIC']
 end
 
 Rake::Task[:test].prerequisites << :compile
