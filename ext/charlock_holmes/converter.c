@@ -20,7 +20,7 @@ static VALUE rb_converter_convert(VALUE self, VALUE rb_txt, VALUE rb_src_enc, VA
 	Check_Type(rb_dst_enc, T_STRING);
 
 	src_txt = RSTRING_PTR(rb_txt);
-	src_len = RSTRING_LEN(rb_txt);
+	src_len = (int32_t)RSTRING_LEN(rb_txt);
 	src_enc = RSTRING_PTR(rb_src_enc);
 	dst_enc = RSTRING_PTR(rb_dst_enc);
 
@@ -50,7 +50,7 @@ static VALUE rb_converter_convert(VALUE self, VALUE rb_txt, VALUE rb_src_enc, VA
 	return rb_out;
 }
 
-void _init_charlock_converter() {
+void _init_charlock_converter(void) {
 	rb_cConverter = rb_define_class_under(rb_mCharlockHolmes, "Converter", rb_cObject);
 
 	rb_define_singleton_method(rb_cConverter, "convert", rb_converter_convert, 3);

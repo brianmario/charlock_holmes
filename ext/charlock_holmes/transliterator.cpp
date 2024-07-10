@@ -116,7 +116,7 @@ static VALUE rb_transliterator_transliterate(VALUE self, VALUE rb_txt, VALUE rb_
   return rb_out;
 }
 
-void _init_charlock_transliterator() {
+void _init_charlock_transliterator(void) {
 #ifdef HAVE_RUBY_ENCODING_H
   rb_eEncodingCompatibilityError = rb_const_get(rb_cEncoding, rb_intern("CompatibilityError"));
 #endif

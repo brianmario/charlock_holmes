@@ -2,7 +2,7 @@
 
 VALUE rb_mCharlockHolmes;
 
-void Init_charlock_holmes() {
+void Init_charlock_holmes(void) {
 	rb_mCharlockHolmes = rb_define_module("CharlockHolmes");
 
 	_init_charlock_encoding_detector();
