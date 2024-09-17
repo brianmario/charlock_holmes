@@ -56,7 +56,7 @@ SRC
 
 # Pass -x c++ to force gcc to compile the test program
 # as C++ (as it will end in .c by default).
-compile_options = +"-x c++"
+compile_options = +" -x c++"
 
 icu_requires_version_flag = checking_for("icu that requires explicit C++ version flag") do
   !try_compile(minimal_program, compile_options)
