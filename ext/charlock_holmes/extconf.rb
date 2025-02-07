@@ -12,14 +12,21 @@ end
 # ICU dependency
 #
 
+# If on Apple Silicon (M1, host_cpu "arm64") and Ruby version is 3.0.0 or greater,
+# then force the C++ compiler to clang++.
+FORCE_COMPATIBILITY_APPLE_M1_RUBY_3 = (RbConfig::CONFIG['host_cpu'] == 'arm64' && Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.0.0')) || false
+if FORCE_COMPATIBILITY_APPLE_M1_RUBY_3
+  RbConfig::CONFIG["CXX"] = "/usr/bin/clang++"
+end
+
 ldflags = cppflags = nil
 
 if RbConfig::CONFIG["host_os"] =~ /darwin/
   begin
     brew_prefix = `brew --prefix icu4c`.chomp
-    ldflags   = "#{brew_prefix}/lib"
-    cppflags  = "#{brew_prefix}/include"
-    pkg_conf  = "#{brew_prefix}/lib/pkgconfig"
+    ldflags = "#{brew_prefix}/lib"
+    cppflags = "#{brew_prefix}/include"
+    pkg_conf = "#{brew_prefix}/lib/pkgconfig"
     # pkg_config should be less error prone than parsing compiler
     # commandline options, but we need to set default ldflags and cpp flags
     # in case the user doesn't have pkg-config installed
@@ -67,8 +74,11 @@ if icu_requires_version_flag
     checking_for("icu that compiles with #{std} standard") do
       flags = compile_options + " -std=#{std}"
       if try_compile(minimal_program, flags)
-        $CPPFLAGS << flags
-
+        if FORCE_COMPATIBILITY_APPLE_M1_RUBY_3
+          $CXXFLAGS << " " << flags
+        else
+          $CPPFLAGS << flags
+        end
         true
       end
     end
@@ -137,5 +147,8 @@ if static_p
 
   substitute_static_libs(%w[icu-i18n icu-io icu-uc])
 end
+
+# Remove stray "-x c++" flag that may have been appended.
+$CPPFLAGS.gsub!(/-x\s*c\+\+/, '') if FORCE_COMPATIBILITY_APPLE_M1_RUBY_3
 
 create_makefile 'charlock_holmes/charlock_holmes'
