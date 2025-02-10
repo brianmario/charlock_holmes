@@ -12,14 +12,18 @@ end
 # ICU dependency
 #
 
+# If on Apple Silicon (M1, host_cpu "arm64") and Ruby version is 3.0.0 or greater,
+# then force the C++ compiler to clang++.
+FORCE_COMPATIBILITY_APPLE_M1_RUBY_3 = (RbConfig::CONFIG['host_cpu'] == 'arm64' && Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.0.0')) || false
+
 ldflags = cppflags = nil
 
 if RbConfig::CONFIG["host_os"] =~ /darwin/
   begin
     brew_prefix = `brew --prefix icu4c`.chomp
-    ldflags   = "#{brew_prefix}/lib"
-    cppflags  = "#{brew_prefix}/include"
-    pkg_conf  = "#{brew_prefix}/lib/pkgconfig"
+    ldflags = "#{brew_prefix}/lib"
+    cppflags = "#{brew_prefix}/include"
+    pkg_conf = "#{brew_prefix}/lib/pkgconfig"
     # pkg_config should be less error prone than parsing compiler
     # commandline options, but we need to set default ldflags and cpp flags
     # in case the user doesn't have pkg-config installed
@@ -56,7 +60,7 @@ SRC
 
 # Pass -x c++ to force gcc to compile the test program
 # as C++ (as it will end in .c by default).
-compile_options = +"-x c++"
+compile_options = +"-x c++" unless FORCE_COMPATIBILITY_APPLE_M1_RUBY_3
 
 icu_requires_version_flag = checking_for("icu that requires explicit C++ version flag") do
   !try_compile(minimal_program, compile_options)
@@ -67,8 +71,7 @@ if icu_requires_version_flag
     checking_for("icu that compiles with #{std} standard") do
       flags = compile_options + " -std=#{std}"
       if try_compile(minimal_program, flags)
-        $CPPFLAGS << flags
-
+        $CFLAGS << flags
         true
       end
     end
