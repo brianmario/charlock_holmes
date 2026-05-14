@@ -67,9 +67,15 @@ minimal_program = <<~SRC
   int main() { return 0; }
 SRC
 
-# Pass -x c++ to force gcc to compile the test program
-# as C++ (as it will end in .c by default).
+# Pass -x c++ to force gcc to compile the test program as C++ (try_compile
+# writes the source to a .c file). Also mirror the -std= flag baked into
+# RbConfig's CXX (e.g. `g++ -std=gnu++11` on most Ruby builds) so the probe
+# matches what the real .cpp build will use. Without this, modern gcc's
+# default for -x c++ is newer than g++ -std=gnu++11, so the probe passes
+# while the real build still fails against ICU 76+ headers.
+cxx_std_flag = RbConfig::CONFIG["CXX"].to_s[/-std=\S+/]
 compile_options = +"-x c++"
+compile_options << " #{cxx_std_flag}" if cxx_std_flag
 
 icu_requires_version_flag = checking_for("icu that requires explicit C++ version flag") do
   !try_compile(minimal_program, compile_options)
@@ -78,10 +84,10 @@ end
 if icu_requires_version_flag
   abort "Cannot compile icu with your compiler: recent versions require C++17 support." unless %w[c++20 c++17 c++11 c++0x].any? do |std|
     checking_for("icu that compiles with #{std} standard") do
-      flags = compile_options + " -std=#{std}"
-      if try_compile(minimal_program, flags)
-        $CPPFLAGS << flags
-
+      if try_compile(minimal_program, "-x c++ -std=#{std}")
+        # Append to CXXFLAGS so the flag only applies to .cpp compilation.
+        # gcc/clang let a later -std= override the one baked into CXX.
+        $CXXFLAGS << " -std=#{std}"
         true
       end
     end
