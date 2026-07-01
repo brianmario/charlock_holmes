@@ -10,12 +10,14 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu]
-        ruby: [ head, '3.2', '3.3' ]
-        ruby-opt: [""]
+        ruby: [head, '3.2', '3.3', '3.4']
+        ruby-opt: ['']
         include:
-          - ruby: "3.3"
-            ruby-opt: "--enable-frozen-string-literal --debug-frozen-string-literal"
-            os: "ubuntu"
+          - os: 'ubuntu'
+            ruby: '3.4'
+            ruby-opt: >
+              --enable-frozen-string-literal
+              --debug-frozen-string-literal
 
     steps:
       - name: Install g++

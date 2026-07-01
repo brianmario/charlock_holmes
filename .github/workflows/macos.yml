@@ -10,12 +10,12 @@ jobs:
       fail-fast: false
       matrix:
         os: [macos]
-        ruby: [ '3.2', '3.3' ]
-        compile_opt: [""]
+        ruby: [head, '3.2', '3.3', '3.4']
+        compile_opt: ['']
         include:
-          - os: "macos"
-            ruby: "3.3"
-            compile_opt: "ENABLE_STATIC=1"
+          - os: 'macos'
+            ruby: '3.4'
+            compile_opt: 'ENABLE_STATIC=1'
 
     steps:
       - name: icu4c
