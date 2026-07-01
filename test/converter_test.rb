@@ -45,4 +45,13 @@ class ConverterTest < Minitest::Test
       assert_nil e, "#{e.class.name} raised, expected nothing"
     end
   end
+
+  def test_convert_empty_string
+    input = ''
+
+    output = CharlockHolmes::Converter.convert input, 'UTF-8', 'UTF-16'
+    assert_equal '', output
+    assert_equal 0, output.bytesize
+    assert_equal input, output
+  end
 end
