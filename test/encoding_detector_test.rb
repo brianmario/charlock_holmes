@@ -107,10 +107,6 @@ class EncodingDetectorTest < Minitest::Test
     detected = @detector.detect not_compat_txt
     assert_equal 'ISO-2022-KR', detected[:encoding]
     assert_equal 'binary', detected[:ruby_encoding]
-
-    detected = @detector.detect "\0\0"
-    assert_equal 'BINARY', detected[:encoding]
-    assert_equal 'ASCII-8BIT', detected[:ruby_encoding]
   end
 
   def test_is_binary
@@ -136,13 +132,13 @@ class EncodingDetectorTest < Minitest::Test
     ['utf16be.html',              'UTF-16BE',   :text],
     ['utf32le.html',              'UTF-32LE',   :text],
     ['utf32be.html',              'UTF-32BE',   :text],
-    ['hello_world',               'BINARY',     :binary],
-    ['octocat.png',               'BINARY',     :binary],
-    ['octocat.jpg',               'BINARY',     :binary],
-    ['octocat.psd',               'BINARY',     :binary],
-    ['octocat.gif',               'BINARY',     :binary],
-    ['octocat.ai',                'BINARY',     :binary],
-    ['foo.pdf',                   'BINARY',     :binary],
+    ['hello_world',               nil,          :binary],
+    ['octocat.png',               nil,          :binary],
+    ['octocat.jpg',               nil,          :binary],
+    ['octocat.psd',               nil,          :binary],
+    ['octocat.gif',               nil,          :binary],
+    ['octocat.ai',                nil,          :binary],
+    ['foo.pdf',                   nil,          :binary],
   ]
 
   def test_detection_works_as_expected

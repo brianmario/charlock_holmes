@@ -72,8 +72,6 @@ static VALUE rb_encdec_binarymatch(void) {
 	rb_match = rb_hash_new();
 
 	rb_hash_aset(rb_match, ID2SYM(rb_intern("type")), ID2SYM(rb_intern("binary")));
-	rb_hash_aset(rb_match, ID2SYM(rb_intern("encoding")), charlock_new_str2("BINARY"));
-	rb_hash_aset(rb_match, ID2SYM(rb_intern("ruby_encoding")), charlock_new_str2("ASCII-8BIT"));
 	rb_hash_aset(rb_match, ID2SYM(rb_intern("confidence")), INT2NUM(100));
 
 	return rb_match;
