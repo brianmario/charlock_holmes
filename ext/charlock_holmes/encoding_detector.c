@@ -350,6 +350,7 @@ static VALUE rb_get_supported_encodings(VALUE klass)
 
 		rb_iv_set(klass, "encoding_list", rb_encoding_list);
 		ucsdet_close(csd);
+		uenum_close(encoding_list);
 	}
 
 	return rb_encoding_list;
