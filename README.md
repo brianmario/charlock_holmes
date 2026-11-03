@@ -83,7 +83,7 @@ pass those arguments to Gem:
 
 Configure Bundler to always use the correct arguments when installing:
 
-    bundle config build.charlock_holmes --with-icu-dir=/path/to/installed/icu4c
+    bundle config set build.charlock_holmes --with-icu-dir=/path/to/installed/icu4c
 
 Using Gem to install directly without Bundler:
 
@@ -93,7 +93,7 @@ If you get a compile time error that looks like `error: delegating constructors 
 
 Bundler:
 
-    bundle config build.charlock_holmes --with-icu-dir=/path/to/installed/icu4c --with-cxxflags=-std=c++11
+    bundle config set build.charlock_holmes --with-icu-dir=/path/to/installed/icu4c --with-cxxflags=-std=c++11
 
 Installing directly:
 
@@ -113,7 +113,7 @@ To install ICU with Homebrew:
 
 Configure Bundler to always use the correct arguments when installing:
 
-    bundle config build.charlock_holmes --with-icu-dir=/usr/local/opt/icu4c
+    bundle config set build.charlock_holmes --with-icu-dir=/usr/local/opt/icu4c
 
 Using Gem to install directly without Bundler:
 
